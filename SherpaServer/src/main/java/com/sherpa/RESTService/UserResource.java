@@ -17,16 +17,16 @@ import com.sherpa.dto.User;
 public class UserResource{
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public User users(){
+   // @Produces(MediaType.APPLICATION_JSON)
+    public String users(){
     	//UserHome uh = new UserHome();
     	//User user = uh.findById(10);
 
-        return null;
+        return "branko";
 
-    }
+    }   
     
-    public static void main (String[] args){
+public static void main (String[] args){
     	
     	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
     
@@ -39,5 +39,5 @@ public class UserResource{
     	System.out.println(uh);
     	
     	
-    };
+    }
 }
