@@ -46,6 +46,17 @@ public class User implements java.io.Serializable {
 	private Set<Report> reportsForSherpaId = new HashSet<Report>(0);
 	private Set<EventUserCross> eventUserCrosses = new HashSet<EventUserCross>(0);
 	private Set<Event> events = new HashSet<Event>(0);
+	
+	
+	//TODO!
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password
+				+ ", fullName=" + fullName + ", gender=" + gender + ", profileImageUrl=" + profileImageUrl
+				+ ", backgroundImageUrl=" + backgroundImageUrl + ", description=" + description + ", country=" + country
+				+ ", hometown=" + hometown + ", address=" + address + ", telephone=" + telephone + ", isSherpa="
+				+ isSherpa + ", isReported=" + isReported + "]";
+	}
 
 	public User() {
 	}

@@ -11,16 +11,30 @@
 
 	<properties>
 		<commons.logging.version>1.2</commons.logging.version>
-		<hibernate.version>5.2.4.Final</hibernate.version>
-		<mysql.version>6.0.5</mysql.version>
-		<javax.j2ee-api.version>7.0</javax.j2ee-api.version>
-		<javax.ejb-api.version>3.0</javax.ejb-api.version>
+
+		<hibernate.core.version>5.2.4.Final</hibernate.core.version>
+		<hibernate.validator.version>5.3.2.Final</hibernate.validator.version>
+
+		<mysql.connector.version>
+			5.1.39<!-- 6.0.5 -->
+		</mysql.connector.version>
+
+		<javax.j2ee.api.version>7.0</javax.j2ee.api.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<javax.ejb.api.version>3.0</javax.ejb.api.version>
+
+		<jersey>2.24</jersey>
+		<jersey.server.core.version>${jersey}</jersey.server.core.version>
+		<jersey.servlet.container.version>${jersey}</jersey.servlet.container.version>
+		<jersey.common.version>${jersey}</jersey.common.version>
+		<jersey.json.version>1.8</jersey.json.version>
+
 		<maven.compiler.version>3.6.0</maven.compiler.version>
-		<maven.plugin.version>3.0.0</maven.plugin.version>
+		<maven.war.plugin.version>3.0.0</maven.war.plugin.version>
 	</properties>
 
 	<dependencies>
+
 		<!-- Apache Commons -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -32,28 +46,25 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
+			<version>${hibernate.core.version}</version>
 		</dependency>
-		
 		<dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-entitymanager</artifactId>
-        <version>4.1.9.Final</version>
-    	</dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
 
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
+			<version>${mysql.connector.version}</version>
 		</dependency>
 
 		<!-- JavaX -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>${javax.j2ee-api.version}</version>
-		</dependency>
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-api</artifactId> 
+			<version>${javax.j2ee.api.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -62,31 +73,33 @@
 		<dependency>
 			<groupId>javax.ejb</groupId>
 			<artifactId>ejb-api</artifactId>
-			<version>${javax.ejb-api.version}</version>
+			<version>${javax.ejb.api.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>2.10.1</version>
-        </dependency>
+
+		<!-- Jersey -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.server.core.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.glassfish.jersey.core</groupId> <artifactId>jersey-common</artifactId> 
+			<version>${jersey.common.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${jersey.servlet.container.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>1.8</version>
+			<version>${jersey.json.version}</version>
 		</dependency>
-	</dependencies>
 
+
+	</dependencies>
 	<build>
 		<finalName>SherpaServer</finalName>
 		<pluginManagement>
@@ -103,10 +116,9 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>${maven.plugin.version}</version>
+					<version>${maven.war.plugin.version}</version>
 				</plugin>
 			</plugins>
-
 		</pluginManagement>
 	</build>
 </project>
