@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.Column;
@@ -17,7 +18,11 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "admin", catalog = "sherpa", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class Admin implements java.io.Serializable {
 
-	private Integer adminId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3478090166342381753L;
+	private Long adminId;
 	private String username;
 	private String password;
 
@@ -33,11 +38,11 @@ public class Admin implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "admin_id", unique = true, nullable = false)
-	public Integer getAdminId() {
+	public Long getAdminId() {
 		return this.adminId;
 	}
 
-	public void setAdminId(Integer adminId) {
+	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
 

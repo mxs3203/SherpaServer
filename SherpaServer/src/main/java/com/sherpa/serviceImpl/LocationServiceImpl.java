@@ -16,8 +16,23 @@ public class LocationServiceImpl implements LocationService {
 	private LocationDao locationDao;
 
 	@Override
-	public Location getLocationById(int locId) {
-		return locationDao.findById(locId);
+	public void addLocation(Location transientInstance) {
+		locationDao.persist(transientInstance);
+	}
+
+	@Override
+	public void removeLocation(Location persistentInstance) {
+		locationDao.remove(persistentInstance);
+	}
+
+	@Override
+	public Location updateLocation(Location detachedInstance) {
+		return locationDao.merge(detachedInstance);
+	}
+
+	@Override
+	public Location findById(Long id) {
+		return locationDao.findById(id);
 	}
 
 }

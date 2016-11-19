@@ -28,20 +28,9 @@ public class UserController {
     }
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") int userId) {
+    public ResponseEntity<User> getUser(@PathVariable("id") Long userId) {
         System.out.println("Fetching User with id " + userId);
-        user = userService.getUserById(userId);
-        if (user == null) {
-            System.out.println("User with id " + userId + " not found");
-            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-	
-	@RequestMapping(value = "/abc/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getABC(@PathVariable("id") int userId) {
-        System.out.println("Fetching User with id " + userId);
-        user = userService.getUserByIdABC(userId);
+        user = userService.findById(userId);
         if (user == null) {
             System.out.println("User with id " + userId + " not found");
             return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);

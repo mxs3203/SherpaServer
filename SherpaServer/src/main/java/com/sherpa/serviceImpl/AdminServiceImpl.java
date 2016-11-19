@@ -13,11 +13,26 @@ import com.sherpa.service.AdminService;
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
-	private AdminDao adminDao;
+    private AdminDao adminDao;
 
 	@Override
-	public Admin getAdminById(int adminId) {
-		return adminDao.findById(adminId);
+	public void addAdmin(Admin transientInstance) {
+		adminDao.persist(transientInstance);
+	}
+	
+	@Override
+	public void removeAdmin(Admin persistentInstance) {
+		adminDao.remove(persistentInstance);
+	}
+	
+	@Override
+	public Admin updateAdmin(Admin detachedInstance) {
+		return adminDao.merge(detachedInstance);
+	}
+	
+	@Override
+	public Admin findById(Long id) {
+		return adminDao.findById(id);
 	}
 
 }

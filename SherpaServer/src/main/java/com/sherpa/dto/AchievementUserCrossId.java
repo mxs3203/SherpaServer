@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.Column;
@@ -11,6 +12,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class AchievementUserCrossId implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5583825163881349033L;
 	private int achievementUserId;
 	private int userId;
 	private int achievementId;

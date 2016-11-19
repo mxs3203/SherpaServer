@@ -1,5 +1,6 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import com.sherpa.dto.Admin;
 
 /**
  * Home object for domain model class Admin.
+ * 
  * @see .Admin
  * @author Hibernate Tools
  */
@@ -59,7 +61,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public Admin findById(int id) {
+	public Admin findById(Long id) {
 		log.debug("getting Admin instance with id: " + id);
 		try {
 			Admin instance = entityManager.find(Admin.class, id);

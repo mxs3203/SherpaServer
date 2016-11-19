@@ -1,5 +1,6 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import com.sherpa.dto.User;
 
 /**
  * Home object for domain model class User.
+ * 
  * @see .User
  * @author Hibernate Tools
  */
@@ -24,6 +26,7 @@ public class UserDaoImpl implements UserDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void persist(User transientInstance) {
 		log.debug("persisting User instance");
 		try {
@@ -35,6 +38,7 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
 	public void remove(User persistentInstance) {
 		log.debug("removing User instance");
 		try {
@@ -46,6 +50,7 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
 	public User merge(User detachedInstance) {
 		log.debug("merging User instance");
 		try {
@@ -59,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(Long id) {
 		log.debug("getting User instance with id: " + id);
 		try {
 			User instance = entityManager.find(User.class, id);

@@ -1,30 +1,34 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
-import com.sherpa.dto.Reward;
+import com.sherpa.dao.EventDao;
+import com.sherpa.dto.Event;
 
 /**
- * Home object for domain model class Reward.
- * @see .Reward
+ * Home object for domain model class Event.
+ * 
+ * @see .Event
  * @author Hibernate Tools
  */
-@Stateless
-public class RewardHome {
+@Repository
+public class EventDaoImpl implements EventDao {
 
-	private static final Log log = LogFactory.getLog(RewardHome.class);
+	private static final Log log = LogFactory.getLog(EventDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Reward transientInstance) {
-		log.debug("persisting Reward instance");
+	@Override
+	public void persist(Event transientInstance) {
+		log.debug("persisting Event instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +38,9 @@ public class RewardHome {
 		}
 	}
 
-	public void remove(Reward persistentInstance) {
-		log.debug("removing Reward instance");
+	@Override
+	public void remove(Event persistentInstance) {
+		log.debug("removing Event instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +50,11 @@ public class RewardHome {
 		}
 	}
 
-	public Reward merge(Reward detachedInstance) {
-		log.debug("merging Reward instance");
+	@Override
+	public Event merge(Event detachedInstance) {
+		log.debug("merging Event instance");
 		try {
-			Reward result = entityManager.merge(detachedInstance);
+			Event result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +63,11 @@ public class RewardHome {
 		}
 	}
 
-	public Reward findById(Integer id) {
-		log.debug("getting Reward instance with id: " + id);
+	@Override
+	public Event findById(Long id) {
+		log.debug("getting Event instance with id: " + id);
 		try {
-			Reward instance = entityManager.find(Reward.class, id);
+			Event instance = entityManager.find(Event.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

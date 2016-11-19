@@ -11,28 +11,28 @@ import com.sherpa.service.UserService;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
     private UserDao userDao;
 
 	@Override
-	public User getUserById(int userId) {
-		return userDao.findById(userId);
+	public void addUser(User transientInstance) {
+		userDao.persist(transientInstance);
 	}
-
+	
 	@Override
-	public User getUserByIdABC(int userId) {
-		User user = userDao.findById(userId);
-		user.setLocation(null);
-		user.setRatings(null);
-		user.setRewards(null);
-		user.setAchievementUserCrosses(null);
-		user.setReportsForSherpaId(null);
-		user.setReportsForUserId(null);
-		user.setExperiences(null);
-		user.setEventUserCrosses(null);
-		user.setEvents(null);
-		return user;
+	public void removeUser(User persistentInstance) {
+		userDao.remove(persistentInstance);
 	}
-
+	
+	@Override
+	public User updateUser(User detachedInstance) {
+		return userDao.merge(detachedInstance);
+	}
+	
+	@Override
+	public User findById(Long id) {
+		return userDao.findById(id);
+	}
+	
 }

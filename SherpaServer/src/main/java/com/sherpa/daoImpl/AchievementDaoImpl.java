@@ -1,31 +1,34 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
-import com.sherpa.dto.AchievementUserCross;
-import com.sherpa.dto.AchievementUserCrossId;
+import com.sherpa.dao.AchievementDao;
+import com.sherpa.dto.Achievement;
 
 /**
- * Home object for domain model class AchievementUserCross.
- * @see .AchievementUserCross
+ * Home object for domain model class Achievement.
+ * 
+ * @see .Achievement
  * @author Hibernate Tools
  */
-@Stateless
-public class AchievementUserCrossHome {
+@Repository
+public class AchievementDaoImpl implements AchievementDao {
 
-	private static final Log log = LogFactory.getLog(AchievementUserCrossHome.class);
+	private static final Log log = LogFactory.getLog(AchievementDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(AchievementUserCross transientInstance) {
-		log.debug("persisting AchievementUserCross instance");
+	@Override
+	public void persist(Achievement transientInstance) {
+		log.debug("persisting Achievement instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -35,8 +38,9 @@ public class AchievementUserCrossHome {
 		}
 	}
 
-	public void remove(AchievementUserCross persistentInstance) {
-		log.debug("removing AchievementUserCross instance");
+	@Override
+	public void remove(Achievement persistentInstance) {
+		log.debug("removing Achievement instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -46,10 +50,11 @@ public class AchievementUserCrossHome {
 		}
 	}
 
-	public AchievementUserCross merge(AchievementUserCross detachedInstance) {
-		log.debug("merging AchievementUserCross instance");
+	@Override
+	public Achievement merge(Achievement detachedInstance) {
+		log.debug("merging Achievement instance");
 		try {
-			AchievementUserCross result = entityManager.merge(detachedInstance);
+			Achievement result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -58,10 +63,11 @@ public class AchievementUserCrossHome {
 		}
 	}
 
-	public AchievementUserCross findById(AchievementUserCrossId id) {
-		log.debug("getting AchievementUserCross instance with id: " + id);
+	@Override
+	public Achievement findById(Long id) {
+		log.debug("getting Achievement instance with id: " + id);
 		try {
-			AchievementUserCross instance = entityManager.find(AchievementUserCross.class, id);
+			Achievement instance = entityManager.find(Achievement.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

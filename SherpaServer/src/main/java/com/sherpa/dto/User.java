@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.util.HashSet;
@@ -23,7 +24,11 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "user", catalog = "sherpa", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User implements java.io.Serializable {
 
-	private Integer userId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4786791258478439634L;
+	private Long userId;
 	private Location location;
 	private String email;
 	private String password;
@@ -46,16 +51,15 @@ public class User implements java.io.Serializable {
 	private Set<Report> reportsForSherpaId = new HashSet<Report>(0);
 	private Set<EventUserCross> eventUserCrosses = new HashSet<EventUserCross>(0);
 	private Set<Event> events = new HashSet<Event>(0);
-	
-	
-	//TODO!
+
+	// TODO!
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password
-				+ ", fullName=" + fullName + ", gender=" + gender + ", profileImageUrl=" + profileImageUrl
-				+ ", backgroundImageUrl=" + backgroundImageUrl + ", description=" + description + ", country=" + country
-				+ ", hometown=" + hometown + ", address=" + address + ", telephone=" + telephone + ", isSherpa="
-				+ isSherpa + ", isReported=" + isReported + "]";
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", fullName=" + fullName
+				+ ", gender=" + gender + ", profileImageUrl=" + profileImageUrl + ", backgroundImageUrl="
+				+ backgroundImageUrl + ", description=" + description + ", country=" + country + ", hometown="
+				+ hometown + ", address=" + address + ", telephone=" + telephone + ", isSherpa=" + isSherpa
+				+ ", isReported=" + isReported + "]";
 	}
 
 	public User() {
@@ -104,11 +108,11 @@ public class User implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "user_id", unique = true, nullable = false)
-	public Integer getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

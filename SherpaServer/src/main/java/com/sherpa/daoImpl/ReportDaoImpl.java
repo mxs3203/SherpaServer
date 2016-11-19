@@ -1,28 +1,32 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
+import com.sherpa.dao.ReportDao;
 import com.sherpa.dto.Report;
 
 /**
  * Home object for domain model class Report.
+ * 
  * @see .Report
  * @author Hibernate Tools
  */
-@Stateless
-public class ReportHome {
+@Repository
+public class ReportDaoImpl implements ReportDao {
 
-	private static final Log log = LogFactory.getLog(ReportHome.class);
+	private static final Log log = LogFactory.getLog(ReportDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void persist(Report transientInstance) {
 		log.debug("persisting Report instance");
 		try {
@@ -34,6 +38,7 @@ public class ReportHome {
 		}
 	}
 
+	@Override
 	public void remove(Report persistentInstance) {
 		log.debug("removing Report instance");
 		try {
@@ -45,6 +50,7 @@ public class ReportHome {
 		}
 	}
 
+	@Override
 	public Report merge(Report detachedInstance) {
 		log.debug("merging Report instance");
 		try {
@@ -57,7 +63,8 @@ public class ReportHome {
 		}
 	}
 
-	public Report findById(Integer id) {
+	@Override
+	public Report findById(Long id) {
 		log.debug("getting Report instance with id: " + id);
 		try {
 			Report instance = entityManager.find(Report.class, id);

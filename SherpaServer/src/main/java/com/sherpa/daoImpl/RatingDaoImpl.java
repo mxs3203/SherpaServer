@@ -1,28 +1,32 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
+import com.sherpa.dao.RatingDao;
 import com.sherpa.dto.Rating;
 
 /**
  * Home object for domain model class Rating.
+ * 
  * @see .Rating
  * @author Hibernate Tools
  */
-@Stateless
-public class RatingHome {
+@Repository
+public class RatingDaoImpl implements RatingDao {
 
-	private static final Log log = LogFactory.getLog(RatingHome.class);
+	private static final Log log = LogFactory.getLog(RatingDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void persist(Rating transientInstance) {
 		log.debug("persisting Rating instance");
 		try {
@@ -34,6 +38,7 @@ public class RatingHome {
 		}
 	}
 
+	@Override
 	public void remove(Rating persistentInstance) {
 		log.debug("removing Rating instance");
 		try {
@@ -45,6 +50,7 @@ public class RatingHome {
 		}
 	}
 
+	@Override
 	public Rating merge(Rating detachedInstance) {
 		log.debug("merging Rating instance");
 		try {
@@ -57,7 +63,8 @@ public class RatingHome {
 		}
 	}
 
-	public Rating findById(Integer id) {
+	@Override
+	public Rating findById(Long id) {
 		log.debug("getting Rating instance with id: " + id);
 		try {
 			Rating instance = entityManager.find(Rating.class, id);

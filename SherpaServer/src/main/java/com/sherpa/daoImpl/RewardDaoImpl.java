@@ -1,30 +1,34 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
-import com.sherpa.dto.Image;
+import com.sherpa.dao.RewardDao;
+import com.sherpa.dto.Reward;
 
 /**
- * Home object for domain model class Image.
- * @see .Image
+ * Home object for domain model class Reward.
+ * 
+ * @see .Reward
  * @author Hibernate Tools
  */
-@Stateless
-public class ImageHome {
+@Repository
+public class RewardDaoImpl implements RewardDao {
 
-	private static final Log log = LogFactory.getLog(ImageHome.class);
+	private static final Log log = LogFactory.getLog(RewardDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Image transientInstance) {
-		log.debug("persisting Image instance");
+	@Override
+	public void persist(Reward transientInstance) {
+		log.debug("persisting Reward instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +38,9 @@ public class ImageHome {
 		}
 	}
 
-	public void remove(Image persistentInstance) {
-		log.debug("removing Image instance");
+	@Override
+	public void remove(Reward persistentInstance) {
+		log.debug("removing Reward instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +50,11 @@ public class ImageHome {
 		}
 	}
 
-	public Image merge(Image detachedInstance) {
-		log.debug("merging Image instance");
+	@Override
+	public Reward merge(Reward detachedInstance) {
+		log.debug("merging Reward instance");
 		try {
-			Image result = entityManager.merge(detachedInstance);
+			Reward result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +63,11 @@ public class ImageHome {
 		}
 	}
 
-	public Image findById(Integer id) {
-		log.debug("getting Image instance with id: " + id);
+	@Override
+	public Reward findById(Long id) {
+		log.debug("getting Reward instance with id: " + id);
 		try {
-			Image instance = entityManager.find(Image.class, id);
+			Reward instance = entityManager.find(Reward.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

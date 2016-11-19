@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.util.Date;
@@ -22,7 +23,11 @@ import javax.persistence.TemporalType;
 @Table(name = "report", catalog = "sherpa")
 public class Report implements java.io.Serializable {
 
-	private Integer reportId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2658846250077631991L;
+	private Long reportId;
 	private Event event;
 	private User userByUserId;
 	private User userBySherpaId;
@@ -51,11 +56,11 @@ public class Report implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "report_id", unique = true, nullable = false)
-	public Integer getReportId() {
+	public Long getReportId() {
 		return this.reportId;
 	}
 
-	public void setReportId(Integer reportId) {
+	public void setReportId(Long reportId) {
 		this.reportId = reportId;
 	}
 

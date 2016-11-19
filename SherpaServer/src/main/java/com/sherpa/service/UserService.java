@@ -3,8 +3,13 @@ package com.sherpa.service;
 import com.sherpa.dto.User;
 
 public interface UserService {
-	
-	User getUserById(int userId);
 
-	User getUserByIdABC(int userId);
+	void addUser(User transientInstance);
+
+	void removeUser(User persistentInstance);
+
+	User updateUser(User detachedInstance);
+
+	User findById(Long id);
+
 }

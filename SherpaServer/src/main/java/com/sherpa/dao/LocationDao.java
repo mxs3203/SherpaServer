@@ -4,6 +4,12 @@ import com.sherpa.dto.Location;
 
 public interface LocationDao {
 
-	Location findById(int locId);
-	
+	void persist(Location transientInstance);
+
+	void remove(Location persistentInstance);
+
+	Location merge(Location detachedInstance);
+
+	Location findById(Long id);
+
 }

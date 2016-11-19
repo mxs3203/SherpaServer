@@ -27,9 +27,9 @@ public class AdminController {
     }
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Admin> getUser(@PathVariable("id") int userId) {
+    public ResponseEntity<Admin> getUser(@PathVariable("id") Long userId) {
         System.out.println("Fetching User with id " + userId);
-        admin = adminService.getAdminById(userId);
+        admin = adminService.findById(userId);
         if (admin == null) {
             System.out.println("User with id " + userId + " not found");
             return new ResponseEntity<Admin>(HttpStatus.BAD_REQUEST);

@@ -4,6 +4,12 @@ import com.sherpa.dto.User;
 
 public interface UserDao {
 
-	User findById(int userId);
-	
+	void persist(User transientInstance);
+
+	void remove(User persistentInstance);
+
+	User merge(User detachedInstance);
+
+	User findById(Long id);
+
 }

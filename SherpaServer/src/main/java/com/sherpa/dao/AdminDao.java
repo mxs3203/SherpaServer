@@ -4,6 +4,12 @@ import com.sherpa.dto.Admin;
 
 public interface AdminDao {
 
-	Admin findById(int adminId);
-	
+	void persist(Admin transientInstance);
+
+	void remove(Admin persistentInstance);
+
+	Admin merge(Admin detachedInstance);
+
+	Admin findById(Long id);
+
 }

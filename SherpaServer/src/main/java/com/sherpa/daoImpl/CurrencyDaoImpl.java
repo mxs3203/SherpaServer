@@ -1,31 +1,34 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
-import com.sherpa.dto.EventTagCross;
-import com.sherpa.dto.EventTagCrossId;
+import com.sherpa.dao.CurrencyDao;
+import com.sherpa.dto.Currency;
 
 /**
- * Home object for domain model class EventTagCross.
- * @see .EventTagCross
+ * Home object for domain model class Currency.
+ * 
+ * @see .Currency
  * @author Hibernate Tools
  */
-@Stateless
-public class EventTagCrossHome {
+@Repository
+public class CurrencyDaoImpl implements CurrencyDao {
 
-	private static final Log log = LogFactory.getLog(EventTagCrossHome.class);
+	private static final Log log = LogFactory.getLog(CurrencyDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(EventTagCross transientInstance) {
-		log.debug("persisting EventTagCross instance");
+	@Override
+	public void persist(Currency transientInstance) {
+		log.debug("persisting Currency instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -35,8 +38,9 @@ public class EventTagCrossHome {
 		}
 	}
 
-	public void remove(EventTagCross persistentInstance) {
-		log.debug("removing EventTagCross instance");
+	@Override
+	public void remove(Currency persistentInstance) {
+		log.debug("removing Currency instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -46,10 +50,11 @@ public class EventTagCrossHome {
 		}
 	}
 
-	public EventTagCross merge(EventTagCross detachedInstance) {
-		log.debug("merging EventTagCross instance");
+	@Override
+	public Currency merge(Currency detachedInstance) {
+		log.debug("merging Currency instance");
 		try {
-			EventTagCross result = entityManager.merge(detachedInstance);
+			Currency result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -58,10 +63,11 @@ public class EventTagCrossHome {
 		}
 	}
 
-	public EventTagCross findById(EventTagCrossId id) {
-		log.debug("getting EventTagCross instance with id: " + id);
+	@Override
+	public Currency findById(Long id) {
+		log.debug("getting Currency instance with id: " + id);
 		try {
-			EventTagCross instance = entityManager.find(EventTagCross.class, id);
+			Currency instance = entityManager.find(Currency.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.util.HashSet;
@@ -21,7 +22,11 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "currency", catalog = "sherpa", uniqueConstraints = @UniqueConstraint(columnNames = "iso"))
 public class Currency implements java.io.Serializable {
 
-	private Integer currencyId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3231399653545569101L;
+	private Long currencyId;
 	private String iso;
 	private String name;
 	private Set<Event> events = new HashSet<Event>(0);
@@ -44,11 +49,11 @@ public class Currency implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "currency_id", unique = true, nullable = false)
-	public Integer getCurrencyId() {
+	public Long getCurrencyId() {
 		return this.currencyId;
 	}
 
-	public void setCurrencyId(Integer currencyId) {
+	public void setCurrencyId(Long currencyId) {
 		this.currencyId = currencyId;
 	}
 

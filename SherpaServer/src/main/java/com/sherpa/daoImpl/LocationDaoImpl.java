@@ -1,5 +1,6 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import com.sherpa.dto.Location;
 
 /**
  * Home object for domain model class Location.
+ * 
  * @see .Location
  * @author Hibernate Tools
  */
@@ -24,6 +26,7 @@ public class LocationDaoImpl implements LocationDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void persist(Location transientInstance) {
 		log.debug("persisting Location instance");
 		try {
@@ -35,6 +38,7 @@ public class LocationDaoImpl implements LocationDao {
 		}
 	}
 
+	@Override
 	public void remove(Location persistentInstance) {
 		log.debug("removing Location instance");
 		try {
@@ -46,6 +50,7 @@ public class LocationDaoImpl implements LocationDao {
 		}
 	}
 
+	@Override
 	public Location merge(Location detachedInstance) {
 		log.debug("merging Location instance");
 		try {
@@ -59,7 +64,7 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public Location findById(int id) {
+	public Location findById(Long id) {
 		log.debug("getting Location instance with id: " + id);
 		try {
 			Location instance = entityManager.find(Location.class, id);

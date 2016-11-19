@@ -1,28 +1,32 @@
 package com.sherpa.daoImpl;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
+import com.sherpa.dao.TagDao;
 import com.sherpa.dto.Tag;
 
 /**
  * Home object for domain model class Tag.
+ * 
  * @see .Tag
  * @author Hibernate Tools
  */
-@Stateless
-public class TagHome {
+@Repository
+public class TagDaoImpl implements TagDao {
 
-	private static final Log log = LogFactory.getLog(TagHome.class);
+	private static final Log log = LogFactory.getLog(TagDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void persist(Tag transientInstance) {
 		log.debug("persisting Tag instance");
 		try {
@@ -34,6 +38,7 @@ public class TagHome {
 		}
 	}
 
+	@Override
 	public void remove(Tag persistentInstance) {
 		log.debug("removing Tag instance");
 		try {
@@ -45,6 +50,7 @@ public class TagHome {
 		}
 	}
 
+	@Override
 	public Tag merge(Tag detachedInstance) {
 		log.debug("merging Tag instance");
 		try {
@@ -57,7 +63,8 @@ public class TagHome {
 		}
 	}
 
-	public Tag findById(Integer id) {
+	@Override
+	public Tag findById(Long id) {
 		log.debug("getting Tag instance with id: " + id);
 		try {
 			Tag instance = entityManager.find(Tag.class, id);

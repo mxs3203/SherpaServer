@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.math.BigDecimal;
@@ -21,7 +22,11 @@ import javax.persistence.Table;
 @Table(name = "location", catalog = "sherpa")
 public class Location implements java.io.Serializable {
 
-	private Integer locationId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6732388531857850713L;
+	private Long locationId;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
 	private String region;
@@ -51,11 +56,11 @@ public class Location implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "location_id", unique = true, nullable = false)
-	public Integer getLocationId() {
+	public Long getLocationId() {
 		return this.locationId;
 	}
 
-	public void setLocationId(Integer locationId) {
+	public void setLocationId(Long locationId) {
 		this.locationId = locationId;
 	}
 

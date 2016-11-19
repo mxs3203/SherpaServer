@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.math.BigDecimal;
@@ -21,7 +22,11 @@ import javax.persistence.Table;
 @Table(name = "achievement", catalog = "sherpa")
 public class Achievement implements java.io.Serializable {
 
-	private Integer achievementId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -617289165341633079L;
+	private Long achievementId;
 	private String imageUrl;
 	private String description;
 	private BigDecimal requirement;
@@ -48,11 +53,11 @@ public class Achievement implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "achievement_id", unique = true, nullable = false)
-	public Integer getAchievementId() {
+	public Long getAchievementId() {
 		return this.achievementId;
 	}
 
-	public void setAchievementId(Integer achievementId) {
+	public void setAchievementId(Long achievementId) {
 		this.achievementId = achievementId;
 	}
 

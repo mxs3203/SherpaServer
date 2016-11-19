@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.math.BigDecimal;
@@ -26,7 +27,11 @@ import javax.persistence.TemporalType;
 @Table(name = "event", catalog = "sherpa")
 public class Event implements java.io.Serializable {
 
-	private Integer eventId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4100434289243179544L;
+	private Long eventId;
 	private Currency currency;
 	private Location locationByEndLocationId;
 	private Location locationByStartLocationId;
@@ -86,11 +91,11 @@ public class Event implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "event_id", unique = true, nullable = false)
-	public Integer getEventId() {
+	public Long getEventId() {
 		return this.eventId;
 	}
 
-	public void setEventId(Integer eventId) {
+	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
 

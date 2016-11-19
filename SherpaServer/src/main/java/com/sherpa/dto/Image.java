@@ -1,5 +1,6 @@
 package com.sherpa.dto;
 // default package
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.Column;
@@ -19,7 +20,11 @@ import javax.persistence.Table;
 @Table(name = "image", catalog = "sherpa")
 public class Image implements java.io.Serializable {
 
-	private Integer imageId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1426119706463802819L;
+	private Long imageId;
 	private Event event;
 	private String imageUrl;
 
@@ -35,11 +40,11 @@ public class Image implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "image_id", unique = true, nullable = false)
-	public Integer getImageId() {
+	public Long getImageId() {
 		return this.imageId;
 	}
 
-	public void setImageId(Integer imageId) {
+	public void setImageId(Long imageId) {
 		this.imageId = imageId;
 	}
 
