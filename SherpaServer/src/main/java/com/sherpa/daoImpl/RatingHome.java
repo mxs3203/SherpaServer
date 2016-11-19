@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,23 +8,23 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.Admin;
+import com.sherpa.dto.Rating;
 
 /**
- * Home object for domain model class Admin.
- * @see .Admin
+ * Home object for domain model class Rating.
+ * @see .Rating
  * @author Hibernate Tools
  */
 @Stateless
-public class AdminHome {
+public class RatingHome {
 
-	private static final Log log = LogFactory.getLog(AdminHome.class);
+	private static final Log log = LogFactory.getLog(RatingHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Admin transientInstance) {
-		log.debug("persisting Admin instance");
+	public void persist(Rating transientInstance) {
+		log.debug("persisting Rating instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +34,8 @@ public class AdminHome {
 		}
 	}
 
-	public void remove(Admin persistentInstance) {
-		log.debug("removing Admin instance");
+	public void remove(Rating persistentInstance) {
+		log.debug("removing Rating instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +45,10 @@ public class AdminHome {
 		}
 	}
 
-	public Admin merge(Admin detachedInstance) {
-		log.debug("merging Admin instance");
+	public Rating merge(Rating detachedInstance) {
+		log.debug("merging Rating instance");
 		try {
-			Admin result = entityManager.merge(detachedInstance);
+			Rating result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +57,10 @@ public class AdminHome {
 		}
 	}
 
-	public Admin findById(Integer id) {
-		log.debug("getting Admin instance with id: " + id);
+	public Rating findById(Integer id) {
+		log.debug("getting Rating instance with id: " + id);
 		try {
-			Admin instance = entityManager.find(Admin.class, id);
+			Rating instance = entityManager.find(Rating.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

@@ -3,33 +3,31 @@
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sherpa</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
-        
-        <!-- JNDI -->
-    	<!-- <property name="hibernate.connection.datasource">java:/comp/env/jdbc/sherpa</property> -->
-        
-        <property name="hibernate.current_session_context_class">thread</property>
-        
-        <mapping class="com.sherpa.dto.Achievement"></mapping>
-        <mapping class="com.sherpa.dto.AchievementUserCross"></mapping>
-        <mapping class="com.sherpa.dto.Admin"></mapping>
-        <mapping class="com.sherpa.dto.Currency"></mapping>
-        <mapping class="com.sherpa.dto.Event"></mapping>
-        <mapping class="com.sherpa.dto.EventTagCross"></mapping>
-        <mapping class="com.sherpa.dto.EventUserCross"></mapping>
-        <mapping class="com.sherpa.dto.Experience"></mapping>
-        <mapping class="com.sherpa.dto.Image"></mapping>
-        <mapping class="com.sherpa.dto.Location"></mapping>
-        <mapping class="com.sherpa.dto.Rating"></mapping>
-        <mapping class="com.sherpa.dto.Report"></mapping>
-        <mapping class="com.sherpa.dto.Reward"></mapping>
-        <mapping class="com.sherpa.dto.Tag"></mapping>
-        <mapping class="com.sherpa.dto.User"></mapping>
-        
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sherpa</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<mapping class="com.sherpa.dto.Achievement"></mapping>
+		<mapping class="com.sherpa.dto.AchievementUserCross"></mapping>
+		<mapping class="com.sherpa.dto.Admin"></mapping>
+		<mapping class="com.sherpa.dto.Currency"></mapping>
+		<mapping class="com.sherpa.dto.Event"></mapping>
+		<mapping class="com.sherpa.dto.EventTagCross"></mapping>
+		<mapping class="com.sherpa.dto.EventUserCross"></mapping>
+		<mapping class="com.sherpa.dto.Experience"></mapping>
+		<mapping class="com.sherpa.dto.Image"></mapping>
+		<mapping class="com.sherpa.dto.Location"></mapping>
+		<mapping class="com.sherpa.dto.Rating"></mapping>
+		<mapping class="com.sherpa.dto.Report"></mapping>
+		<mapping class="com.sherpa.dto.Reward"></mapping>
+		<mapping class="com.sherpa.dto.Tag"></mapping>
+		<mapping class="com.sherpa.dto.User"></mapping>
+
+	</session-factory>
 </hibernate-configuration>

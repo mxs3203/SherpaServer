@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,24 +8,23 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.EventUserCross;
-import com.sherpa.dto.EventUserCrossId;
+import com.sherpa.dto.Tag;
 
 /**
- * Home object for domain model class EventUserCross.
- * @see .EventUserCross
+ * Home object for domain model class Tag.
+ * @see .Tag
  * @author Hibernate Tools
  */
 @Stateless
-public class EventUserCrossHome {
+public class TagHome {
 
-	private static final Log log = LogFactory.getLog(EventUserCrossHome.class);
+	private static final Log log = LogFactory.getLog(TagHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(EventUserCross transientInstance) {
-		log.debug("persisting EventUserCross instance");
+	public void persist(Tag transientInstance) {
+		log.debug("persisting Tag instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -35,8 +34,8 @@ public class EventUserCrossHome {
 		}
 	}
 
-	public void remove(EventUserCross persistentInstance) {
-		log.debug("removing EventUserCross instance");
+	public void remove(Tag persistentInstance) {
+		log.debug("removing Tag instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -46,10 +45,10 @@ public class EventUserCrossHome {
 		}
 	}
 
-	public EventUserCross merge(EventUserCross detachedInstance) {
-		log.debug("merging EventUserCross instance");
+	public Tag merge(Tag detachedInstance) {
+		log.debug("merging Tag instance");
 		try {
-			EventUserCross result = entityManager.merge(detachedInstance);
+			Tag result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -58,10 +57,10 @@ public class EventUserCrossHome {
 		}
 	}
 
-	public EventUserCross findById(EventUserCrossId id) {
-		log.debug("getting EventUserCross instance with id: " + id);
+	public Tag findById(Integer id) {
+		log.debug("getting Tag instance with id: " + id);
 		try {
-			EventUserCross instance = entityManager.find(EventUserCross.class, id);
+			Tag instance = entityManager.find(Tag.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

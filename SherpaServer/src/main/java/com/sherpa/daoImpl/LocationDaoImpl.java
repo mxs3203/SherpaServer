@@ -1,30 +1,31 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
-import com.sherpa.dto.Experience;
+import com.sherpa.dao.LocationDao;
+import com.sherpa.dto.Location;
 
 /**
- * Home object for domain model class Experience.
- * @see .Experience
+ * Home object for domain model class Location.
+ * @see .Location
  * @author Hibernate Tools
  */
-@Stateless
-public class ExperienceHome {
+@Repository
+public class LocationDaoImpl implements LocationDao {
 
-	private static final Log log = LogFactory.getLog(ExperienceHome.class);
+	private static final Log log = LogFactory.getLog(LocationDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Experience transientInstance) {
-		log.debug("persisting Experience instance");
+	public void persist(Location transientInstance) {
+		log.debug("persisting Location instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +35,8 @@ public class ExperienceHome {
 		}
 	}
 
-	public void remove(Experience persistentInstance) {
-		log.debug("removing Experience instance");
+	public void remove(Location persistentInstance) {
+		log.debug("removing Location instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +46,10 @@ public class ExperienceHome {
 		}
 	}
 
-	public Experience merge(Experience detachedInstance) {
-		log.debug("merging Experience instance");
+	public Location merge(Location detachedInstance) {
+		log.debug("merging Location instance");
 		try {
-			Experience result = entityManager.merge(detachedInstance);
+			Location result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +58,11 @@ public class ExperienceHome {
 		}
 	}
 
-	public Experience findById(Integer id) {
-		log.debug("getting Experience instance with id: " + id);
+	@Override
+	public Location findById(int id) {
+		log.debug("getting Location instance with id: " + id);
 		try {
-			Experience instance = entityManager.find(Experience.class, id);
+			Location instance = entityManager.find(Location.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

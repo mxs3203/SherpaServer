@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,23 +8,23 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.Currency;
+import com.sherpa.dto.Report;
 
 /**
- * Home object for domain model class Currency.
- * @see .Currency
+ * Home object for domain model class Report.
+ * @see .Report
  * @author Hibernate Tools
  */
 @Stateless
-public class CurrencyHome {
+public class ReportHome {
 
-	private static final Log log = LogFactory.getLog(CurrencyHome.class);
+	private static final Log log = LogFactory.getLog(ReportHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Currency transientInstance) {
-		log.debug("persisting Currency instance");
+	public void persist(Report transientInstance) {
+		log.debug("persisting Report instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +34,8 @@ public class CurrencyHome {
 		}
 	}
 
-	public void remove(Currency persistentInstance) {
-		log.debug("removing Currency instance");
+	public void remove(Report persistentInstance) {
+		log.debug("removing Report instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +45,10 @@ public class CurrencyHome {
 		}
 	}
 
-	public Currency merge(Currency detachedInstance) {
-		log.debug("merging Currency instance");
+	public Report merge(Report detachedInstance) {
+		log.debug("merging Report instance");
 		try {
-			Currency result = entityManager.merge(detachedInstance);
+			Report result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +57,10 @@ public class CurrencyHome {
 		}
 	}
 
-	public Currency findById(Integer id) {
-		log.debug("getting Currency instance with id: " + id);
+	public Report findById(Integer id) {
+		log.debug("getting Report instance with id: " + id);
 		try {
-			Currency instance = entityManager.find(Currency.class, id);
+			Report instance = entityManager.find(Report.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

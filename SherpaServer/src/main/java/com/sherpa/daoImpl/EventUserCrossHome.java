@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,23 +8,24 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.Rating;
+import com.sherpa.dto.EventUserCross;
+import com.sherpa.dto.EventUserCrossId;
 
 /**
- * Home object for domain model class Rating.
- * @see .Rating
+ * Home object for domain model class EventUserCross.
+ * @see .EventUserCross
  * @author Hibernate Tools
  */
 @Stateless
-public class RatingHome {
+public class EventUserCrossHome {
 
-	private static final Log log = LogFactory.getLog(RatingHome.class);
+	private static final Log log = LogFactory.getLog(EventUserCrossHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Rating transientInstance) {
-		log.debug("persisting Rating instance");
+	public void persist(EventUserCross transientInstance) {
+		log.debug("persisting EventUserCross instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +35,8 @@ public class RatingHome {
 		}
 	}
 
-	public void remove(Rating persistentInstance) {
-		log.debug("removing Rating instance");
+	public void remove(EventUserCross persistentInstance) {
+		log.debug("removing EventUserCross instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +46,10 @@ public class RatingHome {
 		}
 	}
 
-	public Rating merge(Rating detachedInstance) {
-		log.debug("merging Rating instance");
+	public EventUserCross merge(EventUserCross detachedInstance) {
+		log.debug("merging EventUserCross instance");
 		try {
-			Rating result = entityManager.merge(detachedInstance);
+			EventUserCross result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +58,10 @@ public class RatingHome {
 		}
 	}
 
-	public Rating findById(Integer id) {
-		log.debug("getting Rating instance with id: " + id);
+	public EventUserCross findById(EventUserCrossId id) {
+		log.debug("getting EventUserCross instance with id: " + id);
 		try {
-			Rating instance = entityManager.find(Rating.class, id);
+			EventUserCross instance = entityManager.find(EventUserCross.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

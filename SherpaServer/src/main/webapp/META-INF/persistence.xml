@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+   http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="user" transaction-type="RESOURCE_LOCAL">
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> <class>com.sherpa.dto.User</class> 
+			<class>com.sherpa.dao.UserHome</class> <class>com.sherpa.service.UserService</class> 
+			<properties> <property name="hibernate.ejb.cfgfile" value="/src/main/resources/hibernate.cfg.xml" 
+			/> </properties> -->
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+	</persistence-unit>
+</persistence>

@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,23 +8,24 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.Achievement;
+import com.sherpa.dto.EventTagCross;
+import com.sherpa.dto.EventTagCrossId;
 
 /**
- * Home object for domain model class Achievement.
- * @see .Achievement
+ * Home object for domain model class EventTagCross.
+ * @see .EventTagCross
  * @author Hibernate Tools
  */
 @Stateless
-public class AchievementHome {
+public class EventTagCrossHome {
 
-	private static final Log log = LogFactory.getLog(AchievementHome.class);
+	private static final Log log = LogFactory.getLog(EventTagCrossHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Achievement transientInstance) {
-		log.debug("persisting Achievement instance");
+	public void persist(EventTagCross transientInstance) {
+		log.debug("persisting EventTagCross instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +35,8 @@ public class AchievementHome {
 		}
 	}
 
-	public void remove(Achievement persistentInstance) {
-		log.debug("removing Achievement instance");
+	public void remove(EventTagCross persistentInstance) {
+		log.debug("removing EventTagCross instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +46,10 @@ public class AchievementHome {
 		}
 	}
 
-	public Achievement merge(Achievement detachedInstance) {
-		log.debug("merging Achievement instance");
+	public EventTagCross merge(EventTagCross detachedInstance) {
+		log.debug("merging EventTagCross instance");
 		try {
-			Achievement result = entityManager.merge(detachedInstance);
+			EventTagCross result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +58,10 @@ public class AchievementHome {
 		}
 	}
 
-	public Achievement findById(Integer id) {
-		log.debug("getting Achievement instance with id: " + id);
+	public EventTagCross findById(EventTagCrossId id) {
+		log.debug("getting EventTagCross instance with id: " + id);
 		try {
-			Achievement instance = entityManager.find(Achievement.class, id);
+			EventTagCross instance = entityManager.find(EventTagCross.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

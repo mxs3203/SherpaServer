@@ -1,4 +1,4 @@
-package com.sherpa.dao;
+package com.sherpa.daoImpl;
 // default package
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
@@ -8,23 +8,23 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sherpa.dto.Event;
+import com.sherpa.dto.Experience;
 
 /**
- * Home object for domain model class Event.
- * @see .Event
+ * Home object for domain model class Experience.
+ * @see .Experience
  * @author Hibernate Tools
  */
 @Stateless
-public class EventHome {
+public class ExperienceHome {
 
-	private static final Log log = LogFactory.getLog(EventHome.class);
+	private static final Log log = LogFactory.getLog(ExperienceHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Event transientInstance) {
-		log.debug("persisting Event instance");
+	public void persist(Experience transientInstance) {
+		log.debug("persisting Experience instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,8 +34,8 @@ public class EventHome {
 		}
 	}
 
-	public void remove(Event persistentInstance) {
-		log.debug("removing Event instance");
+	public void remove(Experience persistentInstance) {
+		log.debug("removing Experience instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -45,10 +45,10 @@ public class EventHome {
 		}
 	}
 
-	public Event merge(Event detachedInstance) {
-		log.debug("merging Event instance");
+	public Experience merge(Experience detachedInstance) {
+		log.debug("merging Experience instance");
 		try {
-			Event result = entityManager.merge(detachedInstance);
+			Experience result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +57,10 @@ public class EventHome {
 		}
 	}
 
-	public Event findById(Integer id) {
-		log.debug("getting Event instance with id: " + id);
+	public Experience findById(Integer id) {
+		log.debug("getting Experience instance with id: " + id);
 		try {
-			Event instance = entityManager.find(Event.class, id);
+			Experience instance = entityManager.find(Experience.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
