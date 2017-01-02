@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sherpa.dto.Admin;
+import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Controller
@@ -19,22 +20,33 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	private Admin admin;
-	
 	@RequestMapping(method = RequestMethod.GET)
     public String getIndex() {
         return "admin";
     }
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Admin> getUser(@PathVariable("id") Long userId) {
+    public ResponseEntity<AdminDto> getUser(@PathVariable("id") long userId) {
         System.out.println("Fetching User with id " + userId);
-        admin = adminService.findById(userId);
-        if (admin == null) {
+        Admin admin = adminService.findById(userId);
+        AdminDto adminDto = admin.generateDto();
+        if (adminDto == null) {
             System.out.println("User with id " + userId + " not found");
-            return new ResponseEntity<Admin>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+        return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username, @PathVariable("password") String password) {
+        System.out.println("Fetching Admin with username: " + username + " and Password: " + password);
+        AdminDto adminDto = adminService.verifyAdmin(username, password);
+
+        if (adminDto == null) {
+            System.out.println("Admin with username: " + username + " and Password: " + password + " not found");
+            return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Achievement;
+import com.sherpa.model.Achievement;
 
 public interface AchievementDao {
 
@@ -10,6 +10,6 @@ public interface AchievementDao {
 
 	Achievement merge(Achievement detachedInstance);
 
-	Achievement findById(Long id);
+	Achievement findById(long id);
 
 }

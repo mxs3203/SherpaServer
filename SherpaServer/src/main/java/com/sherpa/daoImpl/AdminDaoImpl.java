@@ -5,12 +5,15 @@ package com.sherpa.daoImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.AdminDao;
-import com.sherpa.dto.Admin;
+import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 
 /**
  * Home object for domain model class Admin.
@@ -61,7 +64,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public Admin findById(Long id) {
+	public Admin findById(long id) {
 		log.debug("getting Admin instance with id: " + id);
 		try {
 			Admin instance = entityManager.find(Admin.class, id);
@@ -71,5 +74,23 @@ public class AdminDaoImpl implements AdminDao {
 			log.error("get failed", re);
 			throw re;
 		}
+	}
+	
+	
+	public AdminDto verifyAdmin(String username, String password){		
+		log.debug("getting Admin instance with username: " + username + " password: "+ password);
+		try {
+			Query query = entityManager.createQuery("FROM Admin a WHERE a.username = :username AND a.password = :password");
+			query.setParameter("email", username);
+			query.setParameter("password", password);
+			Admin admin = (Admin) query.getSingleResult();
+			AdminDto adminDto = admin.generateDto();
+			log.debug("get successful");
+			return adminDto;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+		
 	}
 }

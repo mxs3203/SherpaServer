@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.ImageDao;
-import com.sherpa.dto.Image;
+import com.sherpa.model.Image;
 
 /**
  * Home object for domain model class Image.
@@ -64,7 +64,7 @@ public class ImageDaoImpl implements ImageDao {
 	}
 
 	@Override
-	public Image findById(Long id) {
+	public Image findById(long id) {
 		log.debug("getting Image instance with id: " + id);
 		try {
 			Image instance = entityManager.find(Image.class, id);

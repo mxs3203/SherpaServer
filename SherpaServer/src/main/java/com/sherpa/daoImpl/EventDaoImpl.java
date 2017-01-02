@@ -5,12 +5,13 @@ package com.sherpa.daoImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.EventDao;
-import com.sherpa.dto.Event;
+import com.sherpa.model.Event;
 
 /**
  * Home object for domain model class Event.
@@ -64,7 +65,7 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public Event findById(Long id) {
+	public Event findById(long id) {
 		log.debug("getting Event instance with id: " + id);
 		try {
 			Event instance = entityManager.find(Event.class, id);
@@ -75,4 +76,6 @@ public class EventDaoImpl implements EventDao {
 			throw re;
 		}
 	}
+	
+	
 }

@@ -1,7 +1,7 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.AchievementUserCross;
-import com.sherpa.dto.AchievementUserCrossId;
+import com.sherpa.model.AchievementUserCross;
+import com.sherpa.model.AchievementUserCrossId;
 
 public interface AchievementUserCrossDao {
 

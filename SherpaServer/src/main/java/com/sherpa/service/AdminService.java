@@ -1,6 +1,8 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Admin;
+
+import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 
 public interface AdminService {
 
@@ -10,6 +12,8 @@ public interface AdminService {
 
 	Admin updateAdmin(Admin detachedInstance);
 
-	Admin findById(Long id);
-
-}
+	Admin findById(long id);
+	
+	AdminDto verifyAdmin(String username, String passwword);
+	
+}	

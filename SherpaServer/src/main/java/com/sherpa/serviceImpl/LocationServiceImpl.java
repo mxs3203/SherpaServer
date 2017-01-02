@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.LocationDao;
-import com.sherpa.dto.Location;
+import com.sherpa.model.Location;
 import com.sherpa.service.LocationService;
 
 @Service
@@ -31,8 +31,10 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public Location findById(Long id) {
+	public Location findById(long id) {
 		return locationDao.findById(id);
 	}
+	
+	
 
 }

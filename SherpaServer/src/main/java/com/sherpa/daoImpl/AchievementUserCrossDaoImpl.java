@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.AchievementUserCrossDao;
-import com.sherpa.dto.AchievementUserCross;
-import com.sherpa.dto.AchievementUserCrossId;
+import com.sherpa.model.AchievementUserCross;
+import com.sherpa.model.AchievementUserCrossId;
 
 /**
  * Home object for domain model class AchievementUserCross.

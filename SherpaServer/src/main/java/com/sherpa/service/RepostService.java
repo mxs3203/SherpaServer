@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Report;
+import com.sherpa.model.Report;
 
 public interface RepostService {
 
@@ -10,6 +10,6 @@ public interface RepostService {
 
 	Report updateReport(Report detachedInstance);
 
-	Report findById(Long id);
+	Report findById(long id);
 
 }

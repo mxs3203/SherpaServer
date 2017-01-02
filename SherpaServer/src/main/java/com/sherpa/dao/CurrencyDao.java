@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Currency;
+import com.sherpa.model.Currency;
 
 public interface CurrencyDao {
 
@@ -10,6 +10,8 @@ public interface CurrencyDao {
 
 	Currency merge(Currency detachedInstance);
 
-	Currency findById(Long id);
+	Currency findById(long id);
+
+	Currency findByCurrencyIso(String iso);
 
 }

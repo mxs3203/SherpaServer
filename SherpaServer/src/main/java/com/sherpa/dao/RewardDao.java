@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Reward;
+import com.sherpa.model.Reward;
 
 public interface RewardDao {
 
@@ -10,6 +10,6 @@ public interface RewardDao {
 
 	Reward merge(Reward detachedInstance);
 
-	Reward findById(Long id);
+	Reward findById(long id);
 
 }

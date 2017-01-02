@@ -1,6 +1,10 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.User;
+import java.util.Set;
+
+import com.sherpa.dto.EventDto;
+import com.sherpa.dto.UserDto;
+import com.sherpa.model.User;
 
 public interface UserService {
 
@@ -10,6 +14,16 @@ public interface UserService {
 
 	User updateUser(User detachedInstance);
 
-	User findById(Long id);
+	User findById(long id);
+
+	UserDto loginUser(String email, String password);
+
+	Set<EventDto> getUserEvents(long id);
+
+	Set<UserDto> getUsersByRegion(String region);
+
+	Set<UserDto> getSherpasByRegion(String region);
+
+	Set<UserDto> getSherpasByRating(String region);
 
 }

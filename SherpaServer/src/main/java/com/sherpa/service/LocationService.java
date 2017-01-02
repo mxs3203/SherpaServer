@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Location;
+import com.sherpa.model.Location;
 
 public interface LocationService {
 
@@ -10,6 +10,7 @@ public interface LocationService {
 
 	Location updateLocation(Location detachedInstance);
 
-	Location findById(Long id);
+	Location findById(long id);
+
 
 }

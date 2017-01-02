@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.RewardDao;
-import com.sherpa.dto.Reward;
+import com.sherpa.model.Reward;
 import com.sherpa.service.RewardService;
 
 @Service
@@ -31,7 +31,7 @@ public class RewardServiceImpl implements RewardService {
 	}
 	
 	@Override
-	public Reward findById(Long id) {
+	public Reward findById(long id) {
 		return rewardDao.findById(id);
 	}
 	

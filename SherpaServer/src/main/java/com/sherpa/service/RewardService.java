@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Reward;
+import com.sherpa.model.Reward;
 
 public interface RewardService {
 
@@ -10,6 +10,6 @@ public interface RewardService {
 
 	Reward updateReward(Reward detachedInstance);
 
-	Reward findById(Long id);
+	Reward findById(long id);
 
 }

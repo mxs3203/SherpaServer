@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.TagDao;
-import com.sherpa.dto.Tag;
+import com.sherpa.model.Tag;
 import com.sherpa.service.TagService;
 
 @Service
@@ -31,7 +31,7 @@ public class TagServiceImpl implements TagService {
 	}
 	
 	@Override
-	public Tag findById(Long id) {
+	public Tag findById(long id) {
 		return tagDao.findById(id);
 	}
 	

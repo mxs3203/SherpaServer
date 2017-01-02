@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AchievementUserCrossDao;
-import com.sherpa.dto.AchievementUserCross;
-import com.sherpa.dto.AchievementUserCrossId;
+import com.sherpa.model.AchievementUserCross;
+import com.sherpa.model.AchievementUserCrossId;
 import com.sherpa.service.AchievementUserCrossService;
 
 @Service

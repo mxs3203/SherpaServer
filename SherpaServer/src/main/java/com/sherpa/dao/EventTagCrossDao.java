@@ -1,7 +1,7 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.EventTagCross;
-import com.sherpa.dto.EventTagCrossId;
+import com.sherpa.model.EventTagCross;
+import com.sherpa.model.EventTagCrossId;
 
 public interface EventTagCrossDao {
 

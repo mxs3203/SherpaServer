@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.RewardDao;
-import com.sherpa.dto.Reward;
+import com.sherpa.model.Reward;
 
 /**
  * Home object for domain model class Reward.
@@ -64,7 +64,7 @@ public class RewardDaoImpl implements RewardDao {
 	}
 
 	@Override
-	public Reward findById(Long id) {
+	public Reward findById(long id) {
 		log.debug("getting Reward instance with id: " + id);
 		try {
 			Reward instance = entityManager.find(Reward.class, id);

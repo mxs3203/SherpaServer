@@ -5,12 +5,14 @@ package com.sherpa.daoImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.TagDao;
-import com.sherpa.dto.Tag;
+import com.sherpa.model.Tag;
 
 /**
  * Home object for domain model class Tag.
@@ -64,7 +66,7 @@ public class TagDaoImpl implements TagDao {
 	}
 
 	@Override
-	public Tag findById(Long id) {
+	public Tag findById(long id) {
 		log.debug("getting Tag instance with id: " + id);
 		try {
 			Tag instance = entityManager.find(Tag.class, id);
@@ -75,4 +77,19 @@ public class TagDaoImpl implements TagDao {
 			throw re;
 		}
 	}
+	
+	/* TODO! Refactor */
+	@Override
+	public Tag findByTagName(String tagName) {
+		log.debug("getting Tag instance with name: " + tagName);
+		try {
+			Query query = entityManager.createQuery("FROM Tag t WHERE t.tagName = :tagName");
+			query.setParameter("tagName", tagName);
+			return (Tag) query.getSingleResult();
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
 }

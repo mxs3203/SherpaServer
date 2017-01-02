@@ -1,7 +1,7 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.AchievementUserCross;
-import com.sherpa.dto.AchievementUserCrossId;
+import com.sherpa.model.AchievementUserCross;
+import com.sherpa.model.AchievementUserCrossId;
 
 public interface AchievementUserCrossService {
 

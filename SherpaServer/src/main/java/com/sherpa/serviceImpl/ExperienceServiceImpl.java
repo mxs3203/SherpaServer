@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ExperienceDao;
-import com.sherpa.dto.Experience;
+import com.sherpa.model.Experience;
 import com.sherpa.service.ExperienceService;
 
 @Service
@@ -31,7 +31,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public Experience findById(Long id) {
+	public Experience findById(long id) {
 		return experienceDao.findById(id);
 	}
 

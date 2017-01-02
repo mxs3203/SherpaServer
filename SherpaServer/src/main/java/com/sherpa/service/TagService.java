@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Tag;
+import com.sherpa.model.Tag;
 
 public interface TagService {
 
@@ -10,6 +10,6 @@ public interface TagService {
 
 	Tag updateTag(Tag detachedInstance);
 
-	Tag findById(Long id);
+	Tag findById(long id);
 
 }

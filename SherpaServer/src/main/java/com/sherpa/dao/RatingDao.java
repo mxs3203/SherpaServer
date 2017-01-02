@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Rating;
+import com.sherpa.model.Rating;
 
 public interface RatingDao {
 
@@ -10,6 +10,6 @@ public interface RatingDao {
 
 	Rating merge(Rating detachedInstance);
 
-	Rating findById(Long id);
+	Rating findById(long id);
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.CurrencyDao;
-import com.sherpa.dto.Currency;
+import com.sherpa.model.Currency;
 import com.sherpa.service.CurrencyService;
 
 @Service
@@ -31,7 +31,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 	}
 
 	@Override
-	public Currency findById(Long id) {
+	public Currency findById(long id) {
 		return currencyDao.findById(id);
 	}
 

@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.EventUserCrossDao;
-import com.sherpa.dto.EventUserCross;
-import com.sherpa.dto.EventUserCrossId;
+import com.sherpa.model.EventUserCross;
+import com.sherpa.model.EventUserCrossId;
 
 /**
  * Home object for domain model class EventUserCross.

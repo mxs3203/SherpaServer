@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Tag;
+import com.sherpa.model.Tag;
 
 public interface TagDao {
 
@@ -10,6 +10,8 @@ public interface TagDao {
 
 	Tag merge(Tag detachedInstance);
 
-	Tag findById(Long id);
+	Tag findById(long id);
+
+	Tag findByTagName(String tagName);
 
 }

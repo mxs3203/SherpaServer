@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Experience;
+import com.sherpa.model.Experience;
 
 public interface ExperienceService {
 
@@ -10,6 +10,6 @@ public interface ExperienceService {
 
 	Experience updateExperience(Experience detachedInstance);
 
-	Experience findById(Long id);
+	Experience findById(long id);
 
 }

@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Rating;
+import com.sherpa.model.Rating;
 
 public interface RatingService {
 
@@ -10,6 +10,6 @@ public interface RatingService {
 
 	Rating updateRating(Rating detachedInstance);
 
-	Rating findById(Long id);
+	Rating findById(long id);
 
 }

@@ -1,6 +1,12 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.User;
+import java.util.List;
+import java.util.Set;
+
+import com.sherpa.dto.UserDto;
+import com.sherpa.model.Event;
+import com.sherpa.model.Rating;
+import com.sherpa.model.User;
 
 public interface UserDao {
 
@@ -10,6 +16,12 @@ public interface UserDao {
 
 	User merge(User detachedInstance);
 
-	User findById(Long id);
+	User findById(long id);
+
+	UserDto getUserByCredentials(String email, String password);
+	
+	Set<Event> getUserEvents(long sherpaId);
+
+	List<Rating> getSherpasByRating(String region);
 
 }

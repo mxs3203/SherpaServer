@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.RatingDao;
-import com.sherpa.dto.Rating;
+import com.sherpa.model.Rating;
 import com.sherpa.service.RatingService;
 
 @Service
@@ -31,7 +31,7 @@ public class RatingServiceImpl implements RatingService {
 	}
 	
 	@Override
-	public Rating findById(Long id) {
+	public Rating findById(long id) {
 		return ratingDao.findById(id);
 	}
 }

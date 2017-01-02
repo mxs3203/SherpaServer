@@ -1,6 +1,7 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Admin;
+import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 
 public interface AdminDao {
 
@@ -10,6 +11,7 @@ public interface AdminDao {
 
 	Admin merge(Admin detachedInstance);
 
-	Admin findById(Long id);
+	Admin findById(long id);
 
+	AdminDto verifyAdmin(String username, String password);
 }

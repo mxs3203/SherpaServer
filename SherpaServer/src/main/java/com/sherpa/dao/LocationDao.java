@@ -1,6 +1,9 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Location;
+
+import java.util.List;
+
+import com.sherpa.model.Location;
 
 public interface LocationDao {
 
@@ -10,6 +13,8 @@ public interface LocationDao {
 
 	Location merge(Location detachedInstance);
 
-	Location findById(Long id);
+	Location findById(long id);
+
+	List<Location> getRegionLocations(String region);
 
 }

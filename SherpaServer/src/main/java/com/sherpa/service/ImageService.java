@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Image;
+import com.sherpa.model.Image;
 
 public interface ImageService {
 
@@ -10,6 +10,6 @@ public interface ImageService {
 
 	Image updateImage(Image detachedInstance);
 
-	Image findById(Long id);
+	Image findById(long id);
 
 }

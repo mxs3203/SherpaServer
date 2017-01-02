@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Currency;
+import com.sherpa.model.Currency;
 
 public interface CurrencyService {
 
@@ -10,6 +10,6 @@ public interface CurrencyService {
 
 	Currency updateCurrency(Currency detachedInstance);
 
-	Currency findById(Long id);
+	Currency findById(long id);
 
 }

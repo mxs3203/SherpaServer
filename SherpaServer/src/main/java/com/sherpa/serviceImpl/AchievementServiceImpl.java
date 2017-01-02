@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AchievementDao;
-import com.sherpa.dto.Achievement;
+import com.sherpa.model.Achievement;
 import com.sherpa.service.AchievementService;
 
 @Service
@@ -31,7 +31,7 @@ public class AchievementServiceImpl implements AchievementService {
 	}
 
 	@Override
-	public Achievement findById(Long id) {
+	public Achievement findById(long id) {
 		return achievementDao.findById(id);
 	}
 

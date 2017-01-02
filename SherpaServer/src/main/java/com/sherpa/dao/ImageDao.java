@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Image;
+import com.sherpa.model.Image;
 
 public interface ImageDao {
 
@@ -10,6 +10,6 @@ public interface ImageDao {
 
 	Image merge(Image detachedInstance);
 
-	Image findById(Long id);
+	Image findById(long id);
 
 }

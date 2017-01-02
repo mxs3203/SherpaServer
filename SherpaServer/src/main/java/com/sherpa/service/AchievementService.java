@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.Achievement;
+import com.sherpa.model.Achievement;
 
 public interface AchievementService {
 
@@ -10,6 +10,6 @@ public interface AchievementService {
 
 	Achievement updateAchievement(Achievement detachedInstance);
 
-	Achievement findById(Long id);
+	Achievement findById(long id);
 
 }

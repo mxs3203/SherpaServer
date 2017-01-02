@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.AchievementDao;
-import com.sherpa.dto.Achievement;
+import com.sherpa.model.Achievement;
 
 /**
  * Home object for domain model class Achievement.
@@ -64,7 +64,7 @@ public class AchievementDaoImpl implements AchievementDao {
 	}
 
 	@Override
-	public Achievement findById(Long id) {
+	public Achievement findById(long id) {
 		log.debug("getting Achievement instance with id: " + id);
 		try {
 			Achievement instance = entityManager.find(Achievement.class, id);

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ReportDao;
-import com.sherpa.dto.Report;
+import com.sherpa.model.Report;
 import com.sherpa.service.RepostService;
 
 @Service
@@ -31,7 +31,7 @@ public class ReportServiceImpl implements RepostService {
 	}
 	
 	@Override
-	public Report findById(Long id) {
+	public Report findById(long id) {
 		return reportDao.findById(id);
 	}
 }

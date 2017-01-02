@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ImageDao;
-import com.sherpa.dto.Image;
+import com.sherpa.model.Image;
 import com.sherpa.service.ImageService;
 
 @Service
@@ -31,7 +31,7 @@ public class ImageServiceImpl implements ImageService {
 	}
 	
 	@Override
-	public Image findById(Long id) {
+	public Image findById(long id) {
 		return imageDao.findById(id);
 	}
 	

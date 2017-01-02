@@ -1,16 +1,21 @@
 package com.sherpa.daoImpl;
 // default package
 
+import java.util.List;
+
 // Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.LocationDao;
-import com.sherpa.dto.Location;
+import com.sherpa.model.Location;
 
 /**
  * Home object for domain model class Location.
@@ -64,7 +69,7 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public Location findById(Long id) {
+	public Location findById(long id) {
 		log.debug("getting Location instance with id: " + id);
 		try {
 			Location instance = entityManager.find(Location.class, id);
@@ -74,5 +79,25 @@ public class LocationDaoImpl implements LocationDao {
 			log.error("get failed", re);
 			throw re;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Location> getRegionLocations(String region) {
+		
+		List<Location> locations;
+		
+		try {
+			
+			Query query = entityManager.createQuery("FROM Location l WHERE l.region = :region");
+			query.setParameter("region", region);
+			
+			locations = query.getResultList();
+						
+		} catch(NoResultException nre) {
+			locations = null;
+		}
+		
+		return locations;
 	}
 }

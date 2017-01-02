@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.ExperienceDao;
-import com.sherpa.dto.Experience;
+import com.sherpa.model.Experience;
 
 /**
  * Home object for domain model class Experience.
@@ -64,7 +64,7 @@ public class ExperienceDaoImpl implements ExperienceDao {
 	}
 
 	@Override
-	public Experience findById(Long id) {
+	public Experience findById(long id) {
 		log.debug("getting Experience instance with id: " + id);
 		try {
 			Experience instance = entityManager.find(Experience.class, id);

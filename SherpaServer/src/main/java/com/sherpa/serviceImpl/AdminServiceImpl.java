@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AdminDao;
-import com.sherpa.dto.Admin;
+import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Service
@@ -31,8 +32,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public Admin findById(Long id) {
+	public Admin findById(long id) {
 		return adminDao.findById(id);
+	}
+	@Override
+	public AdminDto verifyAdmin(String username, String password){
+		return (AdminDto) adminDao.verifyAdmin(username, password);		
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Experience;
+import com.sherpa.model.Experience;
 
 public interface ExperienceDao {
 
@@ -10,6 +10,6 @@ public interface ExperienceDao {
 
 	Experience merge(Experience detachedInstance);
 
-	Experience findById(Long id);
+	Experience findById(long id);
 
 }

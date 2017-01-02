@@ -1,7 +1,7 @@
 package com.sherpa.service;
 
-import com.sherpa.dto.EventUserCross;
-import com.sherpa.dto.EventUserCrossId;
+import com.sherpa.model.EventUserCross;
+import com.sherpa.model.EventUserCrossId;
 
 public interface EventUserCrossService {
 

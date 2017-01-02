@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.RatingDao;
-import com.sherpa.dto.Rating;
+import com.sherpa.model.Rating;
 
 /**
  * Home object for domain model class Rating.
@@ -64,7 +64,7 @@ public class RatingDaoImpl implements RatingDao {
 	}
 
 	@Override
-	public Rating findById(Long id) {
+	public Rating findById(long id) {
 		log.debug("getting Rating instance with id: " + id);
 		try {
 			Rating instance = entityManager.find(Rating.class, id);

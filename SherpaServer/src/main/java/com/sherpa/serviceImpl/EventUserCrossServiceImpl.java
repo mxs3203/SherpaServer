@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.EventUserCrossDao;
-import com.sherpa.dto.EventUserCross;
-import com.sherpa.dto.EventUserCrossId;
+import com.sherpa.model.EventUserCross;
+import com.sherpa.model.EventUserCrossId;
 import com.sherpa.service.EventUserCrossService;
 
 @Service

@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.EventTagCrossDao;
-import com.sherpa.dto.EventTagCross;
-import com.sherpa.dto.EventTagCrossId;
+import com.sherpa.model.EventTagCross;
+import com.sherpa.model.EventTagCrossId;
 
 /**
  * Home object for domain model class EventTagCross.

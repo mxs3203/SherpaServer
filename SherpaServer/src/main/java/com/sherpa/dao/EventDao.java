@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Event;
+import com.sherpa.model.Event;
 
 public interface EventDao {
 
@@ -10,6 +10,6 @@ public interface EventDao {
 
 	Event merge(Event detachedInstance);
 
-	Event findById(Long id);
+	Event findById(long id);
 
 }

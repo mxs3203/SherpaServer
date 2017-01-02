@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.ReportDao;
-import com.sherpa.dto.Report;
+import com.sherpa.model.Report;
 
 /**
  * Home object for domain model class Report.
@@ -64,7 +64,7 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public Report findById(Long id) {
+	public Report findById(long id) {
 		log.debug("getting Report instance with id: " + id);
 		try {
 			Report instance = entityManager.find(Report.class, id);

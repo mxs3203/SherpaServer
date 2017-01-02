@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.Report;
+import com.sherpa.model.Report;
 
 public interface ReportDao {
 
@@ -10,6 +10,6 @@ public interface ReportDao {
 
 	Report merge(Report detachedInstance);
 
-	Report findById(Long id);
+	Report findById(long id);
 
 }
