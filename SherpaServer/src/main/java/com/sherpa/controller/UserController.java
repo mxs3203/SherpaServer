@@ -25,8 +25,6 @@ public class UserController {
 	 * 
 	 * Refactor!
 	 * 
-	 * Sredit xml-ove
-	 * 
 	 * Boot servera loada MySQL driver nekoliko puta ? neki SSL warn?
 	 * 
 	 * Generic DAO
