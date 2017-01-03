@@ -12,14 +12,18 @@ import com.sherpa.dao.AdminDao;
 import com.sherpa.model.Admin;
 
 @Repository
-public class AdminDaoImpl implements AdminDao {
+public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 
 	private static final Log log = LogFactory.getLog(AdminDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	public void persist(Admin transientInstance) {
+		
+		super.persist(transientInstance);
+		
+		/*
 		log.debug("persisting Admin instance");
 		try {
 			entityManager.persist(transientInstance);
@@ -28,10 +32,14 @@ public class AdminDaoImpl implements AdminDao {
 			log.error("persist failed", re);
 			throw re;
 		}
+		*/
 	}
 
 	public void remove(Admin persistentInstance) {
-		log.debug("removing Admin instance");
+		
+		super.remove(persistentInstance);
+		
+		/*log.debug("removing Admin instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -39,9 +47,14 @@ public class AdminDaoImpl implements AdminDao {
 			log.error("remove failed", re);
 			throw re;
 		}
+		*/
 	}
 
 	public Admin merge(Admin detachedInstance) {
+		
+		return super.merge(detachedInstance);
+		
+		/*
 		log.debug("merging Admin instance");
 		try {
 			Admin result = entityManager.merge(detachedInstance);
@@ -51,9 +64,14 @@ public class AdminDaoImpl implements AdminDao {
 			log.error("merge failed", re);
 			throw re;
 		}
+		*/
 	}
 
 	public Admin findById(long id) {
+		
+		return super.findById(Admin.class, id);
+		
+		/*
 		log.debug("getting Admin instance with id: " + id);
 		try {
 			Admin instance = entityManager.find(Admin.class, id);
@@ -63,6 +81,7 @@ public class AdminDaoImpl implements AdminDao {
 			log.error("get failed", re);
 			throw re;
 		}
+		*/
 	}
 
 	public Admin verifyAdmin(String username, String password) {

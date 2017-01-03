@@ -13,5 +13,7 @@ public interface GenericDao<T> {
 	T findById(Class<T> clazz, long id);
 
 	List<T> getAll(Class<T> clazz);
+	
+	/* TODO! Dal je ovo potrebno? Dal mogu ovdje extendat GenericDao<Admin>? */
 
 }
