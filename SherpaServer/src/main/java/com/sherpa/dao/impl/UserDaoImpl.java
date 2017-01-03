@@ -1,5 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
 
 import java.util.List;
 import java.util.Set;
@@ -21,12 +20,6 @@ import com.sherpa.model.Event;
 import com.sherpa.model.Rating;
 import com.sherpa.model.User;
 
-/**
- * Home object for domain model class User.
- * 
- * @see .User
- * @author Hibernate Tools
- */
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -87,18 +80,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserDto getUserByCredentials(String email, String password) {
-		 
+
 		try {
 			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password");
 			query.setParameter("email", email);
 			query.setParameter("password", password);
 			User user = (User) query.getSingleResult();
-			return user.generateDto();
-		} catch(NoResultException nre) {
+			return user.toDto();
+		} catch (NoResultException nre) {
 			return null;
 		}
 	}
-	
+
 	/* TODO! bez fetch by id */
 	@Override
 	public Set<Event> getUserEvents(long userId) {
@@ -110,28 +103,33 @@ public class UserDaoImpl implements UserDao {
 	public List<Rating> getSherpasByRating(String region) {
 
 		try {
-			
-			/* TODO! Greska u bazi? da linkamo i rated_user_id column u tablicu ; GROUP BY rating_id? */
-			
-			Query query = entityManager.createQuery("FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC", Rating.class);
-						
+
+			/*
+			 * TODO! Greska u bazi? da linkamo i rated_user_id column u tablicu
+			 * ; GROUP BY rating_id?
+			 */
+
+			Query query = entityManager.createQuery(
+					"FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC",
+					Rating.class);
+
 			query.setParameter("region", region);
-			
+
 			@SuppressWarnings("unchecked")
 			List<Rating> ratings = query.getResultList();
-			
-			for(Rating r : ratings) {
+
+			for (Rating r : ratings) {
 				User u = r.getUser();
 				u.getEvents();
 			}
-			
+
 			System.out.println(ratings.toString());
-			
+
 			return ratings;
-						
-		} catch(NoResultException nre) {
+
+		} catch (NoResultException nre) {
 			return null;
 		}
-		
+
 	}
 }

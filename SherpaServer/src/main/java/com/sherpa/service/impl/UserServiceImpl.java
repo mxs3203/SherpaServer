@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private LocationDao locDao;
 
@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto findById(long id) {
-		return userDao.findById(id).generateDto();
+		/* TODO! */
+		return userDao.findById(id).toDto();
 	}
 
 	@Override
@@ -57,8 +58,9 @@ public class UserServiceImpl implements UserService {
 
 		Set<EventDto> eventsDto = new HashSet<EventDto>();
 
-		for(Event events : userDao.getUserEvents(id)) {
-			eventsDto.add(events.generateDto());
+		/* TODO! */
+		for (Event events : userDao.getUserEvents(id)) {
+			eventsDto.add(events.toDto());
 		}
 		return eventsDto;
 	}
@@ -66,36 +68,38 @@ public class UserServiceImpl implements UserService {
 	public Set<UserDto> getUsersByRegion(String region) {
 
 		Set<UserDto> usersDto = new HashSet<UserDto>();
-		
-		for(Location locs : locDao.getRegionLocations(region)) {			
-			for(User user : locs.getUsers()) {
-				usersDto.add(user.generateDto());
+
+		/* TODO! */
+		for (Location locs : locDao.getRegionLocations(region)) {
+			for (User user : locs.getUsers()) {
+				usersDto.add(user.toDto());
 			}
 		}
 		return usersDto;
 	}
-	
+
 	/* TODO! Queriat odmah iz baze usere koji su sherpa */
 	@Override
 	public Set<UserDto> getSherpasByRegion(String region) {
-		
+
 		Set<UserDto> sherpasDto = this.getUsersByRegion(region);
-		
+
 		Iterator<UserDto> iter = sherpasDto.iterator();
 		while (iter.hasNext()) {
-			if(!iter.next().getIsSherpa()) iter.remove();
+			if (!iter.next().getIsSherpa())
+				iter.remove();
 		}
-		
+
 		return sherpasDto;
 	}
 
 	@Override
 	public Set<UserDto> getSherpasByRating(String region) {
-		
+
 		/* TODO! get sherpas events by rating */
-		
+
 		userDao.getSherpasByRating(region);
-		
+
 		return null;
 	}
 

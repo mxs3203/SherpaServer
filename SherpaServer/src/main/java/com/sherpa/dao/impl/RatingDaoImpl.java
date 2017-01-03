@@ -1,7 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,12 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.sherpa.dao.RatingDao;
 import com.sherpa.model.Rating;
 
-/**
- * Home object for domain model class Rating.
- * 
- * @see .Rating
- * @author Hibernate Tools
- */
 @Repository
 public class RatingDaoImpl implements RatingDao {
 

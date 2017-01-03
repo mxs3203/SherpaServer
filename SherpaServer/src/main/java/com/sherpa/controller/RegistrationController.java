@@ -22,7 +22,7 @@ public class RegistrationController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private LocationService locationService;
 
@@ -31,24 +31,23 @@ public class RegistrationController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> registerUserPost(@RequestBody RegisterDto registerBody) {
-		System.out.println(
-				"Fetching User with Email: " + registerBody.getUserDto().getEmail() + " and Password: " + registerBody.getUserDto().getPassword());
-		
-		Location loc = registerBody.getLocationDto().generateEntity();
-		
+		System.out.println("Fetching User with Email: " + registerBody.getUserDto().getEmail() + " and Password: "
+				+ registerBody.getUserDto().getPassword());
+
+		Location loc = registerBody.getLocationDto().toModel();
+
 		locationService.addLocation(loc);
-		
-		
+
 		userDto = registerBody.getUserDto();
-		user = userDto.generateEntity();
+		user = userDto.toModel();
 		user.setLocation(loc);
 		userService.addUser(user);
-		
-		userDto = userService.findById(user.getUserId()).generateDto();
-		
+
+		userDto = userService.findById(user.getUserId());
+
 		if (userDto == null) {
-			System.out.println("User with Email: " + registerBody.getUserDto().getEmail() + " and Password: " + registerBody.getUserDto().getPassword()
-					+ " not found");
+			System.out.println("User with Email: " + registerBody.getUserDto().getEmail() + " and Password: "
+					+ registerBody.getUserDto().getPassword() + " not found");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);

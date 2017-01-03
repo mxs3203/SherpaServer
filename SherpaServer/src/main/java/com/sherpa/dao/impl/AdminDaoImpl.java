@@ -1,7 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,15 +9,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.AdminDao;
-import com.sherpa.dto.AdminDto;
 import com.sherpa.model.Admin;
 
-/**
- * Home object for domain model class Admin.
- * 
- * @see .Admin
- * @author Hibernate Tools
- */
 @Repository
 public class AdminDaoImpl implements AdminDao {
 
@@ -63,7 +53,6 @@ public class AdminDaoImpl implements AdminDao {
 		}
 	}
 
-	@Override
 	public Admin findById(long id) {
 		log.debug("getting Admin instance with id: " + id);
 		try {
@@ -75,22 +64,22 @@ public class AdminDaoImpl implements AdminDao {
 			throw re;
 		}
 	}
-	
-	
-	public AdminDto verifyAdmin(String username, String password){		
-		log.debug("getting Admin instance with username: " + username + " password: "+ password);
+
+	public Admin verifyAdmin(String username, String password) {
+		log.debug("getting Admin instance with username: " + username + " password: " + password);
 		try {
-			Query query = entityManager.createQuery("FROM Admin a WHERE a.username = :username AND a.password = :password");
-			query.setParameter("email", username);
-			query.setParameter("password", password);
+			Query query = entityManager
+					.createQuery("FROM Admin a WHERE a.username = :username AND a.password = :password")
+					.setParameter("email", username).setParameter("password", password);
+
 			Admin admin = (Admin) query.getSingleResult();
-			AdminDto adminDto = admin.generateDto();
+
 			log.debug("get successful");
-			return adminDto;
+			return admin;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
-		
+
 	}
 }

@@ -18,37 +18,43 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-    public String getIndex() {
-        return "admin";
-    }
+	public String getIndex() {
+		return "admin";
+	}
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AdminDto> getUser(@PathVariable("id") long userId) {
-        
-		System.out.println("Fetching User with id " + userId);
-       
-		AdminDto adminDto = adminService.findById(userId);
-        
-		if (adminDto == null) {
-            System.out.println("User with id " + userId + " not found");
-            return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
-        }
-        
-		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
-    }
-	
-	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username, @PathVariable("password") String password) {
-        System.out.println("Fetching Admin with username: " + username + " and Password: " + password);
-        AdminDto adminDto = adminService.verifyAdmin(username, password);
+	public ResponseEntity<AdminDto> getUser(@PathVariable("id") long userId) {
 
-        if (adminDto == null) {
-            System.out.println("Admin with username: " + username + " and Password: " + password + " not found");
-            return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
-    }
+		System.out.println("Fetching User with id " + userId);
+
+		AdminDto adminDto = adminService.findById(userId);
+
+		if (adminDto == null) {
+			System.out.println("User with id " + userId + " not found");
+			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username,
+			@PathVariable("password") String password) {
+		System.out.println("Fetching Admin with username: " + username + " and Password: " + password);
+
+		AdminDto adminDto = new AdminDto();
+		adminDto.setUsername(username);
+		adminDto.setPassword(password);
+
+		adminDto = adminService.verifyAdmin(adminDto);
+
+		if (adminDto == null) {
+			System.out.println("Admin with username: " + username + " and Password: " + password + " not found");
+			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
+	}
 
 }

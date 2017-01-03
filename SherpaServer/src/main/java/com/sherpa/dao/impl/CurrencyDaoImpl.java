@@ -1,7 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,12 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.sherpa.dao.CurrencyDao;
 import com.sherpa.model.Currency;
 
-/**
- * Home object for domain model class Currency.
- * 
- * @see .Currency
- * @author Hibernate Tools
- */
 @Repository
 public class CurrencyDaoImpl implements CurrencyDao {
 
@@ -77,13 +68,13 @@ public class CurrencyDaoImpl implements CurrencyDao {
 			throw re;
 		}
 	}
-	
+
 	/* TODO! refactor */
 	@Override
 	public Currency findByCurrencyIso(String iso) {
 		log.debug("getting Currency instance with iso: " + iso);
 		try {
-			Currency instance;	
+			Currency instance;
 			Query query = entityManager.createQuery("FROM Currency c WHERE c.iso = :iso");
 			query.setParameter("iso", iso);
 			instance = (Currency) query.getSingleResult();
@@ -93,5 +84,5 @@ public class CurrencyDaoImpl implements CurrencyDao {
 			throw re;
 		}
 	}
-	
+
 }

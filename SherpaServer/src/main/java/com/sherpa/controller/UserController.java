@@ -23,13 +23,23 @@ public class UserController {
 	/*
 	 * TODO!
 	 * 
-	 * Refactor!
+	 * Refactor:
+	 * 
+	 * Kontrolera, Servisa i DAO-a
+	 * 
+	 * U DTO i Modelu doraditi toModel i toDTO
+	 * 
 	 * 
 	 * Boot servera loada MySQL driver nekoliko puta ? neki SSL warn?
 	 * 
-	 * Generic DAO
+	 * 
+	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi
+	 * 
 	 * 
 	 * Drugi Logger
+	 * 
+	 * 
+	 * Ovo isto izmozgat:
 	 * 
 	 * U kontroleru se barata samo sa view objektima (DTO). Oni se salju u
 	 * service di se pretvore u model / entity, prije nego ih posaljes u DAO (i
@@ -41,9 +51,16 @@ public class UserController {
 	 * 
 	 * DAO (Entity) -> Service (Entity -> DTO) -> Controller (DTO)
 	 * 
+	 * E sad pitanje je da li je bolje drzati reference u Service-u kao DTO ili
+	 * kao Model? Ako je DTO onda cemo morat rucno zvat querye koji su van
+	 * transakcije, a ako su ostali kao Model s nested Proxy objektima, onda bi
+	 * se iduci query trebao izvrsiti u istoj transakciji (zato
+	 * ima @Transactional na klasi service)
+	 * 
+	 * 
 	 * Vecina provjera se obavlja u servisu (npr. is null i ta sranja). DAO bi
 	 * onda trebao imat sto vise metoda koje obavljaju sta god treba u sto
-	 * manjem broju querya
+	 * manjem broju querya, zato je ovo gore "bitno"
 	 * 
 	 */
 
@@ -58,9 +75,9 @@ public class UserController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
 		System.out.println("Fetching User with id " + userId);
-		
+
 		UserDto user = userService.findById(userId);
-		
+
 		if (user == null) {
 			System.out.println("User with id " + userId + " not found");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);

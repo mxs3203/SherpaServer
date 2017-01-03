@@ -54,7 +54,7 @@ public class RatingDto {
 		this.comment = comment;
 	}
 
-	public Integer getRating() {
+	public int getRating() {
 		return rating;
 	}
 

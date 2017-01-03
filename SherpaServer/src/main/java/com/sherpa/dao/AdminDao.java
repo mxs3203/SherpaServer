@@ -1,6 +1,5 @@
 package com.sherpa.dao;
 
-import com.sherpa.dto.AdminDto;
 import com.sherpa.model.Admin;
 
 public interface AdminDao {
@@ -13,5 +12,5 @@ public interface AdminDao {
 
 	Admin findById(long id);
 
-	AdminDto verifyAdmin(String username, String password);
+	Admin verifyAdmin(String username, String password);
 }

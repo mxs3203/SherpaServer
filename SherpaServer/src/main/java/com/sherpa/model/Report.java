@@ -74,7 +74,7 @@ public class Report implements java.io.Serializable {
 	}
 
 	@Column(name = "date", nullable = false, length = 19)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	public DateTime getDate() {
 		return this.date;
 	}

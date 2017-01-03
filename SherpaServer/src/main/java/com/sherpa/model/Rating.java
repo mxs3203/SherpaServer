@@ -27,7 +27,7 @@ public class Rating implements java.io.Serializable {
 	private User user;
 	private DateTime date;
 	private String comment;
-	private Integer rating;
+	private int rating;
 
 	public Rating() {
 	}
@@ -83,11 +83,11 @@ public class Rating implements java.io.Serializable {
 	}
 
 	@Column(name = "rating")
-	public Integer getRating() {
+	public int getRating() {
 		return this.rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 

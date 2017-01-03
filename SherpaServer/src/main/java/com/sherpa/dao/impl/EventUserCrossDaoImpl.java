@@ -1,7 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,12 +10,6 @@ import com.sherpa.dao.EventUserCrossDao;
 import com.sherpa.model.EventUserCross;
 import com.sherpa.model.EventUserCrossId;
 
-/**
- * Home object for domain model class EventUserCross.
- * 
- * @see .EventUserCross
- * @author Hibernate Tools
- */
 @Repository
 public class EventUserCrossDaoImpl implements EventUserCrossDao {
 

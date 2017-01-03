@@ -1,5 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
 
 import java.util.List;
 
@@ -17,12 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.sherpa.dao.LocationDao;
 import com.sherpa.model.Location;
 
-/**
- * Home object for domain model class Location.
- * 
- * @see .Location
- * @author Hibernate Tools
- */
 @Repository
 public class LocationDaoImpl implements LocationDao {
 
@@ -80,24 +73,24 @@ public class LocationDaoImpl implements LocationDao {
 			throw re;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Location> getRegionLocations(String region) {
-		
+
 		List<Location> locations;
-		
+
 		try {
-			
+
 			Query query = entityManager.createQuery("FROM Location l WHERE l.region = :region");
 			query.setParameter("region", region);
-			
+
 			locations = query.getResultList();
-						
-		} catch(NoResultException nre) {
+
+		} catch (NoResultException nre) {
 			locations = null;
 		}
-		
+
 		return locations;
 	}
 }

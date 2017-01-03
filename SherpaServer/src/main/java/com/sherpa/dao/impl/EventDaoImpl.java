@@ -1,7 +1,4 @@
 package com.sherpa.dao.impl;
-// default package
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,12 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.sherpa.dao.EventDao;
 import com.sherpa.model.Event;
 
-/**
- * Home object for domain model class Event.
- * 
- * @see .Event
- * @author Hibernate Tools
- */
 @Repository
 public class EventDaoImpl implements EventDao {
 
@@ -76,6 +67,5 @@ public class EventDaoImpl implements EventDao {
 			throw re;
 		}
 	}
-	
-	
+
 }

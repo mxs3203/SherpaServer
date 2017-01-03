@@ -26,13 +26,13 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventDao eventDao;
-	
+
 	@Autowired
 	private LocationDao locationDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private CurrencyDao currencyDao;
 
@@ -55,39 +55,42 @@ public class EventServiceImpl implements EventService {
 	public Event findById(long id) {
 		return eventDao.findById(id);
 	}
-	
+
 	/* TODO! refactor za novi objekt */
 	@Override
-	public List<EventLocationDto> getEventsByRegion(String region){
-		
+	public List<EventLocationDto> getEventsByRegion(String region) {
+
 		List<EventLocationDto> events = new ArrayList<EventLocationDto>();
 		List<Location> locations = locationDao.getRegionLocations(region);
-		
-		for(Location loc : locations){
-			
-			Set<Event> eventsForLoc =  loc.getEventsForStartLocationId();
+
+		for (Location loc : locations) {
+
+			Set<Event> eventsForLoc = loc.getEventsForStartLocationId();
 			Iterator<Event> iter = eventsForLoc.iterator();
-			while(iter.hasNext()){
+
+			/* TODO! */
+			while (iter.hasNext()) {
 				Event event = (Event) iter.next();
-				if(event != null && event.getIsFinished() == false){			
-					EventLocationDto eventLocation = new EventLocationDto(event.generateDto(), loc.generateDto());
+				if (event != null && event.getIsFinished() == false) {
+					EventLocationDto eventLocation = new EventLocationDto(event.toDto(), loc.toDto());
 					events.add(eventLocation);
-				}	
-			}				
-		}	
+				}
+			}
+		}
 		return events;
 	}
-	
+
 	/* TODO! refactor */
 	@Override
-	public void insertEvent(EventLocationDto eld){
-		
-		Location location = eld.getLocation().generateEntity();		
-		Event event = eld.getEvent().generateEntity();
-		
+	public void insertEvent(EventLocationDto eld) {
+
+		/* TODO! */
+		Location location = eld.getLocation().toModel();
+		Event event = eld.getEvent().toModel();
+
 		/* unused? */
-		/*List<String> tags = eld.getTags();*/
-		
+		/* List<String> tags = eld.getTags(); */
+
 		String currencyIso = eld.getCurrency();
 		Currency currency = currencyDao.findByCurrencyIso(currencyIso);
 		event.setIsFinished(false);
