@@ -14,7 +14,7 @@ public interface UserService {
 
 	User updateUser(User detachedInstance);
 
-	User findById(long id);
+	UserDto findById(long id);
 
 	UserDto loginUser(String email, String password);
 

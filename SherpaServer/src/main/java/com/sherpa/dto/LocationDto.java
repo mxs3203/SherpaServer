@@ -1,8 +1,8 @@
 package com.sherpa.dto;
 
 import java.math.BigDecimal;
-
-import com.sherpa.model.Location;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LocationDto {
 
@@ -10,49 +10,68 @@ public class LocationDto {
 	private BigDecimal latitude;
 	private BigDecimal longitude;
 	private String region;
-	
-	public LocationDto(){}
-	
-	public LocationDto(BigDecimal latitude, BigDecimal longitude, String region){
-		this.latitude=latitude;
-		this.longitude=longitude;
-		this.region=region;	
+
+	private Set<EventDto> eventsForEndLocationId = new HashSet<EventDto>(0);
+	private Set<EventDto> eventsForStartLocationId = new HashSet<EventDto>(0);
+	private Set<UserDto> users = new HashSet<UserDto>(0);
+
+	public LocationDto() {
 	}
-	
-	public LocationDto(long locationId, BigDecimal latitude, BigDecimal longitude, String region) {
-		this.locationId = locationId;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.region = region;
-	}
-	
+
 	public long getLocationId() {
 		return locationId;
 	}
+
 	public void setLocationId(long locationId) {
 		this.locationId = locationId;
 	}
+
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
+
 	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
+
 	public BigDecimal getLongitude() {
 		return longitude;
 	}
+
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
+
 	public String getRegion() {
 		return region;
 	}
+
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	
-	public Location generateEntity(){
-		Location location = new Location(this.getLatitude(), this.getLongitude(), this.getRegion());
-		return location;	
+
+	public Set<EventDto> getEventsForEndLocationId() {
+		return eventsForEndLocationId;
 	}
+
+	public void setEventsForEndLocationId(Set<EventDto> eventsForEndLocationId) {
+		this.eventsForEndLocationId = eventsForEndLocationId;
+	}
+
+	public Set<EventDto> getEventsForStartLocationId() {
+		return eventsForStartLocationId;
+	}
+
+	public void setEventsForStartLocationId(Set<EventDto> eventsForStartLocationId) {
+		this.eventsForStartLocationId = eventsForStartLocationId;
+	}
+
+	public Set<UserDto> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<UserDto> users) {
+		this.users = users;
+	}
+
 }

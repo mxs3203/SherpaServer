@@ -12,7 +12,7 @@ public interface AdminService {
 
 	Admin updateAdmin(Admin detachedInstance);
 
-	Admin findById(long id);
+	AdminDto findById(long id);
 	
 	AdminDto verifyAdmin(String username, String passwword);
 	

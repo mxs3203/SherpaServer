@@ -32,5 +32,5 @@ public class RegisterDto {
 		this.locationDto = locationDto;
 	}
 	
-	
+	/* TODO! wtf je ovo? */
 }

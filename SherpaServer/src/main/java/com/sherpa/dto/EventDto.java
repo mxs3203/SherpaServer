@@ -1,13 +1,13 @@
 package com.sherpa.dto;
 
 import java.math.BigDecimal;
-import java.util.List;
-
-import org.joda.time.DateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.sherpa.model.Event;
 
 public class EventDto {
+
 	private long eventId;
 	private long currency;
 	private long locationByEndLocationId;
@@ -17,35 +17,16 @@ public class EventDto {
 	private String description;
 	private BigDecimal price;
 	private BigDecimal cumulativeRating;
-	private DateTime dateCreated;
-	private DateTime startTime;
-	private DateTime endTime;
+	private String dateCreated;
+	private String startTime;
+	private String endTime;
 	private Boolean isFinished;
-	
 
-	private List<String> images = null;
-	private String dateCreatedString;
-	private String startTimeString;
-	private String endTimeString;
+	private Set<ReportDto> reports = new HashSet<ReportDto>(0);
+	private Set<RatingDto> ratings = new HashSet<RatingDto>(0);
+	private Set<ImageDto> images = new HashSet<ImageDto>(0);
 
-	public EventDto() {}
-	
-	public EventDto(long eventId, long currency, long locationByEndLocationId, long locationByStartLocationId,
-			long userId, String name, String description, BigDecimal price, BigDecimal cumulativeRating,
-			DateTime dateCreated, DateTime startTime, DateTime endTime, Boolean isFinished) {
-		this.eventId = eventId;
-		this.currency = currency;
-		this.locationByEndLocationId = locationByEndLocationId;
-		this.locationByStartLocationId = locationByStartLocationId;
-		this.userId = userId;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.cumulativeRating = cumulativeRating;
-		this.dateCreated = dateCreated;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.isFinished = isFinished;
+	public EventDto() {
 	}
 
 	public long getEventId() {
@@ -120,27 +101,27 @@ public class EventDto {
 		this.cumulativeRating = cumulativeRating;
 	}
 
-	public DateTime getDateCreated() {
+	public String getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(DateTime dateCreated) {
+	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
-	public DateTime getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(DateTime startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public DateTime getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(DateTime endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -152,41 +133,35 @@ public class EventDto {
 		this.isFinished = isFinished;
 	}
 
-	public List<String> getImages() {
+	public Set<ReportDto> getReports() {
+		return reports;
+	}
+
+	public void setReports(Set<ReportDto> reports) {
+		this.reports = reports;
+	}
+
+	public Set<RatingDto> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<RatingDto> ratings) {
+		this.ratings = ratings;
+	}
+
+	public Set<ImageDto> getImages() {
 		return images;
 	}
 
-	public void setImages(List<String> images) {
+	public void setImages(Set<ImageDto> images) {
 		this.images = images;
 	}
-	
-	public String getDateCreatedString() {
-		return dateCreatedString;
+
+	/* TODO! Mozgat o ovom */
+	public Event generateEntity() {
+		Event event = new Event();
+		event.setEventId(eventId);
+		return event;
 	}
 
-
-	public void setDateCreatedString(String dateCreatedString) {
-		setDateCreated(new DateTime(dateCreatedString));
-	}
-
-	public String getStartTimeString() {
-		return startTimeString;
-	}
-
-	public void setStartTimeString(String startTimeString) {
-		setStartTime(new DateTime(startTimeString));
-	}
-
-	public String getEndTimeString() {
-		return endTimeString;
-	}
-
-	public void setEndTimeString(String endTimeString) {
-		setEndTime(new DateTime(endTimeString));
-	}
-	
-	public Event generateEntity(){
-		return new Event(null, null,this.getName(), this.getDescription(), this.getDateCreated(), this.getStartTime(), this.getEndTime());
-	}
-	
 }

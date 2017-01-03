@@ -17,8 +17,8 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
 	@Override
-	public void addAdmin(Admin transientInstance) {
-		adminDao.persist(transientInstance);
+	public void addAdmin(AdminDto transientInstance) {
+		adminDao.persist(transientInstance.generateEntity());
 	}
 	
 	@Override
@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public Admin findById(long id) {
-		return adminDao.findById(id);
+	public AdminDto findById(long id) {
+		return adminDao.findById(id).generateDto();
 	}
 	@Override
 	public AdminDto verifyAdmin(String username, String password){

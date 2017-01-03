@@ -58,7 +58,9 @@ public class UserController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
 		System.out.println("Fetching User with id " + userId);
-		UserDto user = userService.findById(userId).generateDto();
+		
+		UserDto user = userService.findById(userId);
+		
 		if (user == null) {
 			System.out.println("User with id " + userId + " not found");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);

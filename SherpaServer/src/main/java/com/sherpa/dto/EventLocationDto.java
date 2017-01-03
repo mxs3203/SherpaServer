@@ -58,4 +58,6 @@ public class EventLocationDto {
 		this.location = location;
 	}
 	
+	/* TODO! Dal ova klasa treba uopce? */
+	
 }

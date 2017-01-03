@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.AdminDto;
-import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Controller
@@ -27,14 +26,17 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AdminDto> getUser(@PathVariable("id") long userId) {
-        System.out.println("Fetching User with id " + userId);
-        Admin admin = adminService.findById(userId);
-        AdminDto adminDto = admin.generateDto();
-        if (adminDto == null) {
+        
+		System.out.println("Fetching User with id " + userId);
+       
+		AdminDto adminDto = adminService.findById(userId);
+        
+		if (adminDto == null) {
             System.out.println("User with id " + userId + " not found");
             return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
+        
+		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
