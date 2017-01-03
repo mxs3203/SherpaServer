@@ -1,5 +1,7 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Reward;
+
 public class RewardDto {
 
 	private long rewardId;
@@ -49,6 +51,12 @@ public class RewardDto {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	/* TODO! */
+	public Reward toModel() {
+		Reward reward = new Reward();
+		return reward;
 	}
 
 }

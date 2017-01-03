@@ -3,6 +3,8 @@ package com.sherpa.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sherpa.model.Currency;
+
 public class CurrencyDto {
 
 	private long currencyId;
@@ -35,6 +37,20 @@ public class CurrencyDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<EventDto> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<EventDto> events) {
+		this.events = events;
+	}
+
+	/* TODO! */
+	public Currency toModel() {
+		Currency currency = new Currency();
+		return currency;
 	}
 
 }

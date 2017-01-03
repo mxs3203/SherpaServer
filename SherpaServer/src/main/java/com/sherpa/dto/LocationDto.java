@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sherpa.model.Location;
+
 public class LocationDto {
 
 	private long locationId;
@@ -72,6 +74,12 @@ public class LocationDto {
 
 	public void setUsers(Set<UserDto> users) {
 		this.users = users;
+	}
+
+	/* TODO! */
+	public Location toModel() {
+		Location location = new Location();
+		return location;
 	}
 
 }

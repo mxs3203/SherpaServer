@@ -19,6 +19,7 @@ import com.sherpa.dto.CurrencyDto;
 public class Currency implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3231399653545569101L;
+
 	private long currencyId;
 	private String iso;
 	private String name;
@@ -65,11 +66,16 @@ public class Currency implements java.io.Serializable {
 		this.events = events;
 	}
 
+	/* TODO! dodat set evenata? */
 	public CurrencyDto toDto() {
 		CurrencyDto currencyDto = new CurrencyDto();
+
 		currencyDto.setCurrencyId(currencyId);
 		currencyDto.setIso(iso);
 		currencyDto.setName(name);
+
+		/* currencyDto.setEvents(events.toDto); */
+
 		return currencyDto;
 	}
 

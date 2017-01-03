@@ -1,5 +1,7 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Image;
+
 public class ImageDto {
 
 	private long imageId;
@@ -31,6 +33,12 @@ public class ImageDto {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	/* TODO! */
+	public Image toModel() {
+		Image image = new Image();
+		return image;
 	}
 
 }

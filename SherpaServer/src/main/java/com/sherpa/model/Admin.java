@@ -15,6 +15,7 @@ import com.sherpa.dto.AdminDto;
 public class Admin implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3478090166342381753L;
+
 	private long adminId;
 	private String username;
 	private String password;
@@ -53,9 +54,11 @@ public class Admin implements java.io.Serializable {
 
 	public AdminDto toDto() {
 		AdminDto adminDto = new AdminDto();
+
 		adminDto.setAdminId(adminId);
 		adminDto.setUsername(username);
 		adminDto.setPassword(password);
+
 		return adminDto;
 	}
 

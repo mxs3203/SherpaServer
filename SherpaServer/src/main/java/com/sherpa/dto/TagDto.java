@@ -1,5 +1,7 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Tag;
+
 public class TagDto {
 
 	private long tagId;
@@ -22,6 +24,12 @@ public class TagDto {
 
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
+	}
+
+	/* TODO! */
+	public Tag toModel() {
+		Tag tag = new Tag();
+		return tag;
 	}
 
 }

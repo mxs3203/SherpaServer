@@ -1,5 +1,7 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Rating;
+
 public class RatingDto {
 
 	private long ratingId;
@@ -58,6 +60,12 @@ public class RatingDto {
 
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+
+	/* TODO! */
+	public Rating toModel() {
+		Rating rating = new Rating();
+		return rating;
 	}
 
 }

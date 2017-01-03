@@ -1,5 +1,7 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Report;
+
 public class ReportDto {
 
 	private long reportId;
@@ -58,6 +60,12 @@ public class ReportDto {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	/* TODO! */
+	public Report toModel() {
+		Report report = new Report();
+		return report;
 	}
 
 }

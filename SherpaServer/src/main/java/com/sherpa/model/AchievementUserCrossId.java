@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 public class AchievementUserCrossId implements java.io.Serializable {
 
 	private static final long serialVersionUID = -5583825163881349033L;
+	
 	private int achievementUserId;
 	private int userId;
 	private int achievementId;
@@ -63,5 +64,7 @@ public class AchievementUserCrossId implements java.io.Serializable {
 		result = 37 * result + this.getAchievementId();
 		return result;
 	}
+	
+	/* TODO! dal nam trebaju uopce ove cross klase? */
 
 }

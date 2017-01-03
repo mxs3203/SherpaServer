@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class AchievementUserCross implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8285861460157082151L;
+	
 	private AchievementUserCrossId id;
 	private Achievement achievement;
 	private User user;

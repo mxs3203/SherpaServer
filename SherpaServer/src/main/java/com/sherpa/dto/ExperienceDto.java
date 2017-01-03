@@ -2,6 +2,8 @@ package com.sherpa.dto;
 
 import java.math.BigDecimal;
 
+import com.sherpa.model.Experience;
+
 public class ExperienceDto {
 
 	private long experienceId;
@@ -42,6 +44,12 @@ public class ExperienceDto {
 
 	public void setCumulativeRating(BigDecimal cumulativeRating) {
 		this.cumulativeRating = cumulativeRating;
+	}
+
+	/* TODO! */
+	public Experience toModel() {
+		Experience experience = new Experience();
+		return experience;
 	}
 
 }

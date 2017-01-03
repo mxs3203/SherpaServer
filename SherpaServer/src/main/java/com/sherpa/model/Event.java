@@ -18,12 +18,14 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.sherpa.dto.EventDto;
+import com.sherpa.util.Util;
 
 @Entity
 @Table(name = "event", catalog = "sherpa")
 public class Event implements java.io.Serializable {
 
 	private static final long serialVersionUID = -4100434289243179544L;
+
 	private long eventId;
 	private Currency currency;
 	private Location locationByEndLocationId;
@@ -217,21 +219,26 @@ public class Event implements java.io.Serializable {
 		this.eventTagCrosses = eventTagCrosses;
 	}
 
-	/* TODO! OVO ce triggerat proxy i radit nepotreban call za getById() */
+	/* TODO! Ovo ce triggerat proxy i radit "nepotreban" call za getById() */
 	public EventDto toDto() {
 		EventDto eventDto = new EventDto();
 		eventDto.setEventId(eventId);
-		eventDto.setCurrency(currency.getCurrencyId());
-		eventDto.setLocationByStartLocationId(locationByStartLocationId.getLocationId());
-		eventDto.setLocationByEndLocationId(locationByEndLocationId.getLocationId());
-		eventDto.setUserId(user.getUserId());
+
+		/*
+		 * eventDto.setCurrency(currency.getCurrencyId());
+		 * eventDto.setLocationByStartLocationId(locationByStartLocationId.
+		 * getLocationId());
+		 * eventDto.setLocationByEndLocationId(locationByEndLocationId.
+		 * getLocationId()); eventDto.setUserId(user.getUserId());
+		 */
+
 		eventDto.setName(name);
 		eventDto.setDescription(description);
 		eventDto.setPrice(price);
 		eventDto.setCumulativeRating(cumulativeRating);
-		eventDto.setDateCreated(dateCreated);
-		eventDto.setStartTime(startTime);
-		eventDto.setEndTime(endTime);
+		eventDto.setDateCreated(Util.getDateString(dateCreated));
+		eventDto.setStartTime(Util.getDateString(startTime));
+		eventDto.setEndTime(Util.getDateString(endTime));
 		eventDto.setIsFinished(isFinished);
 		return eventDto;
 	}

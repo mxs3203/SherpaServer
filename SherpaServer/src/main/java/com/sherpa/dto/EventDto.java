@@ -158,9 +158,8 @@ public class EventDto {
 	}
 
 	/* TODO! Mozgat o ovom */
-	public Event generateEntity() {
+	public Event toModel() {
 		Event event = new Event();
-		event.setEventId(eventId);
 		return event;
 	}
 

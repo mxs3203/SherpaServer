@@ -19,6 +19,7 @@ import com.sherpa.dto.AchievementDto;
 public class Achievement implements java.io.Serializable {
 
 	private static final long serialVersionUID = -617289165341633079L;
+
 	private long achievementId;
 	private String imageUrl;
 	private String description;
@@ -77,10 +78,12 @@ public class Achievement implements java.io.Serializable {
 
 	public AchievementDto toDto() {
 		AchievementDto achievementDto = new AchievementDto();
+
 		achievementDto.setAchievementId(achievementId);
 		achievementDto.setImageUrl(imageUrl);
 		achievementDto.setDescription(description);
 		achievementDto.setRequirement(requirement);
+
 		return achievementDto;
 	}
 

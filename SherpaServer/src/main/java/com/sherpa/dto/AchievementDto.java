@@ -2,6 +2,8 @@ package com.sherpa.dto;
 
 import java.math.BigDecimal;
 
+import com.sherpa.model.Achievement;
+
 public class AchievementDto {
 
 	private long achievementId;
@@ -42,6 +44,12 @@ public class AchievementDto {
 
 	public void setRequirement(BigDecimal requirement) {
 		this.requirement = requirement;
+	}
+
+	/* TODO! */
+	public Achievement toModel() {
+		Achievement achievement = new Achievement();
+		return achievement;
 	}
 
 }

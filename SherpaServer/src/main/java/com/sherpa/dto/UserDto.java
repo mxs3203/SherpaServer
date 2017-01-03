@@ -3,6 +3,8 @@ package com.sherpa.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sherpa.model.User;
+
 public class UserDto {
 
 	private long userId;
@@ -197,6 +199,12 @@ public class UserDto {
 
 	public void setEvents(Set<EventDto> events) {
 		this.events = events;
+	}
+
+	/* TODO! */
+	public User toModel() {
+		User user = new User();
+		return user;
 	}
 
 }
