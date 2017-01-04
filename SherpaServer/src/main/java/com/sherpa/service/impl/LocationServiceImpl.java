@@ -32,9 +32,7 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public Location findById(long id) {
-		return locationDao.findById(id);
+		return locationDao.findById(Location.class, id);
 	}
-	
-	
 
 }

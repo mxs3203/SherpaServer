@@ -1,14 +1,11 @@
 package com.sherpa.dao;
 
-import java.util.List;
 import java.util.Set;
 
-import com.sherpa.dto.UserDto;
 import com.sherpa.model.Event;
-import com.sherpa.model.Rating;
 import com.sherpa.model.User;
 
-public interface UserDao {
+public interface UserDao extends GenericDao<User> {
 
 	void persist(User transientInstance);
 
@@ -16,12 +13,12 @@ public interface UserDao {
 
 	User merge(User detachedInstance);
 
-	User findById(long id);
+	User findById(Class<User> clazz, long id);
 
-	UserDto getUserByCredentials(String email, String password);
-	
-	Set<Event> getUserEvents(long sherpaId);
+	User getUserByCredentials(User user);
 
-	List<Rating> getSherpasByRating(String region);
+	Set<Event> getUserEvents(User user);
+
+	Set<User> getSherpasByRatingInRegion(String region);
 
 }

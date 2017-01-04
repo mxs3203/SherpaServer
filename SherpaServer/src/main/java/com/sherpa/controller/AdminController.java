@@ -21,7 +21,7 @@ public class AdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getIndex() {
-		return "admin";
+		return "index";
 	}
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

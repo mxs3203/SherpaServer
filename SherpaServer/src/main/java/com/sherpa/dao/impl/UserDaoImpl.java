@@ -1,9 +1,6 @@
 package com.sherpa.dao.impl;
 
-import java.util.List;
 import java.util.Set;
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,13 +12,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.UserDao;
-import com.sherpa.dto.UserDto;
 import com.sherpa.model.Event;
-import com.sherpa.model.Rating;
 import com.sherpa.model.User;
+import com.sherpa.util.Util;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
 	private static final Log log = LogFactory.getLog(UserDaoImpl.class);
 
@@ -30,106 +26,63 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void persist(User transientInstance) {
-		log.debug("persisting User instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+		super.persist(transientInstance);
 	}
 
 	@Override
 	public void remove(User persistentInstance) {
-		log.debug("removing User instance");
-		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
+		super.remove(persistentInstance);
 	}
 
 	@Override
 	public User merge(User detachedInstance) {
-		log.debug("merging User instance");
+		return super.merge(detachedInstance);
+	}
+
+	@Override
+	public User findById(Class<User> clazz, long id) {
+		return super.findById(clazz, id);
+	}
+
+	@Override
+	public User getUserByCredentials(User p_user) {
+		log.debug("getting User instance with email: " + p_user.getEmail() + " and password: " + p_user.getPassword());
 		try {
-			User result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
+			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password")
+					.setParameter("email", p_user.getEmail()).setParameter("password", p_user.getEmail());
+			return (User) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
 		}
 	}
 
 	@Override
-	public User findById(long id) {
-		log.debug("getting User instance with id: " + id);
+	public Set<Event> getUserEvents(User p_user) {
+		log.debug("getting Events for User instance with ID: " + p_user.getUserId());
 		try {
-			User instance = entityManager.find(User.class, id);
-			log.debug("get successful");
-			return instance;
+			Query query = entityManager.createQuery("FROM Event e WHERE e.userId = :userId").setParameter("userId",
+					p_user.getUserId());
+			return Util.castSet(Event.class, query.getResultList());
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
 
+	/* TODO! Provjerit dal valja */
 	@Override
-	public UserDto getUserByCredentials(String email, String password) {
-
+	public Set<User> getSherpasByRatingInRegion(String region) {
+		log.debug("getting Sherpa instances by Rating in Region: " + region);
 		try {
-			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password");
-			query.setParameter("email", email);
-			query.setParameter("password", password);
-			User user = (User) query.getSingleResult();
-			return user.toDto();
-		} catch (NoResultException nre) {
-			return null;
+			Query query = entityManager
+					.createQuery(
+							"FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC")
+					.setParameter("region", region);
+			return Util.castSet(User.class, query.getResultList());
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
 		}
 	}
 
-	/* TODO! bez fetch by id */
-	@Override
-	public Set<Event> getUserEvents(long userId) {
-		User user = this.findById(userId);
-		return user.getEvents();
-	}
-
-	@Override
-	public List<Rating> getSherpasByRating(String region) {
-
-		try {
-
-			/*
-			 * TODO! Greska u bazi? da linkamo i rated_user_id column u tablicu
-			 * ; GROUP BY rating_id?
-			 */
-
-			Query query = entityManager.createQuery(
-					"FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC",
-					Rating.class);
-
-			query.setParameter("region", region);
-
-			@SuppressWarnings("unchecked")
-			List<Rating> ratings = query.getResultList();
-
-			for (Rating r : ratings) {
-				User u = r.getUser();
-				u.getEvents();
-			}
-
-			System.out.println(ratings.toString());
-
-			return ratings;
-
-		} catch (NoResultException nre) {
-			return null;
-		}
-
-	}
 }

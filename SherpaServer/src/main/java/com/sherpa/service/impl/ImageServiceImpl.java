@@ -13,26 +13,26 @@ import com.sherpa.service.ImageService;
 public class ImageServiceImpl implements ImageService {
 
 	@Autowired
-    private ImageDao imageDao;
+	private ImageDao imageDao;
 
 	@Override
 	public void addImage(Image transientInstance) {
 		imageDao.persist(transientInstance);
 	}
-	
+
 	@Override
 	public void removeImage(Image persistentInstance) {
 		imageDao.remove(persistentInstance);
 	}
-	
+
 	@Override
 	public Image updateImage(Image detachedInstance) {
 		return imageDao.merge(detachedInstance);
 	}
-	
+
 	@Override
 	public Image findById(long id) {
-		return imageDao.findById(id);
+		return imageDao.findById(Image.class, id);
 	}
-	
+
 }

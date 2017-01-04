@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Currency;
 
-public interface CurrencyDao {
+public interface CurrencyDao extends GenericDao<Currency> {
 
 	void persist(Currency transientInstance);
 
@@ -10,7 +10,7 @@ public interface CurrencyDao {
 
 	Currency merge(Currency detachedInstance);
 
-	Currency findById(long id);
+	Currency findById(Class<Currency> clazz, long id);
 
 	Currency findByCurrencyIso(String iso);
 

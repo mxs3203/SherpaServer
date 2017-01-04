@@ -11,45 +11,61 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.RegisterDto;
 import com.sherpa.dto.UserDto;
-import com.sherpa.model.Location;
 import com.sherpa.model.User;
-import com.sherpa.service.LocationService;
 import com.sherpa.service.UserService;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 
+	/* TODO! Jel radi ovo sad? */
+
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private LocationService locationService;
+	// @Autowired
+	// private LocationService locationService;
 
-	private User user;
 	private UserDto userDto;
 
+	// private User user;
+
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDto> registerUserPost(@RequestBody RegisterDto registerBody) {
-		System.out.println("Fetching User with Email: " + registerBody.getUserDto().getEmail() + " and Password: "
-				+ registerBody.getUserDto().getPassword());
+	public ResponseEntity<UserDto> registerUser(@RequestBody RegisterDto request) {
+		System.out.println("Registering User with Email: " + request.getUserDto().getEmail() + " and Password: "
+				+ request.getUserDto().getPassword());
 
-		Location loc = registerBody.getLocationDto().toModel();
+		/*
+		 * Location loc = request.getLocationDto().toModel();
+		 * 
+		 * locationService.addLocation(loc);
+		 * 
+		 * userDto = request.getUserDto(); user = userDto.toModel();
+		 * user.setLocation(loc); userService.addUser(user);
+		 * 
+		 * userDto = userService.loginUser(user);
+		 * 
+		 * if (userDto == null) { System.out.println("User with Email: " +
+		 * request.getUserDto().getEmail() + " and Password: " +
+		 * request.getUserDto().getPassword() + " not found"); return new
+		 * ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST); } return new
+		 * ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
+		 */
 
-		locationService.addLocation(loc);
+		User user = request.getUserDto().toModel();
+		user.setLocation(request.getLocationDto().toModel());
 
-		userDto = registerBody.getUserDto();
-		user = userDto.toModel();
-		user.setLocation(loc);
 		userService.addUser(user);
 
-		userDto = userService.findById(user.getUserId());
+		userDto = userService.loginUser(user);
 
 		if (userDto == null) {
-			System.out.println("User with Email: " + registerBody.getUserDto().getEmail() + " and Password: "
-					+ registerBody.getUserDto().getPassword() + " not found");
+			System.out.println("User with Email: " + request.getUserDto().getEmail() + " and Password: "
+					+ request.getUserDto().getPassword() + " Not Found!");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
+
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
+
 	}
 }

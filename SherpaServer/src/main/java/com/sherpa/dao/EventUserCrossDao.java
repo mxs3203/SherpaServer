@@ -3,7 +3,7 @@ package com.sherpa.dao;
 import com.sherpa.model.EventUserCross;
 import com.sherpa.model.EventUserCrossId;
 
-public interface EventUserCrossDao {
+public interface EventUserCrossDao extends GenericDao<EventUserCross> {
 
 	void persist(EventUserCross transientInstance);
 
@@ -11,6 +11,6 @@ public interface EventUserCrossDao {
 
 	EventUserCross merge(EventUserCross detachedInstance);
 
-	EventUserCross findById(EventUserCrossId id);
+	EventUserCross findById(Class<EventUserCross> clazz, EventUserCrossId id);
 
 }

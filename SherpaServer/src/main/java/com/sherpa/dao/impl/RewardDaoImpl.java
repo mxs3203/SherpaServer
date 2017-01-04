@@ -2,68 +2,35 @@ package com.sherpa.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.RewardDao;
 import com.sherpa.model.Reward;
 
 @Repository
-public class RewardDaoImpl implements RewardDao {
-
-	private static final Log log = LogFactory.getLog(RewardDaoImpl.class);
+public class RewardDaoImpl extends GenericDaoImpl<Reward> implements RewardDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public void persist(Reward transientInstance) {
-		log.debug("persisting Reward instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+		super.persist(transientInstance);
 	}
 
 	@Override
 	public void remove(Reward persistentInstance) {
-		log.debug("removing Reward instance");
-		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
+		super.remove(persistentInstance);
 	}
 
 	@Override
 	public Reward merge(Reward detachedInstance) {
-		log.debug("merging Reward instance");
-		try {
-			Reward result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
+		return super.merge(detachedInstance);
 	}
 
 	@Override
-	public Reward findById(long id) {
-		log.debug("getting Reward instance with id: " + id);
-		try {
-			Reward instance = entityManager.find(Reward.class, id);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
+	public Reward findById(Class<Reward> clazz, long id) {
+		return super.findById(clazz, id);
 	}
+
 }

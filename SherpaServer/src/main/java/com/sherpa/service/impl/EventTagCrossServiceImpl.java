@@ -33,7 +33,7 @@ public class EventTagCrossServiceImpl implements EventTagCrossService {
 
 	@Override
 	public EventTagCross findById(EventTagCrossId id) {
-		return imageDao.findById(id);
+		return imageDao.findById(EventTagCross.class, id);
 	}
 
 }

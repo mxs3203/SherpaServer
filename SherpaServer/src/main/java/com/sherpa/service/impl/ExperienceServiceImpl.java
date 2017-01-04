@@ -32,7 +32,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 	@Override
 	public Experience findById(long id) {
-		return experienceDao.findById(id);
+		return experienceDao.findById(Experience.class, id);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Tag;
 
-public interface TagDao {
+public interface TagDao extends GenericDao<Tag> {
 
 	void persist(Tag transientInstance);
 
@@ -10,7 +10,7 @@ public interface TagDao {
 
 	Tag merge(Tag detachedInstance);
 
-	Tag findById(long id);
+	Tag findById(Class<Tag> clazz, long id);
 
 	Tag findByTagName(String tagName);
 

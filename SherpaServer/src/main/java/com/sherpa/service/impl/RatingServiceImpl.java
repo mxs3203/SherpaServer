@@ -13,25 +13,25 @@ import com.sherpa.service.RatingService;
 public class RatingServiceImpl implements RatingService {
 
 	@Autowired
-    private RatingDao ratingDao;
+	private RatingDao ratingDao;
 
 	@Override
 	public void addRating(Rating transientInstance) {
 		ratingDao.persist(transientInstance);
 	}
-	
+
 	@Override
 	public void removeRating(Rating persistentInstance) {
 		ratingDao.remove(persistentInstance);
 	}
-	
+
 	@Override
 	public Rating updateRating(Rating detachedInstance) {
 		return ratingDao.merge(detachedInstance);
 	}
-	
+
 	@Override
 	public Rating findById(long id) {
-		return ratingDao.findById(id);
+		return ratingDao.findById(Rating.class, id);
 	}
 }

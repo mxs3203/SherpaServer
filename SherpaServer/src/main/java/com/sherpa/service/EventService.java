@@ -1,6 +1,6 @@
 package com.sherpa.service;
 
-import java.util.List;
+import java.util.Set;
 
 import com.sherpa.dto.EventLocationDto;
 import com.sherpa.model.Event;
@@ -15,7 +15,7 @@ public interface EventService {
 
 	Event findById(long id);
 
-	List<EventLocationDto> getEventsByRegion(String region);
+	Set<EventLocationDto> getEventsByRegion(String region);
 
 	void insertEvent(EventLocationDto eld);
 

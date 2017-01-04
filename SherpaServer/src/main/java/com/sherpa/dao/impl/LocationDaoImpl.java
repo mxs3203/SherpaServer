@@ -1,11 +1,8 @@
 package com.sherpa.dao.impl;
 
-import java.util.List;
-
-// Generated Nov 13, 2016 2:15:17 PM by Hibernate Tools 5.2.0.Beta1
+import java.util.Set;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -15,9 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.LocationDao;
 import com.sherpa.model.Location;
+import com.sherpa.util.Util;
 
 @Repository
-public class LocationDaoImpl implements LocationDao {
+public class LocationDaoImpl extends GenericDaoImpl<Location> implements LocationDao {
 
 	private static final Log log = LogFactory.getLog(LocationDaoImpl.class);
 
@@ -26,71 +24,35 @@ public class LocationDaoImpl implements LocationDao {
 
 	@Override
 	public void persist(Location transientInstance) {
-		log.debug("persisting Location instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+		super.persist(transientInstance);
 	}
 
 	@Override
 	public void remove(Location persistentInstance) {
-		log.debug("removing Location instance");
-		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
+		super.remove(persistentInstance);
 	}
 
 	@Override
 	public Location merge(Location detachedInstance) {
-		log.debug("merging Location instance");
-		try {
-			Location result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
+		return super.merge(detachedInstance);
 	}
 
 	@Override
-	public Location findById(long id) {
-		log.debug("getting Location instance with id: " + id);
+	public Location findById(Class<Location> clazz, long id) {
+		return super.findById(clazz, id);
+	}
+
+	@Override
+	public Set<Location> getRegionLocations(String region) {
+		log.debug("getting Location instances with Region: " + region);
 		try {
-			Location instance = entityManager.find(Location.class, id);
-			log.debug("get successful");
-			return instance;
+			Query query = entityManager.createQuery("FROM Location l WHERE l.region = :region").setParameter("region",
+					region);
+			return Util.castSet(Location.class, query.getResultList());
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Location> getRegionLocations(String region) {
-
-		List<Location> locations;
-
-		try {
-
-			Query query = entityManager.createQuery("FROM Location l WHERE l.region = :region");
-			query.setParameter("region", region);
-
-			locations = query.getResultList();
-
-		} catch (NoResultException nre) {
-			locations = null;
-		}
-
-		return locations;
-	}
 }

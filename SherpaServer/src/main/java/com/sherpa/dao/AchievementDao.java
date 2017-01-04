@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Achievement;
 
-public interface AchievementDao {
+public interface AchievementDao extends GenericDao<Achievement> {
 
 	void persist(Achievement transientInstance);
 
@@ -10,6 +10,6 @@ public interface AchievementDao {
 
 	Achievement merge(Achievement detachedInstance);
 
-	Achievement findById(long id);
+	Achievement findById(Class<Achievement> clazz, long id);
 
 }

@@ -12,18 +12,18 @@ public interface UserService {
 
 	void removeUser(User persistentInstance);
 
-	User updateUser(User detachedInstance);
+	UserDto updateUser(User detachedInstance);
 
-	UserDto findById(long id);
+	UserDto findById(User user);
 
-	UserDto loginUser(String email, String password);
+	UserDto loginUser(User user);
 
-	Set<EventDto> getUserEvents(long id);
+	Set<EventDto> getUserEvents(User user);
 
 	Set<UserDto> getUsersByRegion(String region);
 
-	Set<UserDto> getSherpasByRegion(String region);
+//	Set<UserDto> getSherpasByRegion(String region);
 
-	Set<UserDto> getSherpasByRating(String region);
+	Set<UserDto> getSherpasByRatingInRegion(String region);
 
 }

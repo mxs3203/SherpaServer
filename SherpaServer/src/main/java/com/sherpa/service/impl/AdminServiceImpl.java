@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AdminDao;
 import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Service
@@ -32,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public AdminDto findById(long id) {
-		return adminDao.findById(id).toDto();
+		return adminDao.findById(Admin.class, id).toDto();
 	}
 
 	@Override

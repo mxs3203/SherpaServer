@@ -1,6 +1,6 @@
 package com.sherpa.dao.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -71,11 +71,9 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	}
 
 	@Override
-	public List<T> getAll(final Class<T> clazz) {
-		return Util.castList(clazz,
+	public Set<T> getAll(final Class<T> clazz) {
+		return Util.castSet(clazz,
 				entityManager.createQuery("FROM " + clazz + " i WHERE i.deleted = 0").getResultList());
 	}
-
-	/* TODO! Istestirat sve ovo */
 
 }

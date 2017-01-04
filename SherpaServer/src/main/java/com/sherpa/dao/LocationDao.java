@@ -1,11 +1,10 @@
 package com.sherpa.dao;
 
-
-import java.util.List;
+import java.util.Set;
 
 import com.sherpa.model.Location;
 
-public interface LocationDao {
+public interface LocationDao extends GenericDao<Location> {
 
 	void persist(Location transientInstance);
 
@@ -13,8 +12,8 @@ public interface LocationDao {
 
 	Location merge(Location detachedInstance);
 
-	Location findById(long id);
+	Location findById(Class<Location> clazz, long id);
 
-	List<Location> getRegionLocations(String region);
+	Set<Location> getRegionLocations(String region);
 
 }

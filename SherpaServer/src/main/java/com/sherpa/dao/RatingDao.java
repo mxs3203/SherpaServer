@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Rating;
 
-public interface RatingDao {
+public interface RatingDao extends GenericDao<Rating> {
 
 	void persist(Rating transientInstance);
 
@@ -10,6 +10,6 @@ public interface RatingDao {
 
 	Rating merge(Rating detachedInstance);
 
-	Rating findById(long id);
+	Rating findById(Class<Rating> clazz, long id);
 
 }

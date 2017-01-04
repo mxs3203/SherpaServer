@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Image;
 
-public interface ImageDao {
+public interface ImageDao extends GenericDao<Image> {
 
 	void persist(Image transientInstance);
 
@@ -10,6 +10,6 @@ public interface ImageDao {
 
 	Image merge(Image detachedInstance);
 
-	Image findById(long id);
+	Image findById(Class<Image> clazz, long id);
 
 }

@@ -33,7 +33,7 @@ public class EventUserCrossServiceImpl implements EventUserCrossService {
 
 	@Override
 	public EventUserCross findById(EventUserCrossId id) {
-		return eventUserCrossDao.findById(id);
+		return eventUserCrossDao.findById(EventUserCross.class, id);
 	}
 
 }

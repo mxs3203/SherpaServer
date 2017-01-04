@@ -1,8 +1,8 @@
 package com.sherpa.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -30,11 +30,18 @@ public class Util {
 		return date;
 	}
 
-	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
-		List<T> r = new ArrayList<T>(c.size());
-		for (Object o : c)
+	public static <T> Set<T> castSet(Class<? extends T> clazz, Collection<?> collection) {
+		Set<T> r = new HashSet<T>(collection.size());
+		for (Object o : collection)
 			r.add(clazz.cast(o));
 		return r;
 	}
+
+	/* OLD CAST WITH LIST */
+	/*
+	 * public static <T> List<T> castList(Class<? extends T> clazz,
+	 * Collection<?> c) { List<T> r = new ArrayList<T>(c.size()); for (Object o
+	 * : c) r.add(clazz.cast(o)); return r; }
+	 */
 
 }

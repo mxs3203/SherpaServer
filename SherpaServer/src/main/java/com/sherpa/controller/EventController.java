@@ -1,6 +1,6 @@
 package com.sherpa.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,15 +28,15 @@ public class EventController {
     }
 	
 	@RequestMapping(value = "/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<EventLocationDto>> loginUser(@PathVariable("regionName") String region) {
+    public ResponseEntity<Set<EventLocationDto>> loginUser(@PathVariable("regionName") String region) {
         System.out.println("Fetching Events with region: " + region);
         
-        List<EventLocationDto> events = eventService.getEventsByRegion(region);        
+        Set<EventLocationDto> events = eventService.getEventsByRegion(region);        
         if (events == null) {
             System.out.println("User with region: " + region);
-            return new ResponseEntity<List<EventLocationDto>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Set<EventLocationDto>>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<EventLocationDto>>(events, HttpStatus.OK);
+        return new ResponseEntity<Set<EventLocationDto>>(events, HttpStatus.OK);
     }
 	
 	

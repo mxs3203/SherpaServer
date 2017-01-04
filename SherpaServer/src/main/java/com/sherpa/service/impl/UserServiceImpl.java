@@ -38,69 +38,88 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(User detachedInstance) {
-		return userDao.merge(detachedInstance);
+	public UserDto updateUser(User detachedInstance) {
+		return userDao.merge(detachedInstance).toDto();
 	}
 
 	@Override
-	public UserDto findById(long id) {
-		/* TODO! */
-		return userDao.findById(id).toDto();
+	public UserDto findById(User user) {
+		return userDao.findById(User.class, user.getUserId()).toDto();
 	}
 
 	@Override
-	public UserDto loginUser(String email, String password) {
-		return userDao.getUserByCredentials(email, password);
+	public UserDto loginUser(User user) {
+		return userDao.getUserByCredentials(user).toDto();
 	}
 
 	@Override
-	public Set<EventDto> getUserEvents(long id) {
+	public Set<EventDto> getUserEvents(User user) {
 
-		Set<EventDto> eventsDto = new HashSet<EventDto>();
+		/* TODO! Check yo self */
 
-		/* TODO! */
-		for (Event events : userDao.getUserEvents(id)) {
-			eventsDto.add(events.toDto());
+		Set<EventDto> events = new HashSet<EventDto>();
+
+		Iterator<Event> iter = userDao.getUserEvents(user).iterator();
+
+		while (iter.hasNext()) {
+			events.add(iter.next().toDto());
 		}
-		return eventsDto;
+
+		return events;
 	}
 
 	public Set<UserDto> getUsersByRegion(String region) {
 
-		Set<UserDto> usersDto = new HashSet<UserDto>();
+		/*
+		 * Set<UserDto> usersDto = new HashSet<UserDto>();
+		 * 
+		 * TODO! for (Location locs : locDao.getRegionLocations(region)) { for
+		 * (User user : locs.getUsers()) { usersDto.add(user.toDto()); } }
+		 * return usersDto;
+		 */
 
-		/* TODO! */
-		for (Location locs : locDao.getRegionLocations(region)) {
-			for (User user : locs.getUsers()) {
-				usersDto.add(user.toDto());
+		/*
+		 * TODO! Ovo treba preko Query-a rijesit u novoj DAO metodi (Location
+		 * ili User objekta) (FROM Location l INNER JOIN User u WHERE l.region =
+		 * :region AND u.isSherpa = 1)?
+		 */
+
+		Set<UserDto> users = new HashSet<UserDto>();
+
+		Iterator<Location> locIter = locDao.getRegionLocations(region).iterator();
+
+		Iterator<User> userIter = null;
+
+		Set<User> userModel = new HashSet<User>();
+
+		while (locIter.hasNext()) {
+
+			userModel = locIter.next().getUsers();
+
+			userIter = userModel.iterator();
+
+			while (userIter.hasNext()) {
+				users.add(userIter.next().toDto());
 			}
 		}
-		return usersDto;
+
+		return users;
 	}
 
-	/* TODO! Queriat odmah iz baze usere koji su sherpa */
 	@Override
-	public Set<UserDto> getSherpasByRegion(String region) {
+	public Set<UserDto> getSherpasByRatingInRegion(String region) {
 
-		Set<UserDto> sherpasDto = this.getUsersByRegion(region);
+		/* TODO! Jel ovaj kod OK? Query je vrlo vjerojatno kriv */
 
-		Iterator<UserDto> iter = sherpasDto.iterator();
+		Set<UserDto> users = new HashSet<UserDto>();
+
+		Iterator<User> iter = userDao.getSherpasByRatingInRegion(region).iterator();
+
 		while (iter.hasNext()) {
-			if (!iter.next().getIsSherpa())
-				iter.remove();
+			users.add(iter.next().toDto());
 		}
 
-		return sherpasDto;
-	}
-
-	@Override
-	public Set<UserDto> getSherpasByRating(String region) {
-
-		/* TODO! get sherpas events by rating */
-
-		userDao.getSherpasByRating(region);
-
-		return null;
+		return users;
 	}
 
 }

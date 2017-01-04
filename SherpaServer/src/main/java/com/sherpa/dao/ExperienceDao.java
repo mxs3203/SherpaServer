@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Experience;
 
-public interface ExperienceDao {
+public interface ExperienceDao extends GenericDao<Experience> {
 
 	void persist(Experience transientInstance);
 
@@ -10,6 +10,6 @@ public interface ExperienceDao {
 
 	Experience merge(Experience detachedInstance);
 
-	Experience findById(long id);
+	Experience findById(Class<Experience> clazz, long id);
 
 }

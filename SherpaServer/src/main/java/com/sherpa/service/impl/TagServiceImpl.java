@@ -13,26 +13,26 @@ import com.sherpa.service.TagService;
 public class TagServiceImpl implements TagService {
 
 	@Autowired
-    private TagDao tagDao;
+	private TagDao tagDao;
 
 	@Override
 	public void addTag(Tag transientInstance) {
 		tagDao.persist(transientInstance);
 	}
-	
+
 	@Override
 	public void removeTag(Tag persistentInstance) {
 		tagDao.remove(persistentInstance);
 	}
-	
+
 	@Override
 	public Tag updateTag(Tag detachedInstance) {
 		return tagDao.merge(detachedInstance);
 	}
-	
+
 	@Override
 	public Tag findById(long id) {
-		return tagDao.findById(id);
+		return tagDao.findById(Tag.class, id);
 	}
-	
+
 }

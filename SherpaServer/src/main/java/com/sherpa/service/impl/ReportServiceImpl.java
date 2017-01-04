@@ -13,25 +13,25 @@ import com.sherpa.service.RepostService;
 public class ReportServiceImpl implements RepostService {
 
 	@Autowired
-    private ReportDao reportDao;
+	private ReportDao reportDao;
 
 	@Override
 	public void addReport(Report transientInstance) {
 		reportDao.persist(transientInstance);
 	}
-	
+
 	@Override
 	public void removeReport(Report persistentInstance) {
 		reportDao.remove(persistentInstance);
 	}
-	
+
 	@Override
 	public Report updateReport(Report detachedInstance) {
 		return reportDao.merge(detachedInstance);
 	}
-	
+
 	@Override
 	public Report findById(long id) {
-		return reportDao.findById(id);
+		return reportDao.findById(Report.class, id);
 	}
 }

@@ -1,6 +1,6 @@
 package com.sherpa.dao;
 
-import java.util.List;
+import java.util.Set;
 
 public interface GenericDao<T> {
 
@@ -12,8 +12,6 @@ public interface GenericDao<T> {
 
 	T findById(Class<T> clazz, long id);
 
-	List<T> getAll(Class<T> clazz);
-	
-	/* TODO! Dal je ovo potrebno? Dal mogu ovdje extendat GenericDao<Admin>? */
+	Set<T> getAll(Class<T> clazz);
 
 }

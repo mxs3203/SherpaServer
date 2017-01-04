@@ -1,8 +1,7 @@
 package com.sherpa.service.impl;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,15 +52,15 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event findById(long id) {
-		return eventDao.findById(id);
+		return eventDao.findById(Event.class, id);
 	}
 
 	/* TODO! refactor za novi objekt */
 	@Override
-	public List<EventLocationDto> getEventsByRegion(String region) {
+	public Set<EventLocationDto> getEventsByRegion(String region) {
 
-		List<EventLocationDto> events = new ArrayList<EventLocationDto>();
-		List<Location> locations = locationDao.getRegionLocations(region);
+		Set<EventLocationDto> events = new HashSet<EventLocationDto>();
+		Set<Location> locations = locationDao.getRegionLocations(region);
 
 		for (Location loc : locations) {
 
@@ -72,7 +71,11 @@ public class EventServiceImpl implements EventService {
 			while (iter.hasNext()) {
 				Event event = (Event) iter.next();
 				if (event != null && event.getIsFinished() == false) {
-					EventLocationDto eventLocation = new EventLocationDto(event.toDto(), loc.toDto());
+					EventLocationDto eventLocation = new EventLocationDto();
+					
+					eventLocation.setEvent(event.toDto());
+					eventLocation.setLocation(loc.toDto());
+					
 					events.add(eventLocation);
 				}
 			}
@@ -88,17 +91,19 @@ public class EventServiceImpl implements EventService {
 		Location location = eld.getLocation().toModel();
 		Event event = eld.getEvent().toModel();
 
-		/* unused? */
-		/* List<String> tags = eld.getTags(); */
-
-		String currencyIso = eld.getCurrency();
-		Currency currency = currencyDao.findByCurrencyIso(currencyIso);
-		event.setIsFinished(false);
+		Currency currency = currencyDao.findByCurrencyIso(eld.getCurrency());
 		event.setCurrency(currency);
-		User user = userDao.findById(eld.getEvent().getUserId());
+		
+		event.setIsFinished(false);
+		
+		User user = userDao.findById(User.class, eld.getEvent().getUserId());
+		
 		locationDao.persist(location);
+		
 		event.setLocationByStartLocationId(location);
 		event.setUser(user);
+		
 		eventDao.persist(event);
 	}
+
 }

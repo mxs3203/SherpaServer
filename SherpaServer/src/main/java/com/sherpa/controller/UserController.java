@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
+import com.sherpa.model.User;
 import com.sherpa.service.UserService;
 
 @Controller
@@ -74,92 +75,113 @@ public class UserController {
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
-		System.out.println("Fetching User with id " + userId);
 
-		UserDto user = userService.findById(userId);
+		System.out.println("Fetching User with ID: " + userId);
 
-		if (user == null) {
-			System.out.println("User with id " + userId + " not found");
+		User user = new User();
+		user.setUserId(userId);
+
+		UserDto userDto = userService.findById(user);
+
+		if (userDto == null) {
+			System.out.println("User with ID: " + userId + " Not Found!");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+
+		return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDto> loginUserPost(@RequestBody UserDto userBody) {
+	public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userBody) {
+
 		System.out.println(
 				"Fetching User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword());
 
-		UserDto userDto = userService.loginUser(userBody.getEmail(), userBody.getPassword());
+		User user = new User();
+		user.setEmail(userBody.getEmail());
+		user.setPassword(userBody.getPassword());
+
+		UserDto userDto = userService.loginUser(user);
 
 		if (userDto == null) {
 			System.out.println("User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword()
 					+ " not found");
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
-	}
 
-	@RequestMapping(value = "/user/{email}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDto> loginUser(@PathVariable("email") String email,
-			@PathVariable("password") String password) {
-		System.out.println("Fetching User with Email: " + email + " and Password: " + password);
-		UserDto userDto = userService.loginUser(email, password);
-
-		if (userDto == null) {
-			System.out.println("User with Email: " + email + " and Password: " + password + " not found");
-			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
-		}
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/user/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<EventDto>> getSherpaEvents(@PathVariable("id") long userId) {
-		System.out.println("Fetching User events with user id " + userId);
-		Set<EventDto> events = userService.getUserEvents(userId);
+
+		System.out.println("Fetching Events For User With ID: " + userId);
+
+		User user = new User();
+		user.setUserId(userId);
+
+		Set<EventDto> events = userService.getUserEvents(user);
+
 		if (events == null) {
-			System.out.println("Events with user id " + userId + " not found");
+			System.out.println("Events For User With ID: " + userId + " Not Found!");
 			return new ResponseEntity<Set<EventDto>>(HttpStatus.BAD_REQUEST);
 		}
+
 		return new ResponseEntity<Set<EventDto>>(events, HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/users/region/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getUsersByRegion(@PathVariable("name") String region) {
 
-		System.out.println("Fetching Users in region: " + region);
+		System.out.println("Fetching Users in Region: " + region);
+
 		Set<UserDto> users = userService.getUsersByRegion(region);
+
 		if (users == null) {
-			System.out.println("Fetching Users in region " + region + " not found");
+			System.out.println("Users in Region " + region + " Not Found!");
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
+
 		return new ResponseEntity<Set<UserDto>>(users, HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/sherpas/region/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRegion(@PathVariable("region") String region) {
 
-		System.out.println("Fetching Sherpas in region: " + region);
-		Set<UserDto> sherpas = userService.getSherpasByRegion(region);
+		/* TODO! */
+
+		System.out.println("Fetching Sherpas in Region: " + region);
+
+		Set<UserDto> sherpas = null;/*
+									 * userService.getSherpasByRegion(region);
+									 */
+
 		if (sherpas == null) {
 			System.out.println("Failed to fetch all sherpas in region: " + region);
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
+
 		return new ResponseEntity<Set<UserDto>>(sherpas, HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/sherpas/rating/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRating(@PathVariable("region") String region) {
 
-		System.out.println("Fetching Sherpas by rating in region: " + region);
+		System.out.println("Fetching Sherpas by Rating in Region: " + region);
 
-		Set<UserDto> sherpas = userService.getSherpasByRating(region);
+		Set<UserDto> sherpas = userService.getSherpasByRatingInRegion(region);
 
 		if (sherpas == null) {
-			System.out.println("Failed to fetch all sherpas by rating in region: " + region);
+			System.out.println("Failed to Fetch Sherpas by Rating in Region: " + region);
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Set<UserDto>>(sherpas, HttpStatus.OK);
+
 	}
 
 }

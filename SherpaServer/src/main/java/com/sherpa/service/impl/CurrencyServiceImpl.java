@@ -32,7 +32,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 
 	@Override
 	public Currency findById(long id) {
-		return currencyDao.findById(id);
+		return currencyDao.findById(Currency.class, id);
 	}
 
 }

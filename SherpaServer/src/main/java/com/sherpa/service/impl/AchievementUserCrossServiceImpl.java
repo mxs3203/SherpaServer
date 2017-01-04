@@ -33,7 +33,7 @@ public class AchievementUserCrossServiceImpl implements AchievementUserCrossServ
 
 	@Override
 	public AchievementUserCross findById(AchievementUserCrossId id) {
-		return achievementUserCrossDao.findById(id);
+		return achievementUserCrossDao.findById(AchievementUserCross.class, id);
 	}
 
 }

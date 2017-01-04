@@ -3,7 +3,7 @@ package com.sherpa.dao;
 import com.sherpa.model.EventTagCross;
 import com.sherpa.model.EventTagCrossId;
 
-public interface EventTagCrossDao {
+public interface EventTagCrossDao extends GenericDao<EventTagCross> {
 
 	void persist(EventTagCross transientInstance);
 
@@ -11,6 +11,6 @@ public interface EventTagCrossDao {
 
 	EventTagCross merge(EventTagCross detachedInstance);
 
-	EventTagCross findById(EventTagCrossId id);
+	EventTagCross findById(Class<EventTagCross> clazz, EventTagCrossId id);
 
 }

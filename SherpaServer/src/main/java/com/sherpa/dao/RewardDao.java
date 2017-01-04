@@ -2,7 +2,7 @@ package com.sherpa.dao;
 
 import com.sherpa.model.Reward;
 
-public interface RewardDao {
+public interface RewardDao extends GenericDao<Reward> {
 
 	void persist(Reward transientInstance);
 
@@ -10,6 +10,6 @@ public interface RewardDao {
 
 	Reward merge(Reward detachedInstance);
 
-	Reward findById(long id);
+	Reward findById(Class<Reward> clazz, long id);
 
 }

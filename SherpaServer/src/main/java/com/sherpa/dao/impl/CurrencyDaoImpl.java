@@ -12,7 +12,7 @@ import com.sherpa.dao.CurrencyDao;
 import com.sherpa.model.Currency;
 
 @Repository
-public class CurrencyDaoImpl implements CurrencyDao {
+public class CurrencyDaoImpl extends GenericDaoImpl<Currency> implements CurrencyDao {
 
 	private static final Log log = LogFactory.getLog(CurrencyDaoImpl.class);
 
@@ -21,52 +21,22 @@ public class CurrencyDaoImpl implements CurrencyDao {
 
 	@Override
 	public void persist(Currency transientInstance) {
-		log.debug("persisting Currency instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+		super.persist(transientInstance);
 	}
 
 	@Override
 	public void remove(Currency persistentInstance) {
-		log.debug("removing Currency instance");
-		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
+		super.remove(persistentInstance);
 	}
 
 	@Override
 	public Currency merge(Currency detachedInstance) {
-		log.debug("merging Currency instance");
-		try {
-			Currency result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
+		return super.merge(detachedInstance);
 	}
 
 	@Override
-	public Currency findById(long id) {
-		log.debug("getting Currency instance with id: " + id);
-		try {
-			Currency instance = entityManager.find(Currency.class, id);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
+	public Currency findById(Class<Currency> clazz, long id) {
+		return super.findById(clazz, id);
 	}
 
 	/* TODO! refactor */
