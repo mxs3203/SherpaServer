@@ -33,10 +33,11 @@ public class UserController {
 	 * U DTO i Modelu doraditi toModel i toDTO
 	 * 
 	 * 
-	 * Boot servera loada MySQL driver nekoliko puta ? neki SSL warn?
-	 * 
-	 * 
-	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi
+	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi -> GENERIC
+	 * DAO -> trazi Entity / Model class type za Delete -> drugim rijecima
+	 * delete se mora izvrsit u servisu (a DAO onda mora primiti Entity klasu?
+	 * za delete metodu?) ILI
+	 * entityManager.remove(entityManager.getReference(**clazz, **id));?
 	 * 
 	 * 
 	 * System.out-ove pocistit, ostavit samo najbitnije i prebacit ih u Logger
@@ -70,6 +71,8 @@ public class UserController {
 	 * 
 	 * Datasource JNDI?
 	 * 
+	 * Boot servera MySQL driver SSL warning? -> rjeseno sa use SSL=false?
+	 * 
 	 */
 
 	@Autowired
@@ -84,9 +87,6 @@ public class UserController {
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
-
-		System.out.println("Fetching User with ID: " + userId);
-
 		log.debug("Fetching User with ID: {}", userId);
 
 		User user = new User();
@@ -95,10 +95,7 @@ public class UserController {
 		UserDto userDto = userService.findById(user);
 
 		if (userDto == null) {
-			System.out.println("User with ID: " + userId + " Not Found!");
-
 			log.debug("User with ID: {} Not Found!", userId);
-
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -108,10 +105,6 @@ public class UserController {
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userBody) {
-
-		System.out.println(
-				"Fetching User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword());
-
 		log.debug("Fetching User with Email: '{}' and Password: '{}'", userBody.getEmail(), userBody.getPassword());
 
 		User user = new User();
@@ -121,12 +114,8 @@ public class UserController {
 		UserDto userDto = userService.loginUser(user);
 
 		if (userDto == null) {
-			System.out.println("User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword()
-					+ " Not Found!");
-
 			log.debug("User with Email: '{}' and Password: '{}' Not Found!", userBody.getEmail(),
 					userBody.getPassword());
-
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -136,9 +125,6 @@ public class UserController {
 
 	@RequestMapping(value = "/user/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<EventDto>> getSherpaEvents(@PathVariable("id") long userId) {
-
-		System.out.println("Fetching Events For User With ID: " + userId);
-
 		log.debug("Fetching Events For User With ID: {}", userId);
 
 		User user = new User();
@@ -147,10 +133,7 @@ public class UserController {
 		Set<EventDto> events = userService.getUserEvents(user);
 
 		if (events == null) {
-			System.out.println("Events For User With ID: " + userId + " Not Found!");
-
 			log.debug("Events For User With ID: {} Not Found!", userId);
-
 			return new ResponseEntity<Set<EventDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -160,18 +143,12 @@ public class UserController {
 
 	@RequestMapping(value = "/users/region/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getUsersByRegion(@PathVariable("name") String region) {
-
-		System.out.println("Fetching Users in Region: " + region);
-
 		log.debug("Fetching Users in Region: '{}'", region);
 
 		Set<UserDto> users = userService.getUsersByRegion(region);
 
 		if (users == null) {
-			System.out.println("Users in Region " + region + " Not Found!");
-
 			log.debug("Users in Region: '{}' Not Found!", region);
-
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -183,9 +160,6 @@ public class UserController {
 	public ResponseEntity<Set<UserDto>> getSherpasByRegion(@PathVariable("region") String region) {
 
 		/* TODO! */
-
-		System.out.println("Fetching Sherpas in Region: " + region);
-
 		log.debug("Fetching Sherpas in Region: '{}'", region);
 
 		Set<UserDto> sherpas = null;/*
@@ -193,10 +167,7 @@ public class UserController {
 									 */
 
 		if (sherpas == null) {
-			System.out.println("Failed to Fetch Sherpas in Region: " + region);
-
 			log.debug("Failed to Fetch Sherpas in Region: '{}'", region);
-
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -206,18 +177,12 @@ public class UserController {
 
 	@RequestMapping(value = "/sherpas/rating/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRating(@PathVariable("region") String region) {
-
-		System.out.println("Fetching Sherpas by Rating in Region: " + region);
-
 		log.debug("Fetching Sherpas by Rating in Region: '{}'", region);
 
 		Set<UserDto> sherpas = userService.getSherpasByRatingInRegion(region);
 
 		if (sherpas == null) {
-			System.out.println("Failed to Fetch Sherpas by Rating in Region: " + region);
-
 			log.debug("Failed to Fetch Sherpas by Rating in Region: '{}'", region);
-
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Set<UserDto>>(sherpas, HttpStatus.OK);

@@ -36,9 +36,6 @@ public class RegistrationController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> registerUser(@RequestBody RegisterDto request) {
-		System.out.println("Registering User with Email: " + request.getUserDto().getEmail() + " and Password: "
-				+ request.getUserDto().getPassword());
-
 		log.debug("Registering User with Email: '{}' and Password: '{}'", request.getUserDto().getEmail(),
 				request.getUserDto().getPassword());
 
@@ -67,12 +64,8 @@ public class RegistrationController {
 		userDto = userService.loginUser(user);
 
 		if (userDto == null) {
-			System.out.println("User with Email: " + request.getUserDto().getEmail() + " and Password: "
-					+ request.getUserDto().getPassword() + " Not Found!");
-
 			log.debug("User with Email: '{}' and Password: '{}' Not Found!", request.getUserDto().getEmail(),
 					request.getUserDto().getPassword());
-
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 

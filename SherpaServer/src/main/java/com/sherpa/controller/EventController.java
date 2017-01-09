@@ -33,16 +33,11 @@ public class EventController {
 
 	@RequestMapping(value = "/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<EventLocationDto>> loginUser(@PathVariable("regionName") String region) {
-		System.out.println("Fetching Events in Region: " + region);
-
 		log.debug("Fetching Events in Region: {}", region);
 
 		Set<EventLocationDto> events = eventService.getEventsByRegion(region);
 		if (events == null) {
-			System.out.println("Events in Region: " + region + " Not Found!");
-
 			log.debug("Events in Region: '{}' Not Found!", region);
-
 			return new ResponseEntity<Set<EventLocationDto>>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Set<EventLocationDto>>(events, HttpStatus.OK);
@@ -51,19 +46,13 @@ public class EventController {
 	/* TODO! refactor */
 	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
 	public ResponseEntity<String> insertEvent(@RequestBody EventLocationDto eventBody) {
-
-		System.out.println("Inserting Event with Name: " + eventBody.getEvent().getName());
-
 		log.debug("Inserting Event with Name: '{}'", eventBody.getEvent().getName());
 
 		eventService.insertEvent(eventBody);
 
 		/* TODO! WAT? */
 		if (eventBody.getLocation() == null) {
-			System.out.println("Failed to Insert Event with Name: " + eventBody.getEvent().getName());
-
 			log.debug("Failed to Insert Event with Name: '{}'", eventBody.getEvent().getName());
-
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 

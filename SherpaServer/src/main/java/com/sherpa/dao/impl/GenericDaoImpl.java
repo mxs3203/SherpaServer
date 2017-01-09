@@ -15,14 +15,14 @@ import com.sherpa.util.Util;
 @Repository
 public class GenericDaoImpl<T> implements GenericDao<T> {
 
-	private static final Logger log = LoggerFactory.getLogger(TagDaoImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(GenericDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public void persist(final T transientInstance) {
-		log.debug("persisting " + transientInstance.getClass().getName() + " instance");
+		log.debug("persisting {} instance", transientInstance.getClass().getName());
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -34,7 +34,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	@Override
 	public void remove(final T persistentInstance) {
-		log.debug("removing " + persistentInstance.getClass().getName() + " instance");
+		log.debug("removing {} instance", persistentInstance.getClass().getName());
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -46,7 +46,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	@Override
 	public T merge(final T detachedInstance) {
-		log.debug("merging " + detachedInstance.getClass().getName() + " instance");
+		log.debug("merging {} instance", detachedInstance.getClass().getName());
 		try {
 			T result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
@@ -59,7 +59,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	@Override
 	public T findById(final Class<T> clazz, long id) {
-		log.debug("getting " + clazz.getName() + " instance with id: " + id);
+		log.debug("getting {} instance with ID: {}", clazz.getName(), id);
 		try {
 			T instance = entityManager.find(clazz, id);
 			log.debug("get successful");
@@ -72,6 +72,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	@Override
 	public Set<T> getAll(final Class<T> clazz) {
+		log.debug("getting all instances of model: {}", clazz.getName());
 		return Util.castSet(clazz,
 				entityManager.createQuery("FROM " + clazz + " i WHERE i.deleted = 0").getResultList());
 	}

@@ -42,12 +42,13 @@ public class CurrencyDaoImpl extends GenericDaoImpl<Currency> implements Currenc
 	/* TODO! refactor */
 	@Override
 	public Currency findByCurrencyIso(String iso) {
-		log.debug("getting Currency instance with iso: " + iso);
+		log.debug("getting Currency instance with ISO: '{}'", iso);
 		try {
 			Currency instance;
 			Query query = entityManager.createQuery("FROM Currency c WHERE c.iso = :iso");
 			query.setParameter("iso", iso);
 			instance = (Currency) query.getSingleResult();
+			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

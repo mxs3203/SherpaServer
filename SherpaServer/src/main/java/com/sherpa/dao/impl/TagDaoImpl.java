@@ -42,10 +42,12 @@ public class TagDaoImpl extends GenericDaoImpl<Tag> implements TagDao {
 	/* TODO! Refactor */
 	@Override
 	public Tag findByTagName(String tagName) {
-		log.debug("getting Tag instance with name: " + tagName);
+		log.debug("getting Tag instance with name: '{}'", tagName);
 		try {
 			Query query = entityManager.createQuery("FROM Tag t WHERE t.tagName = :tagName");
 			query.setParameter("tagName", tagName);
+
+			log.debug("get successful");
 			return (Tag) query.getSingleResult();
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

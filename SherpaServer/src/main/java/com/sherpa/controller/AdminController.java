@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.AdminDto;
+import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Controller
@@ -29,19 +30,14 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AdminDto> getUser(@PathVariable("id") long userId) {
-
-		System.out.println("Fetching User with id " + userId);
+	public ResponseEntity<AdminDto> getAdmin(@PathVariable("id") long userId) {
 
 		log.debug("Fetching User with ID: {}", userId);
 
 		AdminDto adminDto = adminService.findById(userId);
 
 		if (adminDto == null) {
-			System.out.println("User with ID " + userId + " Not Found!");
-
 			log.debug("User with ID '{}' Not Found!", userId);
-
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -51,8 +47,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username,
 			@PathVariable("password") String password) {
-		System.out.println("Fetching Admin with Username: " + username + " and Password: " + password);
-
 		log.debug("Fetching Admin with Username: '{}' and Password: '{}'", username, password);
 
 		AdminDto adminDto = new AdminDto();
@@ -62,13 +56,28 @@ public class AdminController {
 		adminDto = adminService.verifyAdmin(adminDto);
 
 		if (adminDto == null) {
-			System.out.println("Admin with Username: " + username + " and Password: " + password + " Not Found!");
-			
 			log.debug("Admin with Username: '{}' and Password: '{}' Not Found!", username, password);
-			
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/admin/remove", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AdminDto> deleteNew() {
+		adminService.removeAdmin(new AdminDto());
+		
+		IMPLEMENTIRAT OVAJ KOD? za delete bez prethodnog fetcha?
+		
+		try {
+			entityManager.remove(entityManager.getReference(**clazz, **id));
+			log.debug("remove successful");
+		} catch (RuntimeException re) {
+			log.error("remove failed", re);
+			throw re;
+		}
+		
+		
+		return new ResponseEntity<AdminDto>(HttpStatus.OK);
 	}
 
 }

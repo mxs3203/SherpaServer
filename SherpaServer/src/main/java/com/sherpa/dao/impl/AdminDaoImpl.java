@@ -40,12 +40,11 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 	}
 
 	public Admin verifyAdmin(String username, String password) {
-
-		log.debug("getting Admin instance with username: " + username + " password: " + password);
+		log.debug("getting Admin instance with Username: '{}' and Password: '{}'", username, password);
 		try {
 			Query query = entityManager
 					.createQuery("FROM Admin a WHERE a.username = :username AND a.password = :password")
-					.setParameter("email", username).setParameter("password", password);
+					.setParameter("username", username).setParameter("password", password);
 
 			Admin admin = (Admin) query.getSingleResult();
 

@@ -46,10 +46,12 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
 	@Override
 	public User getUserByCredentials(User p_user) {
-		log.debug("getting User instance with email: " + p_user.getEmail() + " and password: " + p_user.getPassword());
+		log.debug("getting User instance with email: '{}' and password: '{}'", p_user.getEmail(), p_user.getPassword());
 		try {
 			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password")
 					.setParameter("email", p_user.getEmail()).setParameter("password", p_user.getEmail());
+
+			log.debug("get successful");
 			return (User) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
@@ -58,10 +60,12 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
 	@Override
 	public Set<Event> getUserEvents(User p_user) {
-		log.debug("getting Events for User instance with ID: " + p_user.getUserId());
+		log.debug("getting Events for User instance with ID: {}", p_user.getUserId());
 		try {
 			Query query = entityManager.createQuery("FROM Event e WHERE e.userId = :userId").setParameter("userId",
 					p_user.getUserId());
+
+			log.debug("get successful");
 			return Util.castSet(Event.class, query.getResultList());
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -72,12 +76,14 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	/* TODO! Provjerit dal valja */
 	@Override
 	public Set<User> getSherpasByRatingInRegion(String region) {
-		log.debug("getting Sherpa instances by Rating in Region: " + region);
+		log.debug("getting Sherpa instances by Rating in Region: '{}'", region);
 		try {
 			Query query = entityManager
 					.createQuery(
 							"FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC")
 					.setParameter("region", region);
+
+			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
