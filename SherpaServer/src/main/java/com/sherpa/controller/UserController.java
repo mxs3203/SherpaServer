@@ -2,6 +2,8 @@ package com.sherpa.controller;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,7 +39,7 @@ public class UserController {
 	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi
 	 * 
 	 * 
-	 * Drugi Logger
+	 * System.out-ove pocistit, ostavit samo najbitnije i prebacit ih u Logger
 	 * 
 	 * 
 	 * Ovo isto izmozgat:
@@ -63,10 +65,17 @@ public class UserController {
 	 * onda trebao imat sto vise metoda koje obavljaju sta god treba u sto
 	 * manjem broju querya, zato je ovo gore "bitno"
 	 * 
+	 * 
+	 * 
+	 * 
+	 * Datasource JNDI?
+	 * 
 	 */
 
 	@Autowired
 	private UserService userService;
+
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getIndex() {
@@ -78,6 +87,8 @@ public class UserController {
 
 		System.out.println("Fetching User with ID: " + userId);
 
+		log.debug("Fetching User with ID: {}", userId);
+
 		User user = new User();
 		user.setUserId(userId);
 
@@ -85,6 +96,9 @@ public class UserController {
 
 		if (userDto == null) {
 			System.out.println("User with ID: " + userId + " Not Found!");
+
+			log.debug("User with ID: {} Not Found!", userId);
+
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -98,6 +112,8 @@ public class UserController {
 		System.out.println(
 				"Fetching User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword());
 
+		log.debug("Fetching User with Email: '{}' and Password: '{}'", userBody.getEmail(), userBody.getPassword());
+
 		User user = new User();
 		user.setEmail(userBody.getEmail());
 		user.setPassword(userBody.getPassword());
@@ -106,7 +122,11 @@ public class UserController {
 
 		if (userDto == null) {
 			System.out.println("User with Email: " + userBody.getEmail() + " and Password: " + userBody.getPassword()
-					+ " not found");
+					+ " Not Found!");
+
+			log.debug("User with Email: '{}' and Password: '{}' Not Found!", userBody.getEmail(),
+					userBody.getPassword());
+
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -119,6 +139,8 @@ public class UserController {
 
 		System.out.println("Fetching Events For User With ID: " + userId);
 
+		log.debug("Fetching Events For User With ID: {}", userId);
+
 		User user = new User();
 		user.setUserId(userId);
 
@@ -126,6 +148,9 @@ public class UserController {
 
 		if (events == null) {
 			System.out.println("Events For User With ID: " + userId + " Not Found!");
+
+			log.debug("Events For User With ID: {} Not Found!", userId);
+
 			return new ResponseEntity<Set<EventDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -138,10 +163,15 @@ public class UserController {
 
 		System.out.println("Fetching Users in Region: " + region);
 
+		log.debug("Fetching Users in Region: '{}'", region);
+
 		Set<UserDto> users = userService.getUsersByRegion(region);
 
 		if (users == null) {
 			System.out.println("Users in Region " + region + " Not Found!");
+
+			log.debug("Users in Region: '{}' Not Found!", region);
+
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -156,12 +186,17 @@ public class UserController {
 
 		System.out.println("Fetching Sherpas in Region: " + region);
 
+		log.debug("Fetching Sherpas in Region: '{}'", region);
+
 		Set<UserDto> sherpas = null;/*
 									 * userService.getSherpasByRegion(region);
 									 */
 
 		if (sherpas == null) {
-			System.out.println("Failed to fetch all sherpas in region: " + region);
+			System.out.println("Failed to Fetch Sherpas in Region: " + region);
+
+			log.debug("Failed to Fetch Sherpas in Region: '{}'", region);
+
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -174,10 +209,15 @@ public class UserController {
 
 		System.out.println("Fetching Sherpas by Rating in Region: " + region);
 
+		log.debug("Fetching Sherpas by Rating in Region: '{}'", region);
+
 		Set<UserDto> sherpas = userService.getSherpasByRatingInRegion(region);
 
 		if (sherpas == null) {
 			System.out.println("Failed to Fetch Sherpas by Rating in Region: " + region);
+
+			log.debug("Failed to Fetch Sherpas by Rating in Region: '{}'", region);
+
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Set<UserDto>>(sherpas, HttpStatus.OK);

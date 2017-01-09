@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<configuration scan="false">
+
+	<property name="FILE_LOCATION" value="/opt/logs/SherpaServer/" />
+
+	<!-- <property name="PATTERN_DEFAULT" value="[%date{yyyy-MM-dd HH:mm:ss.SSS}] 
+		: %-5level : %thread : %contextName : [%logger.%method:%line] : %message%n%exception" 
+		/> -->
+
+	<property name="PATTERN_DEFAULT"
+		value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] : %-5level : %thread : %contextName : [%logger.%method:%line] : %message%n%exception%n" />
+
+	<!-- Console Logger -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${PATTERN_DEFAULT}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- File Logger -->
+	<appender name="APP"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<file>${FILE_LOCATION}/app.log</file>
+		<encoder>
+			<pattern>${PATTERN_DEFAULT}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${FILE_LOCATION}/app.log.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="org.springframework" level="error" additivity="false">
+		<appender-ref ref="APP" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.sherpa" level="debug" additivity="false">
+		<appender-ref ref="APP" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="APP" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

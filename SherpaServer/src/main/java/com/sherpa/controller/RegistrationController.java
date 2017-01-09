@@ -1,5 +1,7 @@
 package com.sherpa.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,8 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 
+	private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+
 	// @Autowired
 	// private LocationService locationService;
 
@@ -34,6 +38,9 @@ public class RegistrationController {
 	public ResponseEntity<UserDto> registerUser(@RequestBody RegisterDto request) {
 		System.out.println("Registering User with Email: " + request.getUserDto().getEmail() + " and Password: "
 				+ request.getUserDto().getPassword());
+
+		log.debug("Registering User with Email: '{}' and Password: '{}'", request.getUserDto().getEmail(),
+				request.getUserDto().getPassword());
 
 		/*
 		 * Location loc = request.getLocationDto().toModel();
@@ -62,6 +69,10 @@ public class RegistrationController {
 		if (userDto == null) {
 			System.out.println("User with Email: " + request.getUserDto().getEmail() + " and Password: "
 					+ request.getUserDto().getPassword() + " Not Found!");
+
+			log.debug("User with Email: '{}' and Password: '{}' Not Found!", request.getUserDto().getEmail(),
+					request.getUserDto().getPassword());
+
 			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
 		}
 

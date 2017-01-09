@@ -1,5 +1,7 @@
 package com.sherpa.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,8 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String getIndex() {
 		return "index";
@@ -29,10 +33,15 @@ public class AdminController {
 
 		System.out.println("Fetching User with id " + userId);
 
+		log.debug("Fetching User with ID: {}", userId);
+
 		AdminDto adminDto = adminService.findById(userId);
 
 		if (adminDto == null) {
-			System.out.println("User with id " + userId + " not found");
+			System.out.println("User with ID " + userId + " Not Found!");
+
+			log.debug("User with ID '{}' Not Found!", userId);
+
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -42,7 +51,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username,
 			@PathVariable("password") String password) {
-		System.out.println("Fetching Admin with username: " + username + " and Password: " + password);
+		System.out.println("Fetching Admin with Username: " + username + " and Password: " + password);
+
+		log.debug("Fetching Admin with Username: '{}' and Password: '{}'", username, password);
 
 		AdminDto adminDto = new AdminDto();
 		adminDto.setUsername(username);
@@ -51,7 +62,10 @@ public class AdminController {
 		adminDto = adminService.verifyAdmin(adminDto);
 
 		if (adminDto == null) {
-			System.out.println("Admin with username: " + username + " and Password: " + password + " not found");
+			System.out.println("Admin with Username: " + username + " and Password: " + password + " Not Found!");
+			
+			log.debug("Admin with Username: '{}' and Password: '{}' Not Found!", username, password);
+			
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);

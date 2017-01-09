@@ -4,8 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.CurrencyDao;
@@ -14,7 +14,7 @@ import com.sherpa.model.Currency;
 @Repository
 public class CurrencyDaoImpl extends GenericDaoImpl<Currency> implements CurrencyDao {
 
-	private static final Log log = LogFactory.getLog(CurrencyDaoImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(CurrencyDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;

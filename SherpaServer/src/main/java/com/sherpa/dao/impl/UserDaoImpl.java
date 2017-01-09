@@ -7,8 +7,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.UserDao;
@@ -19,7 +19,7 @@ import com.sherpa.util.Util;
 @Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
-	private static final Log log = LogFactory.getLog(UserDaoImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
