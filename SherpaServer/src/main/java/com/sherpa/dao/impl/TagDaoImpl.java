@@ -25,8 +25,8 @@ public class TagDaoImpl extends GenericDaoImpl<Tag> implements TagDao {
 	}
 
 	@Override
-	public void remove(Tag persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Tag> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

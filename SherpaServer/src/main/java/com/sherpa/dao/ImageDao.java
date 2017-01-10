@@ -6,7 +6,7 @@ public interface ImageDao extends GenericDao<Image> {
 
 	void persist(Image transientInstance);
 
-	void remove(Image persistentInstance);
+	void remove(Class<Image> clazz, long id);
 
 	Image merge(Image detachedInstance);
 

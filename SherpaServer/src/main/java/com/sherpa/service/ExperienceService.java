@@ -4,11 +4,11 @@ import com.sherpa.model.Experience;
 
 public interface ExperienceService {
 
-	void addExperience(Experience transientInstance);
+	void add(Experience transientInstance);
 
-	void removeExperience(Experience persistentInstance);
+	void remove(long id);
 
-	Experience updateExperience(Experience detachedInstance);
+	Experience update(Experience detachedInstance);
 
 	Experience findById(long id);
 

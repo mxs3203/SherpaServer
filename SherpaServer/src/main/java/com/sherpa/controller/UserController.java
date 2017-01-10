@@ -33,6 +33,9 @@ public class UserController {
 	 * U DTO i Modelu doraditi toModel i toDTO
 	 * 
 	 * 
+	 * Na DEV kompove stavit konfiguraciju iz deployment-a
+	 * 
+	 * 
 	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi -> GENERIC
 	 * DAO -> trazi Entity / Model class type za Delete -> drugim rijecima
 	 * delete se mora izvrsit u servisu (a DAO onda mora primiti Entity klasu?
@@ -65,13 +68,6 @@ public class UserController {
 	 * Vecina provjera se obavlja u servisu (npr. is null i ta sranja). DAO bi
 	 * onda trebao imat sto vise metoda koje obavljaju sta god treba u sto
 	 * manjem broju querya, zato je ovo gore "bitno"
-	 * 
-	 * 
-	 * 
-	 * 
-	 * Datasource JNDI?
-	 * 
-	 * Boot servera MySQL driver SSL warning? -> rjeseno sa use SSL=false?
 	 * 
 	 */
 

@@ -6,7 +6,7 @@ public interface AdminDao extends GenericDao<Admin> {
 
 	void persist(Admin transientInstance);
 
-	void remove(Admin persistentInstance);
+	void remove(Class<Admin> clazz, long id);
 
 	Admin merge(Admin detachedInstance);
 

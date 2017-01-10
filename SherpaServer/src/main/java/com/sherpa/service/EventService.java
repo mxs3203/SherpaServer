@@ -7,11 +7,11 @@ import com.sherpa.model.Event;
 
 public interface EventService {
 
-	void addEvent(Event transientInstance);
+	void add(Event transientInstance);
 
-	void removeEvent(Event persistentInstance);
+	void remove(long id);
 
-	Event updateEvent(Event detachedInstance);
+	Event update(Event detachedInstance);
 
 	Event findById(long id);
 

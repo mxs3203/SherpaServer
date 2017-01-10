@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.EventUserCrossDao;
 import com.sherpa.model.EventUserCross;
-import com.sherpa.model.EventUserCrossId;
 import com.sherpa.service.EventUserCrossService;
 
 @Service
@@ -17,22 +16,22 @@ public class EventUserCrossServiceImpl implements EventUserCrossService {
 	private EventUserCrossDao eventUserCrossDao;
 
 	@Override
-	public void addEventUserCross(EventUserCross transientInstance) {
+	public void add(EventUserCross transientInstance) {
 		eventUserCrossDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeEventUserCross(EventUserCross persistentInstance) {
-		eventUserCrossDao.remove(persistentInstance);
+	public void remove(long id) {
+		eventUserCrossDao.remove(EventUserCross.class, id);
 	}
 
 	@Override
-	public EventUserCross updateEventUserCross(EventUserCross detachedInstance) {
+	public EventUserCross update(EventUserCross detachedInstance) {
 		return eventUserCrossDao.merge(detachedInstance);
 	}
 
 	@Override
-	public EventUserCross findById(EventUserCrossId id) {
+	public EventUserCross findById(long id) {
 		return eventUserCrossDao.findById(EventUserCross.class, id);
 	}
 

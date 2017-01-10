@@ -16,17 +16,17 @@ public class TagServiceImpl implements TagService {
 	private TagDao tagDao;
 
 	@Override
-	public void addTag(Tag transientInstance) {
+	public void add(Tag transientInstance) {
 		tagDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeTag(Tag persistentInstance) {
-		tagDao.remove(persistentInstance);
+	public void remove(long id) {
+		tagDao.remove(Tag.class, id);
 	}
 
 	@Override
-	public Tag updateTag(Tag detachedInstance) {
+	public Tag update(Tag detachedInstance) {
 		return tagDao.merge(detachedInstance);
 	}
 

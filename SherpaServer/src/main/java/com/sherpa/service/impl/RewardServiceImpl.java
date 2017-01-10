@@ -16,17 +16,17 @@ public class RewardServiceImpl implements RewardService {
 	private RewardDao rewardDao;
 
 	@Override
-	public void addReward(Reward transientInstance) {
+	public void add(Reward transientInstance) {
 		rewardDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeReward(Reward persistentInstance) {
-		rewardDao.remove(persistentInstance);
+	public void remove(long id) {
+		rewardDao.remove(Reward.class, id);
 	}
 
 	@Override
-	public Reward updateReward(Reward detachedInstance) {
+	public Reward update(Reward detachedInstance) {
 		return rewardDao.merge(detachedInstance);
 	}
 

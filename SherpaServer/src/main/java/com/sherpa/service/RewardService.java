@@ -4,11 +4,11 @@ import com.sherpa.model.Reward;
 
 public interface RewardService {
 
-	void addReward(Reward transientInstance);
+	void add(Reward transientInstance);
 
-	void removeReward(Reward persistentInstance);
+	void remove(long id);
 
-	Reward updateReward(Reward detachedInstance);
+	Reward update(Reward detachedInstance);
 
 	Reward findById(long id);
 

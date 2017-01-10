@@ -6,7 +6,7 @@ public interface GenericDao<T> {
 
 	void persist(T transientInstance);
 
-	void remove(T persistentInstance);
+	void remove(Class<T> clazz, long id);
 
 	T merge(T detachedInstance);
 

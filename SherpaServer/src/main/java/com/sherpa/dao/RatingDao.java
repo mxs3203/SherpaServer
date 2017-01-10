@@ -6,7 +6,7 @@ public interface RatingDao extends GenericDao<Rating> {
 
 	void persist(Rating transientInstance);
 
-	void remove(Rating persistentInstance);
+	void remove(Class<Rating> clazz, long id);
 
 	Rating merge(Rating detachedInstance);
 

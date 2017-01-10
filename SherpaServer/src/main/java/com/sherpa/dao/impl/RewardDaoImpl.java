@@ -19,8 +19,8 @@ public class RewardDaoImpl extends GenericDaoImpl<Reward> implements RewardDao {
 	}
 
 	@Override
-	public void remove(Reward persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Reward> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

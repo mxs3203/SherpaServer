@@ -19,8 +19,8 @@ public class ImageDaoImpl extends GenericDaoImpl<Image> implements ImageDao {
 	}
 
 	@Override
-	public void remove(Image persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Image> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

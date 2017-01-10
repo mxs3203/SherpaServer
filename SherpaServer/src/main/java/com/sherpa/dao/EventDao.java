@@ -6,7 +6,7 @@ public interface EventDao extends GenericDao<Event> {
 
 	void persist(Event transientInstance);
 
-	void remove(Event persistentInstance);
+	void remove(Class<Event> clazz, long id);
 
 	Event merge(Event detachedInstance);
 

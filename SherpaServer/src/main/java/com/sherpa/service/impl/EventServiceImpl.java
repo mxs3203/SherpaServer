@@ -36,17 +36,17 @@ public class EventServiceImpl implements EventService {
 	private CurrencyDao currencyDao;
 
 	@Override
-	public void addEvent(Event transientInstance) {
+	public void add(Event transientInstance) {
 		eventDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeEvent(Event persistentInstance) {
-		eventDao.remove(persistentInstance);
+	public void remove(long id) {
+		eventDao.remove(Event.class, id);
 	}
 
 	@Override
-	public Event updateEvent(Event detachedInstance) {
+	public Event update(Event detachedInstance) {
 		return eventDao.merge(detachedInstance);
 	}
 
@@ -72,10 +72,10 @@ public class EventServiceImpl implements EventService {
 				Event event = (Event) iter.next();
 				if (event != null && event.getIsFinished() == false) {
 					EventLocationDto eventLocation = new EventLocationDto();
-					
+
 					eventLocation.setEvent(event.toDto());
 					eventLocation.setLocation(loc.toDto());
-					
+
 					events.add(eventLocation);
 				}
 			}
@@ -93,16 +93,16 @@ public class EventServiceImpl implements EventService {
 
 		Currency currency = currencyDao.findByCurrencyIso(eld.getCurrency());
 		event.setCurrency(currency);
-		
+
 		event.setIsFinished(false);
-		
+
 		User user = userDao.findById(User.class, eld.getEvent().getUserId());
-		
+
 		locationDao.persist(location);
-		
+
 		event.setLocationByStartLocationId(location);
 		event.setUser(user);
-		
+
 		eventDao.persist(event);
 	}
 

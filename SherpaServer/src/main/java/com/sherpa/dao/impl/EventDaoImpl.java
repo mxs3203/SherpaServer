@@ -20,8 +20,8 @@ public class EventDaoImpl extends GenericDaoImpl<Event> implements EventDao {
 	}
 
 	@Override
-	public void remove(Event persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Event> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

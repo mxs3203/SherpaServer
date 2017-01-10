@@ -16,17 +16,17 @@ public class CurrencyServiceImpl implements CurrencyService {
 	private CurrencyDao currencyDao;
 
 	@Override
-	public void addCurrency(Currency transientInstance) {
+	public void add(Currency transientInstance) {
 		currencyDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeCurrency(Currency persistentInstance) {
-		currencyDao.remove(persistentInstance);
+	public void remove(long id) {
+		currencyDao.remove(Currency.class, id);
 	}
 
 	@Override
-	public Currency updateCurrency(Currency detachedInstance) {
+	public Currency update(Currency detachedInstance) {
 		return currencyDao.merge(detachedInstance);
 	}
 

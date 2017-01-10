@@ -6,7 +6,7 @@ public interface ExperienceDao extends GenericDao<Experience> {
 
 	void persist(Experience transientInstance);
 
-	void remove(Experience persistentInstance);
+	void remove(Class<Experience> clazz, long id);
 
 	Experience merge(Experience detachedInstance);
 

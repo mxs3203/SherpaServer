@@ -28,17 +28,17 @@ public class UserServiceImpl implements UserService {
 	private LocationDao locDao;
 
 	@Override
-	public void addUser(User transientInstance) {
+	public void add(User transientInstance) {
 		userDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeUser(User persistentInstance) {
-		userDao.remove(persistentInstance);
+	public void remove(long id) {
+		userDao.remove(User.class, id);
 	}
 
 	@Override
-	public UserDto updateUser(User detachedInstance) {
+	public UserDto update(User detachedInstance) {
 		return userDao.merge(detachedInstance).toDto();
 	}
 

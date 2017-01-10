@@ -19,8 +19,8 @@ public class RatingDaoImpl extends GenericDaoImpl<Rating> implements RatingDao {
 	}
 
 	@Override
-	public void remove(Rating persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Rating> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

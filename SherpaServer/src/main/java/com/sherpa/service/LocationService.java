@@ -4,13 +4,12 @@ import com.sherpa.model.Location;
 
 public interface LocationService {
 
-	void addLocation(Location transientInstance);
+	void add(Location transientInstance);
 
-	void removeLocation(Location persistentInstance);
+	void remove(long id);
 
-	Location updateLocation(Location detachedInstance);
+	Location update(Location detachedInstance);
 
 	Location findById(long id);
-
 
 }

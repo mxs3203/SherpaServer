@@ -4,11 +4,11 @@ import com.sherpa.model.Image;
 
 public interface ImageService {
 
-	void addImage(Image transientInstance);
+	void add(Image transientInstance);
 
-	void removeImage(Image persistentInstance);
+	void remove(long id);
 
-	Image updateImage(Image detachedInstance);
+	Image update(Image detachedInstance);
 
 	Image findById(long id);
 

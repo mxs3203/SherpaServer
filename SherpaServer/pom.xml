@@ -54,6 +54,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${version.mysql.connector}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring -->

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.AchievementUserCrossDao;
 import com.sherpa.model.AchievementUserCross;
-import com.sherpa.model.AchievementUserCrossId;
 
 @Repository
 public class AchievementUserCrossDaoImpl extends GenericDaoImpl<AchievementUserCross>
@@ -21,8 +20,8 @@ public class AchievementUserCrossDaoImpl extends GenericDaoImpl<AchievementUserC
 	}
 
 	@Override
-	public void remove(AchievementUserCross persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<AchievementUserCross> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override
@@ -31,8 +30,8 @@ public class AchievementUserCrossDaoImpl extends GenericDaoImpl<AchievementUserC
 	}
 
 	@Override
-	public AchievementUserCross findById(Class<AchievementUserCross> clazz, AchievementUserCrossId id) {
-		return super.findById(clazz, id.getAchievementUserId());
+	public AchievementUserCross findById(Class<AchievementUserCross> clazz, long id) {
+		return super.findById(clazz, id);
 	}
 
 }

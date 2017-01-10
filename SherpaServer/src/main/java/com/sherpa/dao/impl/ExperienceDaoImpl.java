@@ -19,8 +19,8 @@ public class ExperienceDaoImpl extends GenericDaoImpl<Experience> implements Exp
 	}
 
 	@Override
-	public void remove(Experience persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Experience> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

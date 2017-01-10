@@ -19,8 +19,8 @@ public class ReportDaoImpl extends GenericDaoImpl<Report> implements ReportDao {
 	}
 
 	@Override
-	public void remove(Report persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Report> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

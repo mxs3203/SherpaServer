@@ -17,17 +17,17 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
 
 	@Override
-	public void addAdmin(AdminDto transientInstance) {
+	public void add(AdminDto transientInstance) {
 		adminDao.persist(transientInstance.toModel());
 	}
 
 	@Override
-	public void removeAdmin(AdminDto persistentInstance) {
-		adminDao.remove(persistentInstance.toModel());
+	public void remove(long id) {
+		adminDao.remove(Admin.class, id);
 	}
 
 	@Override
-	public AdminDto updateAdmin(AdminDto detachedInstance) {
+	public AdminDto update(AdminDto detachedInstance) {
 		return adminDao.merge(detachedInstance.toModel()).toDto();
 	}
 

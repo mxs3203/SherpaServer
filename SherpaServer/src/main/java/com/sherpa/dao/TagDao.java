@@ -6,7 +6,7 @@ public interface TagDao extends GenericDao<Tag> {
 
 	void persist(Tag transientInstance);
 
-	void remove(Tag persistentInstance);
+	void remove(Class<Tag> clazz, long id);
 
 	Tag merge(Tag detachedInstance);
 

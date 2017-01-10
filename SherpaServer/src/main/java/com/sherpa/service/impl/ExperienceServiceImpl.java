@@ -16,17 +16,17 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao experienceDao;
 
 	@Override
-	public void addExperience(Experience transientInstance) {
+	public void add(Experience transientInstance) {
 		experienceDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeExperience(Experience persistentInstance) {
-		experienceDao.remove(persistentInstance);
+	public void remove(long id) {
+		experienceDao.remove(Experience.class, id);
 	}
 
 	@Override
-	public Experience updateExperience(Experience detachedInstance) {
+	public Experience update(Experience detachedInstance) {
 		return experienceDao.merge(detachedInstance);
 	}
 

@@ -16,17 +16,17 @@ public class AchievementServiceImpl implements AchievementService {
 	private AchievementDao achievementDao;
 
 	@Override
-	public void addAchievement(Achievement transientInstance) {
+	public void add(Achievement transientInstance) {
 		achievementDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeAchievement(Achievement persistentInstance) {
-		achievementDao.remove(persistentInstance);
+	public void remove(long id) {
+		achievementDao.remove(Achievement.class, id);
 	}
 
 	@Override
-	public Achievement updateAchievement(Achievement detachedInstance) {
+	public Achievement update(Achievement detachedInstance) {
 		return achievementDao.merge(detachedInstance);
 	}
 

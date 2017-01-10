@@ -59,7 +59,7 @@ public class RegistrationController {
 		User user = request.getUserDto().toModel();
 		user.setLocation(request.getLocationDto().toModel());
 
-		userService.addUser(user);
+		userService.add(user);
 
 		userDto = userService.loginUser(user);
 

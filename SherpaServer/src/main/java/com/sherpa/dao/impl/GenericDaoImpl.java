@@ -33,16 +33,26 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	}
 
 	@Override
-	public void remove(final T persistentInstance) {
-		log.debug("removing {} instance", persistentInstance.getClass().getName());
+	public void remove(final Class<T> clazz, long id) {
+		log.debug("removing {} instance with ID: {}", clazz.getName(), id);
 		try {
-			entityManager.remove(persistentInstance);
+			entityManager.remove(entityManager.getReference(clazz, id));
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
 			throw re;
 		}
 	}
+
+	/* OLD remove method - throws exception */
+	/*
+	 * @Override public void remove(final T persistentInstance) {
+	 * log.debug("removing {} instance",
+	 * persistentInstance.getClass().getName()); try {
+	 * entityManager.remove(persistentInstance); log.debug("remove successful");
+	 * } catch (RuntimeException re) { log.error("remove failed", re); throw re;
+	 * } }
+	 */
 
 	@Override
 	public T merge(final T detachedInstance) {

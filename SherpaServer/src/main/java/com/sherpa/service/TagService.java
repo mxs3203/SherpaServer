@@ -4,11 +4,11 @@ import com.sherpa.model.Tag;
 
 public interface TagService {
 
-	void addTag(Tag transientInstance);
+	void add(Tag transientInstance);
 
-	void removeTag(Tag persistentInstance);
+	void remove(long id);
 
-	Tag updateTag(Tag detachedInstance);
+	Tag update(Tag detachedInstance);
 
 	Tag findById(long id);
 

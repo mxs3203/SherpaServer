@@ -4,11 +4,11 @@ import com.sherpa.model.Currency;
 
 public interface CurrencyService {
 
-	void addCurrency(Currency transientInstance);
+	void add(Currency transientInstance);
 
-	void removeCurrency(Currency persistentInstance);
+	void remove(long id);
 
-	Currency updateCurrency(Currency detachedInstance);
+	Currency update(Currency detachedInstance);
 
 	Currency findById(long id);
 

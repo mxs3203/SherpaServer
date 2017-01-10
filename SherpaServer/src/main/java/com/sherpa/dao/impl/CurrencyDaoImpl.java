@@ -25,8 +25,8 @@ public class CurrencyDaoImpl extends GenericDaoImpl<Currency> implements Currenc
 	}
 
 	@Override
-	public void remove(Currency persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Currency> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

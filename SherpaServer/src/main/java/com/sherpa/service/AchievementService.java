@@ -4,11 +4,11 @@ import com.sherpa.model.Achievement;
 
 public interface AchievementService {
 
-	void addAchievement(Achievement transientInstance);
+	void add(Achievement transientInstance);
 
-	void removeAchievement(Achievement persistentInstance);
+	void remove(long id);
 
-	Achievement updateAchievement(Achievement detachedInstance);
+	Achievement update(Achievement detachedInstance);
 
 	Achievement findById(long id);
 

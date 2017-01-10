@@ -4,11 +4,11 @@ import com.sherpa.model.Rating;
 
 public interface RatingService {
 
-	void addRating(Rating transientInstance);
+	void add(Rating transientInstance);
 
-	void removeRating(Rating persistentInstance);
+	void remove(long id);
 
-	Rating updateRating(Rating detachedInstance);
+	Rating update(Rating detachedInstance);
 
 	Rating findById(long id);
 

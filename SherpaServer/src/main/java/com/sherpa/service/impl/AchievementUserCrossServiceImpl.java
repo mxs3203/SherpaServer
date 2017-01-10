@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AchievementUserCrossDao;
 import com.sherpa.model.AchievementUserCross;
-import com.sherpa.model.AchievementUserCrossId;
 import com.sherpa.service.AchievementUserCrossService;
 
 @Service
@@ -17,22 +16,22 @@ public class AchievementUserCrossServiceImpl implements AchievementUserCrossServ
 	private AchievementUserCrossDao achievementUserCrossDao;
 
 	@Override
-	public void addAchievementUserCross(AchievementUserCross transientInstance) {
+	public void add(AchievementUserCross transientInstance) {
 		achievementUserCrossDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeAchievementUserCross(AchievementUserCross persistentInstance) {
-		achievementUserCrossDao.remove(persistentInstance);
+	public void remove(long id) {
+		achievementUserCrossDao.remove(AchievementUserCross.class, id);
 	}
 
 	@Override
-	public AchievementUserCross updateAchievementUserCross(AchievementUserCross detachedInstance) {
+	public AchievementUserCross update(AchievementUserCross detachedInstance) {
 		return achievementUserCrossDao.merge(detachedInstance);
 	}
 
 	@Override
-	public AchievementUserCross findById(AchievementUserCrossId id) {
+	public AchievementUserCross findById(long id) {
 		return achievementUserCrossDao.findById(AchievementUserCross.class, id);
 	}
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.AdminDto;
-import com.sherpa.model.Admin;
 import com.sherpa.service.AdminService;
 
 @Controller
@@ -60,24 +59,6 @@ public class AdminController {
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/admin/remove", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AdminDto> deleteNew() {
-		adminService.removeAdmin(new AdminDto());
-		
-		IMPLEMENTIRAT OVAJ KOD? za delete bez prethodnog fetcha?
-		
-		try {
-			entityManager.remove(entityManager.getReference(**clazz, **id));
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
-		
-		
-		return new ResponseEntity<AdminDto>(HttpStatus.OK);
 	}
 
 }

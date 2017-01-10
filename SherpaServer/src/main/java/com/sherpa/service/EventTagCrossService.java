@@ -1,16 +1,15 @@
 package com.sherpa.service;
 
 import com.sherpa.model.EventTagCross;
-import com.sherpa.model.EventTagCrossId;
 
 public interface EventTagCrossService {
 
-	void addImage(EventTagCross transientInstance);
+	void add(EventTagCross transientInstance);
 
-	void removeImage(EventTagCross persistentInstance);
+	void remove(long id);
 
-	EventTagCross updateImage(EventTagCross detachedInstance);
+	EventTagCross update(EventTagCross detachedInstance);
 
-	EventTagCross findById(EventTagCrossId id);
+	EventTagCross findById(long id);
 
 }

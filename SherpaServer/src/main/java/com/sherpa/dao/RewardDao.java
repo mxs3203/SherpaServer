@@ -6,7 +6,7 @@ public interface RewardDao extends GenericDao<Reward> {
 
 	void persist(Reward transientInstance);
 
-	void remove(Reward persistentInstance);
+	void remove(Class<Reward> clazz, long id);
 
 	Reward merge(Reward detachedInstance);
 

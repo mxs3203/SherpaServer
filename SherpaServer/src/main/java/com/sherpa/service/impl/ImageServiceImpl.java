@@ -16,17 +16,17 @@ public class ImageServiceImpl implements ImageService {
 	private ImageDao imageDao;
 
 	@Override
-	public void addImage(Image transientInstance) {
+	public void add(Image transientInstance) {
 		imageDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeImage(Image persistentInstance) {
-		imageDao.remove(persistentInstance);
+	public void remove(long id) {
+		imageDao.remove(Image.class, id);
 	}
 
 	@Override
-	public Image updateImage(Image detachedInstance) {
+	public Image update(Image detachedInstance) {
 		return imageDao.merge(detachedInstance);
 	}
 

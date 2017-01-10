@@ -16,17 +16,17 @@ public class RatingServiceImpl implements RatingService {
 	private RatingDao ratingDao;
 
 	@Override
-	public void addRating(Rating transientInstance) {
+	public void add(Rating transientInstance) {
 		ratingDao.persist(transientInstance);
 	}
 
 	@Override
-	public void removeRating(Rating persistentInstance) {
-		ratingDao.remove(persistentInstance);
+	public void remove(long id) {
+		ratingDao.remove(Rating.class, id);
 	}
 
 	@Override
-	public Rating updateRating(Rating detachedInstance) {
+	public Rating update(Rating detachedInstance) {
 		return ratingDao.merge(detachedInstance);
 	}
 

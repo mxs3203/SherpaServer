@@ -9,7 +9,7 @@ public interface UserDao extends GenericDao<User> {
 
 	void persist(User transientInstance);
 
-	void remove(User persistentInstance);
+	void remove(Class<User> clazz, long id);
 
 	User merge(User detachedInstance);
 

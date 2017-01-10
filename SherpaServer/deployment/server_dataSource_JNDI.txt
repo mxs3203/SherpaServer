@@ -1,0 +1,37 @@
+
+Tomcat Server Configuration for JNDI DataSource
+
+<Tomcat Directory>/lib should have JDBC Driver .jar (MySQL Connector/J)
+
+In Eclipse, Edit Tomcat's:
+
+
+
+CONTEXT.XML (Inside <Context> Tag)
+
+<ResourceLink name="jdbc/sherpaServer" global="jdbc/sherpaServer" auth="Container" type="javax.sql.DataSource" />
+
+
+
+SERVER.XML (Inside <GlobalNamingResources> Tag)
+
+INFO: This Config Uses Tomcat DBCP2, Commented lines are Alternate Attributes for Tomcat JDBC Connection Pool
+	
+<!--
+	maxActive="100"
+	maxWait="10000"
+-->
+<Resource name="jdbc/sherpaServer"
+	auth="Container"
+	type="javax.sql.DataSource"
+	driverClassName="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost:3306/sherpa?useSSL=false"
+	username="root"
+	password="root"
+	
+	maxTotal="100"
+	maxWaitMillis="10000"
+	
+	maxIdle="20"
+	minIdle="5"
+/>

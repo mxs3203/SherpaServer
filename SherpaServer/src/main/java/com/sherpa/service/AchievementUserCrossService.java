@@ -1,16 +1,15 @@
 package com.sherpa.service;
 
 import com.sherpa.model.AchievementUserCross;
-import com.sherpa.model.AchievementUserCrossId;
 
 public interface AchievementUserCrossService {
 
-	void addAchievementUserCross(AchievementUserCross transientInstance);
+	void add(AchievementUserCross transientInstance);
 
-	void removeAchievementUserCross(AchievementUserCross persistentInstance);
+	void remove(long id);
 
-	AchievementUserCross updateAchievementUserCross(AchievementUserCross detachedInstance);
+	AchievementUserCross update(AchievementUserCross detachedInstance);
 
-	AchievementUserCross findById(AchievementUserCrossId id);
+	AchievementUserCross findById(long id);
 
 }

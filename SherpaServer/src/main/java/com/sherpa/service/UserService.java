@@ -8,11 +8,11 @@ import com.sherpa.model.User;
 
 public interface UserService {
 
-	void addUser(User transientInstance);
+	void add(User transientInstance);
 
-	void removeUser(User persistentInstance);
+	void remove(long id);
 
-	UserDto updateUser(User detachedInstance);
+	UserDto update(User detachedInstance);
 
 	UserDto findById(User user);
 
@@ -22,7 +22,7 @@ public interface UserService {
 
 	Set<UserDto> getUsersByRegion(String region);
 
-//	Set<UserDto> getSherpasByRegion(String region);
+	/* Set<UserDto> getSherpasByRegion(String region); */
 
 	Set<UserDto> getSherpasByRatingInRegion(String region);
 

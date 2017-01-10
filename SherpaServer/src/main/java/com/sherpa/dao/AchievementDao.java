@@ -6,7 +6,7 @@ public interface AchievementDao extends GenericDao<Achievement> {
 
 	void persist(Achievement transientInstance);
 
-	void remove(Achievement persistentInstance);
+	void remove(Class<Achievement> clazz, long id);
 
 	Achievement merge(Achievement detachedInstance);
 

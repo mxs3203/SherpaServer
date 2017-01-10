@@ -25,8 +25,8 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 	}
 
 	@Override
-	public void remove(Admin persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Admin> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

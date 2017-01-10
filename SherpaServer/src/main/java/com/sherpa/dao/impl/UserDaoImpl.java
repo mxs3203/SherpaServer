@@ -30,8 +30,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public void remove(User persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<User> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

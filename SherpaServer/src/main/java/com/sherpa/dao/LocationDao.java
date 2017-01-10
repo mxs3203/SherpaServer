@@ -8,7 +8,7 @@ public interface LocationDao extends GenericDao<Location> {
 
 	void persist(Location transientInstance);
 
-	void remove(Location persistentInstance);
+	void remove(Class<Location> clazz, long id);
 
 	Location merge(Location detachedInstance);
 

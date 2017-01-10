@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.EventTagCrossDao;
 import com.sherpa.model.EventTagCross;
-import com.sherpa.model.EventTagCrossId;
 
 @Repository
 public class EventTagCrossDaoImpl extends GenericDaoImpl<EventTagCross> implements EventTagCrossDao {
@@ -20,8 +19,8 @@ public class EventTagCrossDaoImpl extends GenericDaoImpl<EventTagCross> implemen
 	}
 
 	@Override
-	public void remove(EventTagCross persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<EventTagCross> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override
@@ -30,8 +29,8 @@ public class EventTagCrossDaoImpl extends GenericDaoImpl<EventTagCross> implemen
 	}
 
 	@Override
-	public EventTagCross findById(Class<EventTagCross> clazz, EventTagCrossId id) {
-		return super.findById(clazz, id.getEventTagId());
+	public EventTagCross findById(Class<EventTagCross> clazz, long id) {
+		return super.findById(clazz, id);
 	}
 
 }

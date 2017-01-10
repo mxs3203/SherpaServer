@@ -6,7 +6,7 @@ public interface ReportDao extends GenericDao<Report> {
 
 	void persist(Report transientInstance);
 
-	void remove(Report persistentInstance);
+	void remove(Class<Report> clazz, long id);
 
 	Report merge(Report detachedInstance);
 

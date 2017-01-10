@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd 
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:annotation-config />
@@ -12,15 +14,18 @@
 	<context:component-scan base-package="com.sherpa.dao" />
 	<context:component-scan base-package="com.sherpa.service" />
 
+	<!-- DataSource - JNDI -->
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/sherpaServer" />
 
-	<!-- Use SSL false makne MySQL warning -->
-	<bean id="dataSource"
+	<!-- DataSource - Local / Direct -->
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/sherpa?useSSL=false" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/sherpa?useSSL=false" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
-	</bean>
+	</bean> -->
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -34,10 +39,5 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-
-
-		<!-- <property name="jpaProperties"> <props> <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> 
-			<prop key="hibernate.format_sql">true</prop> <prop key="hibernate.show_sql">true</prop> 
-			</props> </property> -->
 	</bean>
 </beans>

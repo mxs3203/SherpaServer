@@ -6,7 +6,7 @@ public interface CurrencyDao extends GenericDao<Currency> {
 
 	void persist(Currency transientInstance);
 
-	void remove(Currency persistentInstance);
+	void remove(Class<Currency> clazz, long id);
 
 	Currency merge(Currency detachedInstance);
 

@@ -19,8 +19,8 @@ public class AchievementDaoImpl extends GenericDaoImpl<Achievement> implements A
 	}
 
 	@Override
-	public void remove(Achievement persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Achievement> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override

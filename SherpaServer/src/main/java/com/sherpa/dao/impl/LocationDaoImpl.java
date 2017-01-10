@@ -28,8 +28,8 @@ public class LocationDaoImpl extends GenericDaoImpl<Location> implements Locatio
 	}
 
 	@Override
-	public void remove(Location persistentInstance) {
-		super.remove(persistentInstance);
+	public void remove(Class<Location> clazz, long id) {
+		super.remove(clazz, id);
 	}
 
 	@Override
