@@ -36,6 +36,8 @@ public class UserController {
 	 * Na DEV kompove stavit konfiguraciju iz deployment-a
 	 * 
 	 * 
+	 * Delete Rjesen?
+	 * 
 	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi -> GENERIC
 	 * DAO -> trazi Entity / Model class type za Delete -> drugim rijecima
 	 * delete se mora izvrsit u servisu (a DAO onda mora primiti Entity klasu?
@@ -47,6 +49,10 @@ public class UserController {
 	 * 
 	 * 
 	 * Ovo isto izmozgat:
+	 * 
+	 * 
+	 * U ServiceImpl-ovima direkt zvat genericDao.x();?
+	 * 
 	 * 
 	 * U kontroleru se barata samo sa view objektima (DTO). Oni se salju u
 	 * service di se pretvore u model / entity, prije nego ih posaljes u DAO (i
