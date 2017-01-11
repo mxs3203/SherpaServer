@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto loginUser(User user) {
-		return userDao.getUserByCredentials(user).toDto();
+		return userDao.findByCredentials(user).toDto();
 	}
 
 	@Override

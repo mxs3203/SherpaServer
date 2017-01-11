@@ -45,7 +45,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public User getUserByCredentials(User p_user) {
+	public User findByCredentials(User p_user) {
 		log.debug("getting User instance with email: '{}' and password: '{}'", p_user.getEmail(), p_user.getPassword());
 		try {
 			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password")

@@ -12,6 +12,6 @@ public interface AdminService {
 
 	AdminDto findById(long id);
 
-	AdminDto verifyAdmin(AdminDto adminDto);
+	AdminDto loginAdmin(AdminDto adminDto);
 
 }

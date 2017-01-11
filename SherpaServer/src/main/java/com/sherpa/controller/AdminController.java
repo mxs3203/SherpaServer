@@ -52,7 +52,7 @@ public class AdminController {
 		adminDto.setUsername(username);
 		adminDto.setPassword(password);
 
-		adminDto = adminService.verifyAdmin(adminDto);
+		adminDto = adminService.loginAdmin(adminDto);
 
 		if (adminDto == null) {
 			log.debug("Admin with Username: '{}' and Password: '{}' Not Found!", username, password);

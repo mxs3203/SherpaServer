@@ -37,8 +37,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AdminDto verifyAdmin(AdminDto adminDto) {
-		return adminDao.verifyAdmin(adminDto.getUsername(), adminDto.getPassword()).toDto();
+	public AdminDto loginAdmin(AdminDto adminDto) {
+		return adminDao.findByCredentials(adminDto.getUsername(), adminDto.getPassword()).toDto();
 	}
 
 }

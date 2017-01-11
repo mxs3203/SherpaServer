@@ -15,7 +15,7 @@ public interface UserDao extends GenericDao<User> {
 
 	User findById(Class<User> clazz, long id);
 
-	User getUserByCredentials(User user);
+	User findByCredentials(User user);
 
 	Set<Event> getUserEvents(User user);
 

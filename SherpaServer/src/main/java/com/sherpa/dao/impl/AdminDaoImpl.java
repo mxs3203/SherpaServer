@@ -39,7 +39,7 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 		return super.findById(clazz, id);
 	}
 
-	public Admin verifyAdmin(String username, String password) {
+	public Admin findByCredentials(String username, String password) {
 		log.debug("getting Admin instance with Username: '{}' and Password: '{}'", username, password);
 		try {
 			Query query = entityManager
