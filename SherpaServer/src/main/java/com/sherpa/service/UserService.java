@@ -14,15 +14,15 @@ public interface UserService {
 
 	UserDto update(User detachedInstance);
 
-	UserDto findById(User user);
+	UserDto findById(long id);
 
 	UserDto loginUser(User user);
 
-	Set<EventDto> getUserEvents(User user);
+	Set<EventDto> getSherpaEvents(long id);
 
 	Set<UserDto> getUsersByRegion(String region);
 
-	/* Set<UserDto> getSherpasByRegion(String region); */
+	Set<UserDto> getSherpasByRegion(String region);
 
 	Set<UserDto> getSherpasByRatingInRegion(String region);
 

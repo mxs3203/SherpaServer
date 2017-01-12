@@ -91,10 +91,7 @@ public class UserController {
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
 		log.debug("Fetching User with ID: {}", userId);
 
-		User user = new User();
-		user.setUserId(userId);
-
-		UserDto userDto = userService.findById(user);
+		UserDto userDto = userService.findById(userId);
 
 		if (userDto == null) {
 			log.debug("User with ID: {} Not Found!", userId);
@@ -125,14 +122,11 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/user/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/sherpa/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<EventDto>> getSherpaEvents(@PathVariable("id") long userId) {
 		log.debug("Fetching Events For User With ID: {}", userId);
 
-		User user = new User();
-		user.setUserId(userId);
-
-		Set<EventDto> events = userService.getUserEvents(user);
+		Set<EventDto> events = userService.getSherpaEvents(userId);
 
 		if (events == null) {
 			log.debug("Events For User With ID: {} Not Found!", userId);
@@ -160,13 +154,9 @@ public class UserController {
 
 	@RequestMapping(value = "/sherpas/region/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRegion(@PathVariable("region") String region) {
-
-		/* TODO! */
 		log.debug("Fetching Sherpas in Region: '{}'", region);
 
-		Set<UserDto> sherpas = null;/*
-									 * userService.getSherpasByRegion(region);
-									 */
+		Set<UserDto> sherpas = userService.getSherpasByRegion(region);
 
 		if (sherpas == null) {
 			log.debug("Failed to Fetch Sherpas in Region: '{}'", region);

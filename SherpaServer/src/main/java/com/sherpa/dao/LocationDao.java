@@ -14,6 +14,6 @@ public interface LocationDao extends GenericDao<Location> {
 
 	Location findById(Class<Location> clazz, long id);
 
-	Set<Location> getRegionLocations(String region);
+	Set<Location> getByRegion(String region);
 
 }

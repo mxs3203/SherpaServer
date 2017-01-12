@@ -59,14 +59,34 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public Set<Event> getUserEvents(User p_user) {
-		log.debug("getting Events for User instance with ID: {}", p_user.getUserId());
+	public Set<Event> getSherpaEvents(long id) {
+		log.debug("getting Events for User instance with ID: {}", id);
 		try {
-			Query query = entityManager.createQuery("FROM Event e WHERE e.userId = :userId").setParameter("userId",
-					p_user.getUserId());
+			Query query = entityManager.createQuery("FROM Event e WHERE e.user.userId = :userId").setParameter("userId",
+					id);
 
 			log.debug("get successful");
 			return Util.castSet(Event.class, query.getResultList());
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+
+	/* TODO! */
+	@Override
+	public Set<User> getSherpasByRegion(String region) {
+		log.debug("getting Sherpa instances in Region: {}", region);
+		try {
+			Query query = entityManager
+					.createQuery("SELECT l.users FROM Location l WHERE l.users.isSherpa = 1 AND l.region = :region")
+					.setParameter("region", region);
+
+			// .createQuery("FROM User u INNER JOIN FETCH Location l WHERE
+			// u.isSherpa = 1 AND l.region = :region")
+
+			log.debug("get successful");
+			return Util.castSet(User.class, query.getResultList());
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;

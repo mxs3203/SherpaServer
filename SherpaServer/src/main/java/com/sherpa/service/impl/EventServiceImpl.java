@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
 	public Set<EventLocationDto> getEventsByRegion(String region) {
 
 		Set<EventLocationDto> events = new HashSet<EventLocationDto>();
-		Set<Location> locations = locationDao.getRegionLocations(region);
+		Set<Location> locations = locationDao.getByRegion(region);
 
 		for (Location loc : locations) {
 

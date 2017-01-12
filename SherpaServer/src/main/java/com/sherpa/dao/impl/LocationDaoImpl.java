@@ -43,7 +43,7 @@ public class LocationDaoImpl extends GenericDaoImpl<Location> implements Locatio
 	}
 
 	@Override
-	public Set<Location> getRegionLocations(String region) {
+	public Set<Location> getByRegion(String region) {
 		log.debug("getting Location instances with Region: '{}'", region);
 		try {
 			Query query = entityManager.createQuery("FROM Location l WHERE l.region = :region").setParameter("region",

@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto findById(User user) {
-		return userDao.findById(User.class, user.getUserId()).toDto();
+	public UserDto findById(long id) {
+		return userDao.findById(User.class, id).toDto();
 	}
 
 	@Override
@@ -53,13 +53,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<EventDto> getUserEvents(User user) {
-
-		/* TODO! Check yo self */
+	public Set<EventDto> getSherpaEvents(long id) {
 
 		Set<EventDto> events = new HashSet<EventDto>();
 
-		Iterator<Event> iter = userDao.getUserEvents(user).iterator();
+		Iterator<Event> iter = userDao.getSherpaEvents(id).iterator();
 
 		while (iter.hasNext()) {
 			events.add(iter.next().toDto());
@@ -71,22 +69,13 @@ public class UserServiceImpl implements UserService {
 	public Set<UserDto> getUsersByRegion(String region) {
 
 		/*
-		 * Set<UserDto> usersDto = new HashSet<UserDto>();
-		 * 
-		 * TODO! for (Location locs : locDao.getRegionLocations(region)) { for
-		 * (User user : locs.getUsers()) { usersDto.add(user.toDto()); } }
-		 * return usersDto;
-		 */
-
-		/*
-		 * TODO! Ovo treba preko Query-a rijesit u novoj DAO metodi (Location
-		 * ili User objekta) (FROM Location l INNER JOIN User u WHERE l.region =
-		 * :region AND u.isSherpa = 1)?
+		 * TODO! Radi (vrati nesto), ali treba vidjet dal ima neki efikasniji
+		 * nacin i dal je tocan query result uopce
 		 */
 
 		Set<UserDto> users = new HashSet<UserDto>();
 
-		Iterator<Location> locIter = locDao.getRegionLocations(region).iterator();
+		Iterator<Location> locIter = locDao.getByRegion(region).iterator();
 
 		Iterator<User> userIter = null;
 
@@ -101,6 +90,19 @@ public class UserServiceImpl implements UserService {
 			while (userIter.hasNext()) {
 				users.add(userIter.next().toDto());
 			}
+		}
+
+		return users;
+	}
+
+	public Set<UserDto> getSherpasByRegion(String region) {
+
+		Set<UserDto> users = new HashSet<UserDto>();
+
+		Iterator<User> userIter = userDao.getSherpasByRegion(region).iterator();
+
+		while (userIter.hasNext()) {
+			users.add(userIter.next().toDto());
 		}
 
 		return users;

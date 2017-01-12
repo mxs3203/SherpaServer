@@ -37,7 +37,7 @@ public class AdminControllerTest {
 	}
 
 	@Test
-	public void test_get_by_id_success() throws Exception {
+	public void testGetByIdSuccess() throws Exception {
 
 		AdminDto admin = new AdminDto();
 		admin.setAdminId(1);
@@ -59,7 +59,7 @@ public class AdminControllerTest {
 	}
 
 	@Test
-	public void test_get_by_id_fail_bad_request() throws Exception {
+	public void testGetByIdFailBadRequest() throws Exception {
 
 		long assertId = -1;
 
@@ -68,6 +68,28 @@ public class AdminControllerTest {
 		mockMvc.perform(get("/admins/admin/{id}", assertId)).andExpect(status().isBadRequest());
 
 		verify(adminService, times(1)).findById(assertId);
+		verifyNoMoreInteractions(adminService);
+
+	}
+
+	@Test
+	public void testLoginSuccess() throws Exception {
+
+		AdminDto admin = new AdminDto();
+		admin.setAdminId(1);
+		admin.setUsername("admin");
+		admin.setPassword("admin");
+
+		long assertId = admin.getAdminId();
+
+		when(adminService.loginAdmin(admin)).thenReturn(admin);
+
+		mockMvc.perform(get("/admins/admin/{username}/{password}", admin.getUsername(), admin.getPassword()))
+				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.adminId", is(assertId))).andExpect(jsonPath("$.username", is("admin")))
+				.andExpect(jsonPath("$.password", is("admin")));
+
+		verify(adminService, times(1)).loginAdmin(admin);
 		verifyNoMoreInteractions(adminService);
 
 	}
