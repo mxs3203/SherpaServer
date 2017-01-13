@@ -2,6 +2,7 @@ package com.sherpa.service;
 
 import java.util.Set;
 
+import com.sherpa.dto.EventDto;
 import com.sherpa.dto.EventLocationDto;
 import com.sherpa.model.Event;
 
@@ -11,12 +12,13 @@ public interface EventService {
 
 	void remove(long id);
 
-	Event update(Event detachedInstance);
+	EventDto update(Event detachedInstance);
 
-	Event findById(long id);
+	EventDto findById(long id);
 
 	Set<EventLocationDto> getEventsByRegion(String region);
 
+	/* TODO! ovo nevalja */
 	void insertEvent(EventLocationDto eld);
 
 }

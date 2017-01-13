@@ -12,6 +12,7 @@ import com.sherpa.dao.CurrencyDao;
 import com.sherpa.dao.EventDao;
 import com.sherpa.dao.LocationDao;
 import com.sherpa.dao.UserDao;
+import com.sherpa.dto.EventDto;
 import com.sherpa.dto.EventLocationDto;
 import com.sherpa.model.Currency;
 import com.sherpa.model.Event;
@@ -46,13 +47,13 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public Event update(Event detachedInstance) {
-		return eventDao.merge(detachedInstance);
+	public EventDto update(Event detachedInstance) {
+		return eventDao.merge(detachedInstance).toDto();
 	}
 
 	@Override
-	public Event findById(long id) {
-		return eventDao.findById(Event.class, id);
+	public EventDto findById(long id) {
+		return eventDao.findById(Event.class, id).toDto();
 	}
 
 	/* TODO! refactor za novi objekt */

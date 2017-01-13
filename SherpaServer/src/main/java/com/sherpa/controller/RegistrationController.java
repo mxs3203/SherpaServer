@@ -27,34 +27,12 @@ public class RegistrationController {
 
 	private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
 
-	// @Autowired
-	// private LocationService locationService;
-
 	private UserDto userDto;
-
-	// private User user;
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDto> registerUser(@RequestBody RegisterDto request) {
 		log.debug("Registering User with Email: '{}' and Password: '{}'", request.getUserDto().getEmail(),
 				request.getUserDto().getPassword());
-
-		/*
-		 * Location loc = request.getLocationDto().toModel();
-		 * 
-		 * locationService.addLocation(loc);
-		 * 
-		 * userDto = request.getUserDto(); user = userDto.toModel();
-		 * user.setLocation(loc); userService.addUser(user);
-		 * 
-		 * userDto = userService.loginUser(user);
-		 * 
-		 * if (userDto == null) { System.out.println("User with Email: " +
-		 * request.getUserDto().getEmail() + " and Password: " +
-		 * request.getUserDto().getPassword() + " not found"); return new
-		 * ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST); } return new
-		 * ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
-		 */
 
 		User user = request.getUserDto().toModel();
 		user.setLocation(request.getLocationDto().toModel());

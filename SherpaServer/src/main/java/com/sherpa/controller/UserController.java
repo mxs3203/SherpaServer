@@ -28,6 +28,8 @@ public class UserController {
 	 * 
 	 * Refactor:
 	 * 
+	 * REFACTOR EVENT KONTROLERA!
+	 * 
 	 * Kontrolera, Servisa i DAO-a
 	 * 
 	 * U DTO i Modelu doraditi toModel i toDTO

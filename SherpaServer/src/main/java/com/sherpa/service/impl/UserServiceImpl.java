@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sherpa.dao.LocationDao;
 import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
 import com.sherpa.model.Event;
-import com.sherpa.model.Location;
 import com.sherpa.model.User;
 import com.sherpa.service.UserService;
 
@@ -23,9 +21,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-
-	@Autowired
-	private LocationDao locDao;
 
 	@Override
 	public void add(User transientInstance) {
@@ -68,28 +63,12 @@ public class UserServiceImpl implements UserService {
 
 	public Set<UserDto> getUsersByRegion(String region) {
 
-		/*
-		 * TODO! Radi (vrati nesto), ali treba vidjet dal ima neki efikasniji
-		 * nacin i dal je tocan query result uopce
-		 */
-
 		Set<UserDto> users = new HashSet<UserDto>();
 
-		Iterator<Location> locIter = locDao.getByRegion(region).iterator();
+		Iterator<User> userIter = userDao.getUsersByRegion(region).iterator();
 
-		Iterator<User> userIter = null;
-
-		Set<User> userModel = new HashSet<User>();
-
-		while (locIter.hasNext()) {
-
-			userModel = locIter.next().getUsers();
-
-			userIter = userModel.iterator();
-
-			while (userIter.hasNext()) {
-				users.add(userIter.next().toDto());
-			}
+		while (userIter.hasNext()) {
+			users.add(userIter.next().toDto());
 		}
 
 		return users;
@@ -110,8 +89,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<UserDto> getSherpasByRatingInRegion(String region) {
-
-		/* TODO! Jel ovaj kod OK? Query je vrlo vjerojatno kriv */
 
 		Set<UserDto> users = new HashSet<UserDto>();
 

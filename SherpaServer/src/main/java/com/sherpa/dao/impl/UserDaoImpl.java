@@ -50,7 +50,6 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		try {
 			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password")
 					.setParameter("email", p_user.getEmail()).setParameter("password", p_user.getEmail());
-
 			log.debug("get successful");
 			return (User) query.getSingleResult();
 		} catch (NoResultException nre) {
@@ -58,13 +57,13 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
+	/* TODO! Query ok? */
 	@Override
 	public Set<Event> getSherpaEvents(long id) {
 		log.debug("getting Events for User instance with ID: {}", id);
 		try {
 			Query query = entityManager.createQuery("FROM Event e WHERE e.user.userId = :userId").setParameter("userId",
 					id);
-
 			log.debug("get successful");
 			return Util.castSet(Event.class, query.getResultList());
 		} catch (RuntimeException re) {
@@ -73,18 +72,14 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
-	/* TODO! */
+	/* TODO! Query ok? */
 	@Override
-	public Set<User> getSherpasByRegion(String region) {
-		log.debug("getting Sherpa instances in Region: {}", region);
+	public Set<User> getUsersByRegion(String region) {
+		log.debug("getting All User (Sherpa and non-Sherpa) instances in Region: {}", region);
 		try {
 			Query query = entityManager
-					.createQuery("SELECT l.users FROM Location l WHERE l.users.isSherpa = 1 AND l.region = :region")
+					.createQuery("SELECT l.users FROM Location l JOIN l.users u WHERE l.region = :region")
 					.setParameter("region", region);
-
-			// .createQuery("FROM User u INNER JOIN FETCH Location l WHERE
-			// u.isSherpa = 1 AND l.region = :region")
-
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());
 		} catch (RuntimeException re) {
@@ -93,16 +88,37 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
-	/* TODO! Provjerit dal valja */
+	/* TODO! Query ok? */
+	@Override
+	public Set<User> getSherpasByRegion(String region) {
+		log.debug("getting Sherpa instances in Region: {}", region);
+		try {
+			Query query = entityManager
+					.createQuery(
+							"SELECT l.users FROM Location l JOIN l.users u WHERE u.isSherpa = 1 AND l.region = :region")
+					.setParameter("region", region);
+			log.debug("get successful");
+			return Util.castSet(User.class, query.getResultList());
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+
+	/*
+	 * TODO! Query ok? Query vrati 3 rezultata, a castList gleda dal taj objekt
+	 * (u ovom slucaju User objekt) vec postoji u setu i ako postoji ne dodaje
+	 * ga. E sad buduci da je rating kao sto veci to bolji, mozda bi ga trebao
+	 * ostavit i mi to onda handle-at s nekim logikama?
+	 */
 	@Override
 	public Set<User> getSherpasByRatingInRegion(String region) {
 		log.debug("getting Sherpa instances by Rating in Region: '{}'", region);
 		try {
 			Query query = entityManager
 					.createQuery(
-							"FROM Rating r INNER JOIN FETCH r.event e INNER JOIN FETCH e.locationByStartLocationId l INNER JOIN FETCH e.user u WHERE l.region = :region AND u.isSherpa = 1 ORDER BY r.rating DESC")
+							"SELECT u FROM User u JOIN Rating r ON r.user.userId = u.userId JOIN Event e ON r.event.eventId = e.eventId JOIN Location startLoc ON startLoc.locationId = e.locationByStartLocationId JOIN Location endLoc ON endLoc.locationId = e.locationByEndLocationId WHERE u.isSherpa = 1 AND (startLoc.region = :region OR endLoc.region = :region) ORDER BY r.rating DESC")
 					.setParameter("region", region);
-
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());
 		} catch (RuntimeException re) {

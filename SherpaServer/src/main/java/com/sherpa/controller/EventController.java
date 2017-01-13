@@ -36,6 +36,7 @@ public class EventController {
 		log.debug("Fetching Events in Region: {}", region);
 
 		Set<EventLocationDto> events = eventService.getEventsByRegion(region);
+
 		if (events == null) {
 			log.debug("Events in Region: '{}' Not Found!", region);
 			return new ResponseEntity<Set<EventLocationDto>>(HttpStatus.BAD_REQUEST);
@@ -48,9 +49,9 @@ public class EventController {
 	public ResponseEntity<String> insertEvent(@RequestBody EventLocationDto eventBody) {
 		log.debug("Inserting Event with Name: '{}'", eventBody.getEvent().getName());
 
+		/* TODO! WAT? ovo nevalja, tj. trazi mozganje i refactor */
 		eventService.insertEvent(eventBody);
 
-		/* TODO! WAT? */
 		if (eventBody.getLocation() == null) {
 			log.debug("Failed to Insert Event with Name: '{}'", eventBody.getEvent().getName());
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

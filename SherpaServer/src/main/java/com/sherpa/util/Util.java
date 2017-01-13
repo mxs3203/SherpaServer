@@ -17,9 +17,6 @@ public class Util {
 
 	private final static DateTimeFormatter dtfTime = DateTimeFormat.forPattern(Constants.TIME_FORMAT_WITH_TIME);
 
-	public Util() {
-	}
-
 	public static String getDateString(DateTime date) {
 		String dateString = dtfTime.print(date);
 		return dateString;
@@ -30,18 +27,14 @@ public class Util {
 		return date;
 	}
 
-	public static <T> Set<T> castSet(Class<? extends T> clazz, Collection<?> collection) {
-		Set<T> r = new HashSet<T>(collection.size());
-		for (Object o : collection)
-			r.add(clazz.cast(o));
-		return r;
-	}
-
-	/* OLD CAST WITH LIST */
-	/*
-	 * public static <T> List<T> castList(Class<? extends T> clazz,
-	 * Collection<?> c) { List<T> r = new ArrayList<T>(c.size()); for (Object o
-	 * : c) r.add(clazz.cast(o)); return r; }
+	/**
+	 * Cast Hibernate Query Results From List (ArrayList) To Set (HashSet)
 	 */
+	public static <T> Set<T> castSet(Class<? extends T> clazz, Collection<?> collection) {
+		Set<T> resultSet = new HashSet<T>(collection.size());
+		for (Object object : collection)
+			resultSet.add(clazz.cast(object));
+		return resultSet;
+	}
 
 }

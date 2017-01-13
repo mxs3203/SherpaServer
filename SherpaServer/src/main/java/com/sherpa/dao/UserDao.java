@@ -18,7 +18,9 @@ public interface UserDao extends GenericDao<User> {
 	User findByCredentials(User user);
 
 	Set<Event> getSherpaEvents(long id);
-	
+
+	Set<User> getUsersByRegion(String region);
+
 	Set<User> getSherpasByRegion(String region);
 
 	Set<User> getSherpasByRatingInRegion(String region);
