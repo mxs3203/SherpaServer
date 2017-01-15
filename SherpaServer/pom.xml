@@ -30,6 +30,9 @@
 
 		<version.maven.compiler>3.6.0</version.maven.compiler>
 		<version.maven.war.plugin>3.0.0</version.maven.war.plugin>
+
+		<maven.test.skip>true</maven.test.skip>
+
 	</properties>
 
 	<dependencies>

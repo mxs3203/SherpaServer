@@ -1,0 +1,262 @@
+
+--Ubuntu
+
+--Kernel Update
+rpi-update
+
+
+--Provjerit Locale Servera: (Ako su sjebani)
+locale
+
+locale-gen "en_US.UTF-8"
+
+dpkg-reconfigure locales
+
+(AKO KASNIJE I DALJE JEBE)
+export LC_ALL="en_US.UTF-8"
+
+reboot
+
+locale
+
+
+-Headless Server Mode:
+graphical disable
+
+
+-Resize File System:
+df -h ; || ; lsblk (DISK SIZE?)
+
+sudo fdisk /dev/mmcblk0
+
+d, 2, n, p, 2, enter, enter, w; reboot
+
+sudo resize2fs /dev/mmcblk0p2
+
+df -h ; || ; lsblk (DISK SIZE?)
+
+
+-Update:
+apt-get update && apt-get upgrade
+
+
+-Reboot:
+reboot
+
+
+-Shutdown:
+shutdown -h now
+
+
+
+--Java8
+
+java -version
+
+apt-get install openjdk-8-jdk-headless (ili openjdk-8-jdk)
+
+java -version
+
+FOLDER ZA HEADLESS => (java-8-openjdk-armhf ?)
+
+export JAVA_HOME=/usr/lib/jvm/<PATH DO FOLDERA>
+
+ILI
+
+nano /etc/environment
+
+JAVA_HOME="/usr/lib/jvm/<PATH DO FOLDERA>"
+
+source /etc/environment
+
+
+
+
+--Tomcat9
+
+cd /opt/
+
+wget <URL DO TOMCAT DOWNLOAD LINKA>
+
+tar -zxpvf <TOMCAT ZIP FILE NAME>
+
+mv <TOMCAT FOLDER NAME> tomcat9
+
+export CATALINA_HOME=/opt/tomcat9
+
+ILI
+
+nano /etc/environment
+
+CATALINA_HOME="/opt/tomcat9"
+
+source /etc/environment
+
+
+
+nano $CATALINA_HOME/conf/tomcat-users.xml
+
+<!-- User Manager Can Access Only Manager Section -->
+<role rolename="manager-gui" />
+<user username="manager" password="manager" roles="manager-gui" />
+
+<!-- User Admin Can Access Manager and Admin Section -->
+<role rolename="admin-gui" />
+<user username="admin" password="admin" roles="manager-gui,admin-gui" />
+
+
+
+cd $CATALINA_HOME/bin/
+
+./startup.sh
+
+./shutdown.sh
+
+
+
+nano $CATALINA_HOME/conf/Catalina/localhost/manager.xml
+
+<Context privileged="true" antiResourceLocking="false" docBase="${catalina.home}/webapps/manager">
+	<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
+</Context>
+
+
+
+
+nano /etc/init.d/tomcat9
+
+#! /bin/bash
+# /etc/init.d/tomcat9
+
+### BEGIN INIT INFO
+# Provides:        tomcat9
+# Required-Start:  $network
+# Required-Stop:   $network
+# Default-Start:   2 3 4 5
+# Default-Stop:    0 1 6
+# Short-Description: Start/Stop Tomcat server
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+start() {
+ sh /opt/tomcat9/bin/startup.sh
+}
+
+stop() {
+ sh /opt/tomcat9/bin/shutdown.sh
+}
+
+case $1 in
+  start|stop) $1;;
+  restart) stop; start;;
+  *) echo "Run as $0 <start|stop|restart>"; exit 1;;
+esac
+
+
+
+chmod 755 /etc/init.d/tomcat9
+update-rc.d tomcat9 defaults
+
+
+
+--Maven:
+
+apt-get install maven
+
+
+
+--MySQL:
+
+apt-get install mysql-server
+
+mysql_secure_installation
+
+
+
+--No IP:
+
+cd /opt/
+
+mkdir noip
+
+cd noip
+
+wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+
+tar -zxpvf <FILE NAME>
+
+cd <FOLDER NAME>
+
+make
+
+make install
+
+noip2 ­-S
+
+
+
+
+nano /etc/init.d/noip2
+
+#! /bin/sh
+# /etc/init.d/noip2
+
+### BEGIN INIT INFO
+# Provides:     noip2
+# Required-Start:  $network
+# Required-Stop:   $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start noip2 at boot time
+# Description: Start noip2 at boot time
+### END INIT INFO
+
+# . /etc/rc.d/init.d/functions  # uncomment/modify for your killproc
+
+DAEMON=/usr/local/bin/noip2
+NAME=noip2
+
+test -x $DAEMON || exit 0
+
+case "$1" in
+    start)
+    echo -n "Starting Dynamic Address Update: "
+    start-stop-daemon --start --exec $DAEMON
+    echo "noip2."
+    ;;
+    stop)
+    echo -n "Shutting Down Dynamic Address Update:"
+    start-stop-daemon --stop --oknodo --retry 30 --exec $DAEMON
+    echo "noip2."
+    ;;
+
+    restart)
+    echo -n "Restarting Dynamic Address Update: "
+    start-stop-daemon --stop --oknodo --retry 30 --exec $DAEMON
+    start-stop-daemon --start --exec $DAEMON
+    echo "noip2."
+    ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+exit 0
+
+
+
+chmod 755 /etc/init.d/noip2
+update-rc.d noip2 defaults
+
+
+
+--Deploy Driver (SSH File Transfer)
+
+scp <PATH TO THE .JAR> sherpa@sherpa-desktop.local.: <PATH TO DESTINATION> (i.e. /home/sherpa/Downloads)
+
+
+
+--Deploy Tomcat JNDI
+
+<TOMCAT DIR>/conf (context.xml i server.xml)
