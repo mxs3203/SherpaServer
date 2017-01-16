@@ -4,19 +4,18 @@ import java.util.Set;
 
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
-import com.sherpa.model.User;
 
 public interface UserService {
 
-	void add(User transientInstance);
+	void add(UserDto transientInstance);
 
 	void remove(long id);
 
-	UserDto update(User detachedInstance);
+	UserDto update(UserDto detachedInstance);
 
 	UserDto findById(long id);
 
-	UserDto loginUser(User user);
+	UserDto loginUser(UserDto user);
 
 	Set<EventDto> getSherpaEvents(long id);
 

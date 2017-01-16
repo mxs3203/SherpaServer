@@ -3,16 +3,15 @@ package com.sherpa.service;
 import java.util.Set;
 
 import com.sherpa.dto.EventDto;
-import com.sherpa.dto.EventLocationDto;
-import com.sherpa.model.Event;
+import com.sherpa.dto.composite.EventLocationDto;
 
 public interface EventService {
 
-	void add(Event transientInstance);
+	void add(EventDto transientInstance);
 
 	void remove(long id);
 
-	EventDto update(Event detachedInstance);
+	EventDto update(EventDto detachedInstance);
 
 	EventDto findById(long id);
 

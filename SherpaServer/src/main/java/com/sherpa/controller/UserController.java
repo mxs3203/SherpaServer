@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
-import com.sherpa.model.User;
 import com.sherpa.service.UserService;
 
 @Controller
@@ -28,7 +27,7 @@ public class UserController {
 	 * 
 	 * Refactor:
 	 * 
-	 * REFACTOR EVENT KONTROLERA!
+	 * REFACTOR EVENT i REGISTRATION KONTROLERA!
 	 * 
 	 * Kontrolera, Servisa i DAO-a
 	 * 
@@ -108,7 +107,7 @@ public class UserController {
 	public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userBody) {
 		log.debug("Fetching User with Email: '{}' and Password: '{}'", userBody.getEmail(), userBody.getPassword());
 
-		User user = new User();
+		UserDto user = new UserDto();
 		user.setEmail(userBody.getEmail());
 		user.setPassword(userBody.getPassword());
 

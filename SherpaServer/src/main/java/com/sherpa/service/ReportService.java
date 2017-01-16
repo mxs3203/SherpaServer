@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Report;
+import com.sherpa.dto.ReportDto;
 
 public interface ReportService {
 
-	void add(Report transientInstance);
+	void add(ReportDto transientInstance);
 
 	void remove(long id);
 
-	Report update(Report detachedInstance);
+	ReportDto update(ReportDto detachedInstance);
 
-	Report findById(long id);
+	ReportDto findById(long id);
 
 }

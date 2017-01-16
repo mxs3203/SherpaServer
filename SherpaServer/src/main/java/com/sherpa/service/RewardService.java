@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Reward;
+import com.sherpa.dto.RewardDto;
 
 public interface RewardService {
 
-	void add(Reward transientInstance);
+	void add(RewardDto transientInstance);
 
 	void remove(long id);
 
-	Reward update(Reward detachedInstance);
+	RewardDto update(RewardDto detachedInstance);
 
-	Reward findById(long id);
+	RewardDto findById(long id);
 
 }

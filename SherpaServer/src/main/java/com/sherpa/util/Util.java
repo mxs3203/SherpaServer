@@ -29,6 +29,7 @@ public class Util {
 
 	/**
 	 * Cast Hibernate Query Results From List (ArrayList) To Set (HashSet)
+	 * Duplicate Values are Not Allowed in Set Collections
 	 */
 	public static <T> Set<T> castSet(Class<? extends T> clazz, Collection<?> collection) {
 		Set<T> resultSet = new HashSet<T>(collection.size());

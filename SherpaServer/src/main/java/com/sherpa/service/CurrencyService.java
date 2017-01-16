@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Currency;
+import com.sherpa.dto.CurrencyDto;
 
 public interface CurrencyService {
 
-	void add(Currency transientInstance);
+	void add(CurrencyDto transientInstance);
 
 	void remove(long id);
 
-	Currency update(Currency detachedInstance);
+	CurrencyDto update(CurrencyDto detachedInstance);
 
-	Currency findById(long id);
+	CurrencyDto findById(long id);
 
 }

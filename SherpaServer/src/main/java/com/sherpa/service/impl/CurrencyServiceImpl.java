@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.CurrencyDao;
+import com.sherpa.dto.CurrencyDto;
 import com.sherpa.model.Currency;
 import com.sherpa.service.CurrencyService;
 
@@ -16,8 +17,8 @@ public class CurrencyServiceImpl implements CurrencyService {
 	private CurrencyDao currencyDao;
 
 	@Override
-	public void add(Currency transientInstance) {
-		currencyDao.persist(transientInstance);
+	public void add(CurrencyDto transientInstance) {
+		currencyDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class CurrencyServiceImpl implements CurrencyService {
 	}
 
 	@Override
-	public Currency update(Currency detachedInstance) {
-		return currencyDao.merge(detachedInstance);
+	public CurrencyDto update(CurrencyDto detachedInstance) {
+		return currencyDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Currency findById(long id) {
-		return currencyDao.findById(Currency.class, id);
+	public CurrencyDto findById(long id) {
+		return currencyDao.findById(Currency.class, id).toDto();
 	}
 
 }

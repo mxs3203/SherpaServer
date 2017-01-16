@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.RatingDao;
+import com.sherpa.dto.RatingDto;
 import com.sherpa.model.Rating;
 import com.sherpa.service.RatingService;
 
@@ -16,8 +17,8 @@ public class RatingServiceImpl implements RatingService {
 	private RatingDao ratingDao;
 
 	@Override
-	public void add(Rating transientInstance) {
-		ratingDao.persist(transientInstance);
+	public void add(RatingDto transientInstance) {
+		ratingDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,12 +27,12 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public Rating update(Rating detachedInstance) {
-		return ratingDao.merge(detachedInstance);
+	public RatingDto update(RatingDto detachedInstance) {
+		return ratingDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Rating findById(long id) {
-		return ratingDao.findById(Rating.class, id);
+	public RatingDto findById(long id) {
+		return ratingDao.findById(Rating.class, id).toDto();
 	}
 }

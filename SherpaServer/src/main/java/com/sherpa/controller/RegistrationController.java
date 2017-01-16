@@ -11,16 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sherpa.dto.RegisterDto;
 import com.sherpa.dto.UserDto;
-import com.sherpa.model.User;
+import com.sherpa.dto.composite.UserLocationDto;
 import com.sherpa.service.UserService;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
-
-	/* TODO! Jel radi ovo sad? */
 
 	@Autowired
 	private UserService userService;
@@ -30,16 +27,17 @@ public class RegistrationController {
 	private UserDto userDto;
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDto> registerUser(@RequestBody RegisterDto request) {
+	public ResponseEntity<UserDto> registerUser(@RequestBody UserLocationDto request) {
 		log.debug("Registering User with Email: '{}' and Password: '{}'", request.getUserDto().getEmail(),
 				request.getUserDto().getPassword());
 
-		User user = request.getUserDto().toModel();
-		user.setLocation(request.getLocationDto().toModel());
-
-		userService.add(user);
-
-		userDto = userService.loginUser(user);
+		/*
+		 * TODO!
+		 * 
+		 * Napisat registration metodu koja prima composite userlocation i
+		 * sprema novi record + provjera dal user s istim emailom vec postoji,
+		 * bla bla
+		 */
 
 		if (userDto == null) {
 			log.debug("User with Email: '{}' and Password: '{}' Not Found!", request.getUserDto().getEmail(),
@@ -50,4 +48,5 @@ public class RegistrationController {
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
 
 	}
+
 }

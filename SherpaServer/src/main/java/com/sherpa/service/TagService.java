@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Tag;
+import com.sherpa.dto.TagDto;
 
 public interface TagService {
 
-	void add(Tag transientInstance);
+	void add(TagDto transientInstance);
 
 	void remove(long id);
 
-	Tag update(Tag detachedInstance);
+	TagDto update(TagDto detachedInstance);
 
-	Tag findById(long id);
+	TagDto findById(long id);
 
 }

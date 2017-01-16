@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Location;
+import com.sherpa.dto.LocationDto;
 
 public interface LocationService {
 
-	void add(Location transientInstance);
+	void add(LocationDto transientInstance);
 
 	void remove(long id);
 
-	Location update(Location detachedInstance);
+	LocationDto update(LocationDto detachedInstance);
 
-	Location findById(long id);
+	LocationDto findById(long id);
 
 }

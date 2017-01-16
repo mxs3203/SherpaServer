@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Experience;
+import com.sherpa.dto.ExperienceDto;
 
 public interface ExperienceService {
 
-	void add(Experience transientInstance);
+	void add(ExperienceDto transientInstance);
 
 	void remove(long id);
 
-	Experience update(Experience detachedInstance);
+	ExperienceDto update(ExperienceDto detachedInstance);
 
-	Experience findById(long id);
+	ExperienceDto findById(long id);
 
 }

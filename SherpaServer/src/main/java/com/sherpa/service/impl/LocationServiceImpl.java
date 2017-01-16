@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.LocationDao;
+import com.sherpa.dto.LocationDto;
 import com.sherpa.model.Location;
 import com.sherpa.service.LocationService;
 
@@ -16,8 +17,8 @@ public class LocationServiceImpl implements LocationService {
 	private LocationDao locationDao;
 
 	@Override
-	public void add(Location transientInstance) {
-		locationDao.persist(transientInstance);
+	public void add(LocationDto transientInstance) {
+		locationDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public Location update(Location detachedInstance) {
-		return locationDao.merge(detachedInstance);
+	public LocationDto update(LocationDto detachedInstance) {
+		return locationDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Location findById(long id) {
-		return locationDao.findById(Location.class, id);
+	public LocationDto findById(long id) {
+		return locationDao.findById(Location.class, id).toDto();
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ImageDao;
+import com.sherpa.dto.ImageDto;
 import com.sherpa.model.Image;
 import com.sherpa.service.ImageService;
 
@@ -16,8 +17,8 @@ public class ImageServiceImpl implements ImageService {
 	private ImageDao imageDao;
 
 	@Override
-	public void add(Image transientInstance) {
-		imageDao.persist(transientInstance);
+	public void add(ImageDto transientInstance) {
+		imageDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Image update(Image detachedInstance) {
-		return imageDao.merge(detachedInstance);
+	public ImageDto update(ImageDto detachedInstance) {
+		return imageDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Image findById(long id) {
-		return imageDao.findById(Image.class, id);
+	public ImageDto findById(long id) {
+		return imageDao.findById(Image.class, id).toDto();
 	}
 
 }

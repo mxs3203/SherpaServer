@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Rating;
+import com.sherpa.dto.RatingDto;
 
 public interface RatingService {
 
-	void add(Rating transientInstance);
+	void add(RatingDto transientInstance);
 
 	void remove(long id);
 
-	Rating update(Rating detachedInstance);
+	RatingDto update(RatingDto detachedInstance);
 
-	Rating findById(long id);
+	RatingDto findById(long id);
 
 }

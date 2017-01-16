@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ReportDao;
+import com.sherpa.dto.ReportDto;
 import com.sherpa.model.Report;
 import com.sherpa.service.ReportService;
 
@@ -16,8 +17,8 @@ public class ReportServiceImpl implements ReportService {
 	private ReportDao reportDao;
 
 	@Override
-	public void add(Report transientInstance) {
-		reportDao.persist(transientInstance);
+	public void add(ReportDto transientInstance) {
+		reportDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,12 +27,12 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Report update(Report detachedInstance) {
-		return reportDao.merge(detachedInstance);
+	public ReportDto update(ReportDto detachedInstance) {
+		return reportDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Report findById(long id) {
-		return reportDao.findById(Report.class, id);
+	public ReportDto findById(long id) {
+		return reportDao.findById(Report.class, id).toDto();
 	}
 }

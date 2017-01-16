@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sherpa.dto.EventLocationDto;
+import com.sherpa.dto.composite.EventLocationDto;
 import com.sherpa.service.EventService;
 
 @Controller
@@ -32,7 +32,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<EventLocationDto>> loginUser(@PathVariable("regionName") String region) {
+	public ResponseEntity<Set<EventLocationDto>> getEventsByRegion(@PathVariable("regionName") String region) {
 		log.debug("Fetching Events in Region: {}", region);
 
 		Set<EventLocationDto> events = eventService.getEventsByRegion(region);
@@ -45,11 +45,11 @@ public class EventController {
 	}
 
 	/* TODO! refactor */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
+	/*@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
 	public ResponseEntity<String> insertEvent(@RequestBody EventLocationDto eventBody) {
 		log.debug("Inserting Event with Name: '{}'", eventBody.getEvent().getName());
 
-		/* TODO! WAT? ovo nevalja, tj. trazi mozganje i refactor */
+		 TODO! WAT? ovo nevalja, tj. trazi mozganje i refactor 
 		eventService.insertEvent(eventBody);
 
 		if (eventBody.getLocation() == null) {
@@ -58,6 +58,6 @@ public class EventController {
 		}
 
 		return new ResponseEntity<String>(HttpStatus.OK);
-	}
+	}*/
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.RewardDao;
+import com.sherpa.dto.RewardDto;
 import com.sherpa.model.Reward;
 import com.sherpa.service.RewardService;
 
@@ -16,8 +17,8 @@ public class RewardServiceImpl implements RewardService {
 	private RewardDao rewardDao;
 
 	@Override
-	public void add(Reward transientInstance) {
-		rewardDao.persist(transientInstance);
+	public void add(RewardDto transientInstance) {
+		rewardDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class RewardServiceImpl implements RewardService {
 	}
 
 	@Override
-	public Reward update(Reward detachedInstance) {
-		return rewardDao.merge(detachedInstance);
+	public RewardDto update(RewardDto detachedInstance) {
+		return rewardDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Reward findById(long id) {
-		return rewardDao.findById(Reward.class, id);
+	public RewardDto findById(long id) {
+		return rewardDao.findById(Reward.class, id).toDto();
 	}
 
 }

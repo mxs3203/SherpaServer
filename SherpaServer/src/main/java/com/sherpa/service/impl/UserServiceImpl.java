@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public void add(User transientInstance) {
-		userDao.persist(transientInstance);
+	public void add(UserDto transientInstance) {
+		userDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto update(User detachedInstance) {
-		return userDao.merge(detachedInstance).toDto();
+	public UserDto update(UserDto detachedInstance) {
+		return userDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto loginUser(User user) {
-		return userDao.findByCredentials(user).toDto();
+	public UserDto loginUser(UserDto user) {
+		return userDao.findByCredentials(user.toModel()).toDto();
 	}
 
 	@Override

@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Achievement;
+import com.sherpa.dto.AchievementDto;
 
 public interface AchievementService {
 
-	void add(Achievement transientInstance);
+	void add(AchievementDto transientInstance);
 
 	void remove(long id);
 
-	Achievement update(Achievement detachedInstance);
+	AchievementDto update(AchievementDto detachedInstance);
 
-	Achievement findById(long id);
+	AchievementDto findById(long id);
 
 }

@@ -1,15 +1,15 @@
 package com.sherpa.service;
 
-import com.sherpa.model.Image;
+import com.sherpa.dto.ImageDto;
 
 public interface ImageService {
 
-	void add(Image transientInstance);
+	void add(ImageDto transientInstance);
 
 	void remove(long id);
 
-	Image update(Image detachedInstance);
+	ImageDto update(ImageDto detachedInstance);
 
-	Image findById(long id);
+	ImageDto findById(long id);
 
 }

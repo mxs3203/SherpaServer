@@ -1,7 +1,5 @@
 package com.sherpa.dao;
 
-import java.util.Set;
-
 import com.sherpa.model.Location;
 
 public interface LocationDao extends GenericDao<Location> {
@@ -13,7 +11,5 @@ public interface LocationDao extends GenericDao<Location> {
 	Location merge(Location detachedInstance);
 
 	Location findById(Class<Location> clazz, long id);
-
-	Set<Location> getByRegion(String region);
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.AchievementDao;
+import com.sherpa.dto.AchievementDto;
 import com.sherpa.model.Achievement;
 import com.sherpa.service.AchievementService;
 
@@ -16,8 +17,8 @@ public class AchievementServiceImpl implements AchievementService {
 	private AchievementDao achievementDao;
 
 	@Override
-	public void add(Achievement transientInstance) {
-		achievementDao.persist(transientInstance);
+	public void add(AchievementDto transientInstance) {
+		achievementDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class AchievementServiceImpl implements AchievementService {
 	}
 
 	@Override
-	public Achievement update(Achievement detachedInstance) {
-		return achievementDao.merge(detachedInstance);
+	public AchievementDto update(AchievementDto detachedInstance) {
+		return achievementDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Achievement findById(long id) {
-		return achievementDao.findById(Achievement.class, id);
+	public AchievementDto findById(long id) {
+		return achievementDao.findById(Achievement.class, id).toDto();
 	}
 
 }

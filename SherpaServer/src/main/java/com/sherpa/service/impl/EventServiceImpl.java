@@ -8,16 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sherpa.dao.CurrencyDao;
 import com.sherpa.dao.EventDao;
-import com.sherpa.dao.LocationDao;
-import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
-import com.sherpa.dto.EventLocationDto;
-import com.sherpa.model.Currency;
+import com.sherpa.dto.composite.EventLocationDto;
 import com.sherpa.model.Event;
 import com.sherpa.model.Location;
-import com.sherpa.model.User;
 import com.sherpa.service.EventService;
 
 @Service
@@ -27,18 +22,9 @@ public class EventServiceImpl implements EventService {
 	@Autowired
 	private EventDao eventDao;
 
-	@Autowired
-	private LocationDao locationDao;
-
-	@Autowired
-	private UserDao userDao;
-
-	@Autowired
-	private CurrencyDao currencyDao;
-
 	@Override
-	public void add(Event transientInstance) {
-		eventDao.persist(transientInstance);
+	public void add(EventDto transientInstance) {
+		eventDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -47,8 +33,8 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public EventDto update(Event detachedInstance) {
-		return eventDao.merge(detachedInstance).toDto();
+	public EventDto update(EventDto detachedInstance) {
+		return eventDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
@@ -56,55 +42,55 @@ public class EventServiceImpl implements EventService {
 		return eventDao.findById(Event.class, id).toDto();
 	}
 
-	/* TODO! refactor za novi objekt */
+	/*
+	 * TODO! refactor, mozganje! da li ic po regiji ili po lat + long + radius?
+	 */
 	@Override
 	public Set<EventLocationDto> getEventsByRegion(String region) {
 
 		Set<EventLocationDto> events = new HashSet<EventLocationDto>();
-		Set<Location> locations = locationDao.getByRegion(region);
+		Event event;
+		Location locationStart;
+		EventLocationDto eventLocDto = new EventLocationDto();
 
-		for (Location loc : locations) {
+		Iterator<Event> iter = eventDao.getByRegion(region).iterator();
 
-			Set<Event> eventsForLoc = loc.getEventsForStartLocationId();
-			Iterator<Event> iter = eventsForLoc.iterator();
+		while (iter.hasNext()) {
 
-			/* TODO! */
-			while (iter.hasNext()) {
-				Event event = (Event) iter.next();
-				if (event != null && event.getIsFinished() == false) {
-					EventLocationDto eventLocation = new EventLocationDto();
+			event = iter.next();
+			locationStart = event.getLocationByStartLocationId();
 
-					eventLocation.setEvent(event.toDto());
-					eventLocation.setLocation(loc.toDto());
+			eventLocDto.setEvent(event.toDto());
+			eventLocDto.setLocationStart(locationStart.toDto());
 
-					events.add(eventLocation);
-				}
-			}
+			events.add(eventLocDto);
 		}
+
 		return events;
+
 	}
 
 	/* TODO! refactor */
 	@Override
 	public void insertEvent(EventLocationDto eld) {
 
-		/* TODO! */
-		Location location = eld.getLocation().toModel();
-		Event event = eld.getEvent().toModel();
-
-		Currency currency = currencyDao.findByCurrencyIso(eld.getCurrency());
-		event.setCurrency(currency);
-
-		event.setIsFinished(false);
-
-		User user = userDao.findById(User.class, eld.getEvent().getUserId());
-
-		locationDao.persist(location);
-
-		event.setLocationByStartLocationId(location);
-		event.setUser(user);
-
-		eventDao.persist(event);
+		/*
+		 * TODO! Location location = eld.getLocation().toModel(); Event event =
+		 * eld.getEvent().toModel();
+		 * 
+		 * Currency currency = currencyDao.findByCurrencyIso(eld.getCurrency());
+		 * event.setCurrency(currency);
+		 * 
+		 * event.setIsFinished(false);
+		 * 
+		 * User user = userDao.findById(User.class, eld.getEvent().getUserId());
+		 * 
+		 * locationDao.persist(location);
+		 * 
+		 * event.setLocationByStartLocationId(location); event.setUser(user);
+		 * 
+		 * eventDao.persist(event);
+		 */
 	}
 
 }

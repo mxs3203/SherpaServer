@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.ExperienceDao;
+import com.sherpa.dto.ExperienceDto;
 import com.sherpa.model.Experience;
 import com.sherpa.service.ExperienceService;
 
@@ -16,8 +17,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao experienceDao;
 
 	@Override
-	public void add(Experience transientInstance) {
-		experienceDao.persist(transientInstance);
+	public void add(ExperienceDto transientInstance) {
+		experienceDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public Experience update(Experience detachedInstance) {
-		return experienceDao.merge(detachedInstance);
+	public ExperienceDto update(ExperienceDto detachedInstance) {
+		return experienceDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Experience findById(long id) {
-		return experienceDao.findById(Experience.class, id);
+	public ExperienceDto findById(long id) {
+		return experienceDao.findById(Experience.class, id).toDto();
 	}
 
 }

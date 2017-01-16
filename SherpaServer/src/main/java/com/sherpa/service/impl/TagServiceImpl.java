@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.TagDao;
+import com.sherpa.dto.TagDto;
 import com.sherpa.model.Tag;
 import com.sherpa.service.TagService;
 
@@ -16,8 +17,8 @@ public class TagServiceImpl implements TagService {
 	private TagDao tagDao;
 
 	@Override
-	public void add(Tag transientInstance) {
-		tagDao.persist(transientInstance);
+	public void add(TagDto transientInstance) {
+		tagDao.persist(transientInstance.toModel());
 	}
 
 	@Override
@@ -26,13 +27,13 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public Tag update(Tag detachedInstance) {
-		return tagDao.merge(detachedInstance);
+	public TagDto update(TagDto detachedInstance) {
+		return tagDao.merge(detachedInstance.toModel()).toDto();
 	}
 
 	@Override
-	public Tag findById(long id) {
-		return tagDao.findById(Tag.class, id);
+	public TagDto findById(long id) {
+		return tagDao.findById(Tag.class, id).toDto();
 	}
 
 }
