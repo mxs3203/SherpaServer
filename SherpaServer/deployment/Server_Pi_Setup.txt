@@ -1,5 +1,5 @@
 
---Ubuntu
+--Ubuntu (Mate)
 
 --Kernel Update
 rpi-update
@@ -8,12 +8,21 @@ rpi-update
 --Provjerit Locale Servera: (Ako su sjebani)
 locale
 
+
+AKO FALE DODAT IH:
+
+nano /etc/environment
+
+LANG="en_US.UTF-8"
+LANGUAGE="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+
+reboot
+
+ONDA:
 locale-gen "en_US.UTF-8"
 
 dpkg-reconfigure locales
-
-(AKO KASNIJE I DALJE JEBE)
-export LC_ALL="en_US.UTF-8"
 
 reboot
 
@@ -25,7 +34,7 @@ graphical disable
 
 
 -Resize File System:
-df -h ; || ; lsblk (DISK SIZE?)
+df -h
 
 sudo fdisk /dev/mmcblk0
 
@@ -33,7 +42,9 @@ d, 2, n, p, 2, enter, enter, w; reboot
 
 sudo resize2fs /dev/mmcblk0p2
 
-df -h ; || ; lsblk (DISK SIZE?)
+reboot
+
+df -h
 
 
 -Update:
@@ -57,12 +68,6 @@ apt-get install openjdk-8-jdk-headless (ili openjdk-8-jdk)
 
 java -version
 
-FOLDER ZA HEADLESS => (java-8-openjdk-armhf ?)
-
-export JAVA_HOME=/usr/lib/jvm/<PATH DO FOLDERA>
-
-ILI
-
 nano /etc/environment
 
 JAVA_HOME="/usr/lib/jvm/<PATH DO FOLDERA>"
@@ -81,10 +86,6 @@ wget <URL DO TOMCAT DOWNLOAD LINKA>
 tar -zxpvf <TOMCAT ZIP FILE NAME>
 
 mv <TOMCAT FOLDER NAME> tomcat9
-
-export CATALINA_HOME=/opt/tomcat9
-
-ILI
 
 nano /etc/environment
 
