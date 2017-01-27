@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
+import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.UserDto;
+import com.sherpa.dto.composite.UserLocationDto;
 import com.sherpa.model.Event;
 import com.sherpa.model.User;
 import com.sherpa.service.UserService;
@@ -43,8 +45,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto loginUser(UserDto user) {
-		return userDao.findByCredentials(user.toModel()).toDto();
+	public UserDto loginUser(UserDto userDto) {
+		return userDao.findByCredentials(userDto.toModel()).toDto();
 	}
 
 	@Override
@@ -99,6 +101,22 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return users;
+	}
+
+	@Override
+	public UserDto registerUser(UserLocationDto userLocationDto) {
+
+		UserDto userDto = userLocationDto.getUserDto();
+		LocationDto locationDto = userLocationDto.getLocationDto();
+
+		/*
+		 * TODO! mozgat. pretvorit locationDto u model i spremit ga u user
+		 * model? da li ce to persistati u obe tablice?
+		 */
+
+		userDao.persist(userDto.toModel());
+
+		return null;
 	}
 
 }

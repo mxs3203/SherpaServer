@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public AdminDto loginAdmin(AdminDto adminDto) {
-		return adminDao.findByCredentials(adminDto.getUsername(), adminDto.getPassword()).toDto();
+		return adminDao.findByCredentials(adminDto.toModel()).toDto();
 	}
 
 }

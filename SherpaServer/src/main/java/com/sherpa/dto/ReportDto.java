@@ -1,11 +1,14 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Event;
 import com.sherpa.model.Report;
+import com.sherpa.model.User;
+import com.sherpa.util.Util;
 
 public class ReportDto {
 
 	private long reportId;
-	private long event;
+	private long eventId;
 	private long userByUserId;
 	private long userBySherpaId;
 	private String date;
@@ -23,11 +26,11 @@ public class ReportDto {
 	}
 
 	public long getEvent() {
-		return event;
+		return eventId;
 	}
 
-	public void setEvent(long event) {
-		this.event = event;
+	public void setEvent(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public long getUserByUserId() {
@@ -62,9 +65,23 @@ public class ReportDto {
 		this.comment = comment;
 	}
 
-	/* TODO! */
 	public Report toModel() {
 		Report report = new Report();
+
+		report.setReportId(reportId);
+
+		Event event = new Event(eventId);
+		report.setEvent(event);
+
+		User user = new User(userByUserId);
+		report.setUserBySherpaId(user);
+
+		User sherpa = new User(userBySherpaId);
+		report.setUserBySherpaId(sherpa);
+
+		report.setDate(Util.getDateJoda(date));
+		report.setComment(comment);
+
 		return report;
 	}
 

@@ -14,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.sherpa.dto.UserDto;
 
 @Entity
@@ -50,6 +47,10 @@ public class User implements java.io.Serializable {
 	private Set<Event> events = new HashSet<Event>(0);
 
 	public User() {
+	}
+
+	public User(long userId) {
+		this.userId = userId;
 	}
 
 	@Id
@@ -254,7 +255,6 @@ public class User implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Fetch(FetchMode.JOIN)
 	public Set<Event> getEvents() {
 		return this.events;
 	}

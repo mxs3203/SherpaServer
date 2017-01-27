@@ -39,22 +39,19 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 		return super.findById(clazz, id);
 	}
 
-	public Admin findByCredentials(String username, String password) {
-		log.debug("getting Admin instance with Username: '{}' and Password: '{}'", username, password);
+	public Admin findByCredentials(Admin admin) {
+		log.debug("getting Admin instance with Username: '{}' and Password: '{}'", admin.getUsername(),
+				admin.getPassword());
 		try {
 			Query query = entityManager
 					.createQuery("FROM Admin a WHERE a.username = :username AND a.password = :password")
-					.setParameter("username", username).setParameter("password", password);
-
-			Admin admin = (Admin) query.getSingleResult();
-
+					.setParameter("username", admin.getUsername()).setParameter("password", admin.getPassword());
 			log.debug("get successful");
-			return admin;
+			return (Admin) query.getSingleResult();
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
-
 	}
 
 }

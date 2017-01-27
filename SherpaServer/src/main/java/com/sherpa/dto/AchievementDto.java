@@ -46,9 +46,14 @@ public class AchievementDto {
 		this.requirement = requirement;
 	}
 
-	/* TODO! */
 	public Achievement toModel() {
 		Achievement achievement = new Achievement();
+
+		achievement.setAchievementId(achievementId);
+		achievement.setImageUrl(imageUrl);
+		achievement.setDescription(description);
+		achievement.setRequirement(requirement);
+
 		return achievement;
 	}
 

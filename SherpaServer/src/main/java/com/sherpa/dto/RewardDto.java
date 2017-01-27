@@ -1,11 +1,12 @@
 package com.sherpa.dto;
 
 import com.sherpa.model.Reward;
+import com.sherpa.model.User;
 
 public class RewardDto {
 
 	private long rewardId;
-	private long user;
+	private long userId;
 	private int type;
 	private String description;
 	private String imageUrl;
@@ -22,11 +23,11 @@ public class RewardDto {
 	}
 
 	public long getUser() {
-		return user;
+		return userId;
 	}
 
-	public void setUser(long user) {
-		this.user = user;
+	public void setUser(long userId) {
+		this.userId = userId;
 	}
 
 	public int getType() {
@@ -53,9 +54,17 @@ public class RewardDto {
 		this.imageUrl = imageUrl;
 	}
 
-	/* TODO! */
 	public Reward toModel() {
 		Reward reward = new Reward();
+		reward.setRewardId(rewardId);
+
+		User user = new User(userId);
+		reward.setUser(user);
+
+		reward.setType(type);
+		reward.setDescription(description);
+		reward.setImageUrl(imageUrl);
+
 		return reward;
 	}
 

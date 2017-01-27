@@ -27,6 +27,10 @@ public class Reward implements java.io.Serializable {
 	public Reward() {
 	}
 
+	public Reward(long rewardId) {
+		this.rewardId = rewardId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "reward_id", unique = true, nullable = false)

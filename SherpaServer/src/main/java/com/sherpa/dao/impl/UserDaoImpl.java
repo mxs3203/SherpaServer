@@ -45,15 +45,16 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public User findByCredentials(User p_user) {
-		log.debug("getting User instance with email: '{}' and password: '{}'", p_user.getEmail(), p_user.getPassword());
+	public User findByCredentials(User user) {
+		log.debug("getting User instance with email: '{}' and password: '{}'", user.getEmail(), user.getPassword());
 		try {
 			Query query = entityManager.createQuery("FROM User u WHERE u.email = :email AND u.password = :password")
-					.setParameter("email", p_user.getEmail()).setParameter("password", p_user.getEmail());
+					.setParameter("email", user.getEmail()).setParameter("password", user.getPassword());
 			log.debug("get successful");
 			return (User) query.getSingleResult();
 		} catch (NoResultException nre) {
-			return null;
+			log.error("get failed", nre);
+			throw nre;
 		}
 	}
 

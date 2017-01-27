@@ -32,6 +32,10 @@ public class Report implements java.io.Serializable {
 	public Report() {
 	}
 
+	public Report(long reportId) {
+		this.reportId = reportId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "report_id", unique = true, nullable = false)

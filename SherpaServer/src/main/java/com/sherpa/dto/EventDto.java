@@ -4,12 +4,16 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sherpa.model.Currency;
 import com.sherpa.model.Event;
+import com.sherpa.model.Location;
+import com.sherpa.model.User;
+import com.sherpa.util.Util;
 
 public class EventDto {
 
 	private long eventId;
-	private long currency;
+	private long currencyId;
 	private long locationByEndLocationId;
 	private long locationByStartLocationId;
 	private long userId;
@@ -38,11 +42,11 @@ public class EventDto {
 	}
 
 	public long getCurrency() {
-		return currency;
+		return currencyId;
 	}
 
-	public void setCurrency(long currency) {
-		this.currency = currency;
+	public void setCurrency(long currencyId) {
+		this.currencyId = currencyId;
 	}
 
 	public long getLocationByEndLocationId() {
@@ -157,9 +161,34 @@ public class EventDto {
 		this.images = images;
 	}
 
-	/* TODO! Mozgat o ovom */
 	public Event toModel() {
 		Event event = new Event();
+
+		event.setEventId(eventId);
+
+		Currency currency = new Currency(currencyId);
+		event.setCurrency(currency);
+
+		Location endLoc = new Location(locationByEndLocationId);
+		event.setLocationByEndLocationId(endLoc);
+
+		Location startLoc = new Location(locationByStartLocationId);
+		event.setLocationByStartLocationId(startLoc);
+
+		User user = new User(userId);
+		event.setUser(user);
+		
+		event.setName(name);
+		event.setDescription(description);
+		event.setPrice(price);
+		event.setCumulativeRating(cumulativeRating);
+		event.setDateCreated(Util.getDateJoda(dateCreated));
+		event.setStartTime(Util.getDateJoda(startTime));
+		event.setEndTime(Util.getDateJoda(endTime));
+		event.setIsFinished(isFinished);
+		
+		/* TODO! Setovi */
+
 		return event;
 	}
 

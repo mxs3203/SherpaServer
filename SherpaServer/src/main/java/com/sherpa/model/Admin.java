@@ -23,6 +23,10 @@ public class Admin implements java.io.Serializable {
 	public Admin() {
 	}
 
+	public Admin(long adminId) {
+		this.adminId = adminId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "admin_id", unique = true, nullable = false)

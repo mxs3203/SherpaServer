@@ -12,6 +12,6 @@ public interface AdminDao extends GenericDao<Admin> {
 
 	Admin findById(Class<Admin> clazz, long id);
 
-	Admin findByCredentials(String username, String password);
+	Admin findByCredentials(Admin admin);
 
 }

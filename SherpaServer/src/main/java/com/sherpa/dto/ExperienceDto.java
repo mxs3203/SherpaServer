@@ -3,11 +3,12 @@ package com.sherpa.dto;
 import java.math.BigDecimal;
 
 import com.sherpa.model.Experience;
+import com.sherpa.model.User;
 
 public class ExperienceDto {
 
 	private long experienceId;
-	private long user;
+	private long userId;
 	private int experience;
 	private BigDecimal cumulativeRating;
 
@@ -23,11 +24,11 @@ public class ExperienceDto {
 	}
 
 	public long getUser() {
-		return user;
+		return userId;
 	}
 
-	public void setUser(long user) {
-		this.user = user;
+	public void setUser(long userId) {
+		this.userId = userId;
 	}
 
 	public int getExperience() {
@@ -46,9 +47,17 @@ public class ExperienceDto {
 		this.cumulativeRating = cumulativeRating;
 	}
 
-	/* TODO! */
 	public Experience toModel() {
 		Experience experience = new Experience();
+
+		experience.setExperienceId(experienceId);
+
+		User user = new User(userId);
+		experience.setUser(user);
+
+		experience.setExperience(this.experience);
+		experience.setCumulativeRating(cumulativeRating);
+
 		return experience;
 	}
 

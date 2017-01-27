@@ -12,9 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.sherpa.dto.LocationDto;
 
 @Entity
@@ -32,6 +29,10 @@ public class Location implements java.io.Serializable {
 	private Set<User> users = new HashSet<User>(0);
 
 	public Location() {
+	}
+
+	public Location(long locationId) {
+		this.locationId = locationId;
 	}
 
 	@Id
@@ -91,7 +92,6 @@ public class Location implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
-	@Fetch(FetchMode.JOIN)
 	public Set<User> getUsers() {
 		return this.users;
 	}

@@ -76,9 +76,16 @@ public class LocationDto {
 		this.users = users;
 	}
 
-	/* TODO! */
 	public Location toModel() {
 		Location location = new Location();
+
+		location.setLocationId(locationId);
+		location.setLongitude(longitude);
+		location.setLatitude(latitude);
+		location.setRegion(region);
+
+		/* TODO! SETOVI use, event, ... */
+
 		return location;
 	}
 

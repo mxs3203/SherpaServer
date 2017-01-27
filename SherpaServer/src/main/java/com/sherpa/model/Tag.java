@@ -18,12 +18,16 @@ import com.sherpa.dto.TagDto;
 public class Tag implements java.io.Serializable {
 
 	private static final long serialVersionUID = 6040534604155616135L;
-	
+
 	private long tagId;
 	private String tagName;
 	private Set<EventTagCross> eventTagCrosses = new HashSet<EventTagCross>(0);
 
 	public Tag() {
+	}
+
+	public Tag(long tagId) {
+		this.tagId = tagId;
 	}
 
 	@Id

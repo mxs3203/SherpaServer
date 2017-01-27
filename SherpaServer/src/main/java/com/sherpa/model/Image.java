@@ -25,6 +25,10 @@ public class Image implements java.io.Serializable {
 	public Image() {
 	}
 
+	public Image(long imageId) {
+		this.imageId = imageId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "image_id", unique = true, nullable = false)

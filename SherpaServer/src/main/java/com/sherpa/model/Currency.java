@@ -28,6 +28,10 @@ public class Currency implements java.io.Serializable {
 	public Currency() {
 	}
 
+	public Currency(long currencyId) {
+		this.currencyId = currencyId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "currency_id", unique = true, nullable = false)

@@ -29,6 +29,10 @@ public class Achievement implements java.io.Serializable {
 	public Achievement() {
 	}
 
+	public Achievement(long achievementId) {
+		this.achievementId = achievementId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "achievement_id", unique = true, nullable = false)

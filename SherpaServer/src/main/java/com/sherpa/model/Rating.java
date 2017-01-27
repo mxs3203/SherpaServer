@@ -32,6 +32,10 @@ public class Rating implements java.io.Serializable {
 	public Rating() {
 	}
 
+	public Rating(long ratingId) {
+		this.ratingId = ratingId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rating_id", unique = true, nullable = false)

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
+import com.sherpa.dto.composite.UserLocationDto;
 
 public interface UserService {
 
@@ -24,5 +25,7 @@ public interface UserService {
 	Set<UserDto> getSherpasByRegion(String region);
 
 	Set<UserDto> getSherpasByRatingInRegion(String region);
+
+	UserDto registerUser(UserLocationDto userLocationDto);
 
 }

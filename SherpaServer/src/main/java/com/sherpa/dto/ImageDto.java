@@ -1,11 +1,12 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Event;
 import com.sherpa.model.Image;
 
 public class ImageDto {
 
 	private long imageId;
-	private long event;
+	private long eventId;
 	private String imageUrl;
 
 	public ImageDto() {
@@ -20,11 +21,11 @@ public class ImageDto {
 	}
 
 	public long getEvent() {
-		return event;
+		return eventId;
 	}
 
-	public void setEvent(long event) {
-		this.event = event;
+	public void setEvent(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public String getImageUrl() {
@@ -35,9 +36,16 @@ public class ImageDto {
 		this.imageUrl = imageUrl;
 	}
 
-	/* TODO! */
 	public Image toModel() {
 		Image image = new Image();
+
+		image.setImageId(imageId);
+
+		Event event = new Event(eventId);
+		image.setEvent(event);
+
+		image.setImageUrl(imageUrl);
+
 		return image;
 	}
 

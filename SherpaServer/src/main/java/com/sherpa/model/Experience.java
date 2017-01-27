@@ -28,6 +28,10 @@ public class Experience implements java.io.Serializable {
 	public Experience() {
 	}
 
+	public Experience(long experienceId) {
+		this.experienceId = experienceId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "experience_id", unique = true, nullable = false)

@@ -47,9 +47,15 @@ public class CurrencyDto {
 		this.events = events;
 	}
 
-	/* TODO! */
 	public Currency toModel() {
 		Currency currency = new Currency();
+		
+		currency.setCurrencyId(currencyId);
+		currency.setIso(iso);
+		currency.setName(name);
+		
+		/* TODO! Setovi */
+		
 		return currency;
 	}
 

@@ -48,6 +48,10 @@ public class Event implements java.io.Serializable {
 	public Event() {
 	}
 
+	public Event(long eventId) {
+		this.eventId = eventId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "event_id", unique = true, nullable = false)

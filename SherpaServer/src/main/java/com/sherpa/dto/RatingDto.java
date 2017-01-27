@@ -1,12 +1,15 @@
 package com.sherpa.dto;
 
+import com.sherpa.model.Event;
 import com.sherpa.model.Rating;
+import com.sherpa.model.User;
+import com.sherpa.util.Util;
 
 public class RatingDto {
 
 	private long ratingId;
-	private long event;
-	private long user;
+	private long eventId;
+	private long userId;
 	private String date;
 	private String comment;
 	private int rating;
@@ -23,19 +26,19 @@ public class RatingDto {
 	}
 
 	public long getEvent() {
-		return event;
+		return eventId;
 	}
 
-	public void setEvent(long event) {
-		this.event = event;
+	public void setEvent(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public long getUser() {
-		return user;
+		return userId;
 	}
 
-	public void setUser(long user) {
-		this.user = user;
+	public void setUser(long userId) {
+		this.userId = userId;
 	}
 
 	public String getDate() {
@@ -62,9 +65,21 @@ public class RatingDto {
 		this.rating = rating;
 	}
 
-	/* TODO! */
 	public Rating toModel() {
 		Rating rating = new Rating();
+
+		rating.setRatingId(ratingId);
+
+		User user = new User(userId);
+		rating.setUser(user);
+
+		Event event = new Event(eventId);
+		rating.setEvent(event);
+
+		rating.setDate(Util.getDateJoda(date));
+		rating.setComment(comment);
+		rating.setRating(this.rating);
+
 		return rating;
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.EventDto;
 import com.sherpa.dto.UserDto;
+import com.sherpa.dto.composite.UserLocationDto;
 import com.sherpa.service.UserService;
 
 @Controller
@@ -27,7 +28,7 @@ public class UserController {
 	 * 
 	 * Refactor:
 	 * 
-	 * REFACTOR EVENT i REGISTRATION KONTROLERA!
+	 * REFACTOR EVENT KONTROLERA!
 	 * 
 	 * Kontrolera, Servisa i DAO-a
 	 * 
@@ -46,14 +47,7 @@ public class UserController {
 	 * entityManager.remove(entityManager.getReference(**clazz, **id));?
 	 * 
 	 * 
-	 * System.out-ove pocistit, ostavit samo najbitnije i prebacit ih u Logger
-	 * 
-	 * 
 	 * Ovo isto izmozgat:
-	 * 
-	 * 
-	 * U ServiceImpl-ovima direkt zvat genericDao.x();?
-	 * 
 	 * 
 	 * U kontroleru se barata samo sa view objektima (DTO). Oni se salju u
 	 * service di se pretvore u model / entity, prije nego ih posaljes u DAO (i
@@ -65,16 +59,14 @@ public class UserController {
 	 * 
 	 * DAO (Entity) -> Service (Entity -> DTO) -> Controller (DTO)
 	 * 
-	 * E sad pitanje je da li je bolje drzati reference u Service-u kao DTO ili
-	 * kao Model? Ako je DTO onda cemo morat rucno zvat querye koji su van
-	 * transakcije, a ako su ostali kao Model s nested Proxy objektima, onda bi
-	 * se iduci query trebao izvrsiti u istoj transakciji (zato
-	 * ima @Transactional na klasi service)
-	 * 
-	 * 
 	 * Vecina provjera se obavlja u servisu (npr. is null i ta sranja). DAO bi
 	 * onda trebao imat sto vise metoda koje obavljaju sta god treba u sto
-	 * manjem broju querya, zato je ovo gore "bitno"
+	 * manjem broju querya
+	 * 
+	 * 
+	 * 
+	 * ResponseEntity promjenit u odgovarajuci, ex: result == null ->
+	 * httpStatus.no_result
 	 * 
 	 */
 
@@ -107,11 +99,7 @@ public class UserController {
 	public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userBody) {
 		log.debug("Fetching User with Email: '{}' and Password: '{}'", userBody.getEmail(), userBody.getPassword());
 
-		UserDto user = new UserDto();
-		user.setEmail(userBody.getEmail());
-		user.setPassword(userBody.getPassword());
-
-		UserDto userDto = userService.loginUser(user);
+		UserDto userDto = userService.loginUser(userBody);
 
 		if (userDto == null) {
 			log.debug("User with Email: '{}' and Password: '{}' Not Found!", userBody.getEmail(),
@@ -179,6 +167,31 @@ public class UserController {
 			return new ResponseEntity<Set<UserDto>>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Set<UserDto>>(sherpas, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/user/registration", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserDto> registerUser(@RequestBody UserLocationDto requestBody) {
+		log.debug("Registering User with Email: '{}' and Password: '{}'", requestBody.getUserDto().getEmail(),
+				requestBody.getUserDto().getPassword());
+
+		/*
+		 * TODO!
+		 * 
+		 * Napisat registration metodu koja prima composite userlocation i
+		 * sprema novi record + provjera dal user s istim emailom vec postoji,
+		 * bla bla
+		 */
+
+		UserDto userDto = userService.registerUser(requestBody);
+
+		if (userDto == null) {
+			log.debug("User with Email: '{}' and Password: '{}' Not Found!", requestBody.getUserDto().getEmail(),
+					requestBody.getUserDto().getPassword());
+			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
 
 	}
 

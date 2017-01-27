@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,7 +31,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AdminDto> getAdmin(@PathVariable("id") long userId) {
-
 		log.debug("Fetching User with ID: {}", userId);
 
 		AdminDto adminDto = adminService.findById(userId);
@@ -43,21 +43,19 @@ public class AdminController {
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/admin/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AdminDto> loginAdmin(@PathVariable("username") String username,
-			@PathVariable("password") String password) {
-		log.debug("Fetching Admin with Username: '{}' and Password: '{}'", username, password);
+	@RequestMapping(value = "/admin/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AdminDto> loginAdmin(@RequestBody AdminDto adminBody) {
+		log.debug("Fetching Admin with Username: '{}' and Password: '{}'", adminBody.getUsername(),
+				adminBody.getPassword());
 
-		AdminDto adminDto = new AdminDto();
-		adminDto.setUsername(username);
-		adminDto.setPassword(password);
-
-		adminDto = adminService.loginAdmin(adminDto);
+		AdminDto adminDto = adminService.loginAdmin(adminBody);
 
 		if (adminDto == null) {
-			log.debug("Admin with Username: '{}' and Password: '{}' Not Found!", username, password);
+			log.debug("Admin with Username: '{}' and Password: '{}' Not Found!", adminBody.getUsername(),
+					adminBody.getPassword());
 			return new ResponseEntity<AdminDto>(HttpStatus.BAD_REQUEST);
 		}
+
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
 	}
 

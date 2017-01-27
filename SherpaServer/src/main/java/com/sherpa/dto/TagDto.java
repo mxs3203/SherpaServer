@@ -26,9 +26,10 @@ public class TagDto {
 		this.tagName = tagName;
 	}
 
-	/* TODO! */
 	public Tag toModel() {
 		Tag tag = new Tag();
+		tag.setTagId(tagId);
+		tag.setTagName(tagName);
 		return tag;
 	}
 

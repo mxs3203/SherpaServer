@@ -3,12 +3,13 @@ package com.sherpa.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sherpa.model.Location;
 import com.sherpa.model.User;
 
 public class UserDto {
 
 	private long userId;
-	private long location;
+	private long locationId;
 	private String email;
 	private String password;
 	private String fullName;
@@ -42,11 +43,11 @@ public class UserDto {
 	}
 
 	public long getLocation() {
-		return location;
+		return locationId;
 	}
 
 	public void setLocation(long location) {
-		this.location = location;
+		this.locationId = location;
 	}
 
 	public String getEmail() {
@@ -201,9 +202,30 @@ public class UserDto {
 		this.events = events;
 	}
 
-	/* TODO! */
 	public User toModel() {
 		User user = new User();
+
+		user.setUserId(userId);
+
+		Location location = new Location(locationId);
+		user.setLocation(location);
+
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setFullName(fullName);
+		user.setGender(gender);
+		user.setProfileImageUrl(profileImageUrl);
+		user.setBackgroundImageUrl(backgroundImageUrl);
+		user.setDescription(description);
+		user.setCountry(country);
+		user.setHometown(hometown);
+		user.setAddress(address);
+		user.setTelephone(telephone);
+		user.setIsSherpa(isSherpa);
+		user.setIsReported(isReported);
+
+		/* TODO! Setovi */
+
 		return user;
 	}
 

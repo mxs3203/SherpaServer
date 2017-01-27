@@ -10,11 +10,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class Util {
 
-	/*
-	 * private final static DateTimeFormatter dtfDate =
-	 * DateTimeFormat.forPattern(Constants.TIME_FORMAT_WITHOUT_TIME);
-	 */
-
 	private final static DateTimeFormatter dtfTime = DateTimeFormat.forPattern(Constants.TIME_FORMAT_WITH_TIME);
 
 	public static String getDateString(DateTime date) {
