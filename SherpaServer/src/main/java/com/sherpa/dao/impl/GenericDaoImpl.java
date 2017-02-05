@@ -80,11 +80,11 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
+	/* TODO! named parameter u FROM :clazz? */
 	@Override
 	public Set<T> getAll(final Class<T> clazz) {
 		log.debug("getting all instances of model: {}", clazz.getName());
-		return Util.castSet(clazz,
-				entityManager.createQuery("FROM " + clazz + " i WHERE i.deleted = 0").getResultList());
+		return Util.castSet(clazz, entityManager.createQuery("FROM " + clazz.getName()).getResultList());
 	}
 
 }
