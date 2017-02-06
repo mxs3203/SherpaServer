@@ -4,13 +4,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.persistence.EntityExistsException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
-import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.UserDto;
 import com.sherpa.dto.composite.UserLocationDto;
 import com.sherpa.model.Event;
@@ -106,17 +107,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto registerUser(UserLocationDto userLocationDto) {
 
-		UserDto userDto = userLocationDto.getUserDto();
-		LocationDto locationDto = userLocationDto.getLocationDto();
+		User user = userLocationDto.getUserDto().toModel();
+		user.setLocation(userLocationDto.getLocationDto().toModel());
 
 		/*
 		 * TODO! mozgat. pretvorit locationDto u model i spremit ga u user
 		 * model? da li ce to persistati u obe tablice?
 		 */
 
-		userDao.persist(userDto.toModel());
+		try {
+			userDao.persist(user);
+		} catch (EntityExistsException e) {
+			e.printStackTrace();
+		}
 
-		return null;
+		return userDao.findByCredentials(user).toDto();
 	}
 
 }
