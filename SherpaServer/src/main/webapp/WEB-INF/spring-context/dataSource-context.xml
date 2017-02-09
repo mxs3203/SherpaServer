@@ -15,7 +15,7 @@
 	<context:component-scan base-package="com.sherpa.service" />
 
 	<!-- DataSource - JNDI -->
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/sherpaServer" />
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/SherpaServer" />
 
 	<!-- DataSource - Local / Direct -->
 	<!-- <bean id="dataSource"

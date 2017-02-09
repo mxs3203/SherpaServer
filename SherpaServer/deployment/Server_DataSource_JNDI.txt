@@ -9,7 +9,7 @@ In Eclipse, Edit Tomcat's:
 
 CONTEXT.XML (Inside <Context> Tag)
 
-<ResourceLink name="jdbc/sherpaServer" global="jdbc/sherpaServer" auth="Container" type="javax.sql.DataSource" />
+<ResourceLink name="jdbc/SherpaServer" global="jdbc/SherpaServer" auth="Container" type="javax.sql.DataSource" />
 
 
 
@@ -21,7 +21,7 @@ INFO: This Config Uses Tomcat DBCP2, Commented lines are Alternate Attributes fo
 	maxActive="100"
 	maxWait="10000"
 -->
-<Resource name="jdbc/sherpaServer"
+<Resource name="jdbc/SherpaServer"
 	auth="Container"
 	type="javax.sql.DataSource"
 	driverClassName="com.mysql.jdbc.Driver"
