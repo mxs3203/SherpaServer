@@ -1,10 +1,10 @@
 
-Tomcat Server Configuration for JNDI DataSource
+Tomcat Server Configuration for JNDI DataSource:
 
-<Tomcat Directory>/lib should have JDBC Driver .jar (MySQL Connector/J)
 
-In Eclipse, Edit Tomcat's:
+Unarchive ContainerDataSourceLibs.zip to <Tomcat Directory>/lib
 
+In Eclipse (for local development), Edit Tomcat's:
 
 
 CONTEXT.XML (Inside <Context> Tag)
@@ -12,12 +12,14 @@ CONTEXT.XML (Inside <Context> Tag)
 <ResourceLink name="jdbc/SherpaServer" global="jdbc/SherpaServer" auth="Container" type="javax.sql.DataSource" />
 
 
-
 SERVER.XML (Inside <GlobalNamingResources> Tag)
 
 INFO: This Config Uses Tomcat DBCP2, Commented lines are Alternate Attributes for Tomcat JDBC Connection Pool
-	
+
+=================== OLD: Tomcat JNDI
+
 <!--
+	<!-- Tomcat JDBC Connection Pool -->
 	maxActive="100"
 	maxWait="10000"
 -->
@@ -35,3 +37,51 @@ INFO: This Config Uses Tomcat DBCP2, Commented lines are Alternate Attributes fo
 	maxIdle="20"
 	minIdle="5"
 />
+
+
+
+=================== Hikari JNDI
+
+<Resource name="jdbc/SherpaServer" auth="Container"
+	factory="com.zaxxer.hikari.HikariJNDIFactory"
+	type="javax.sql.DataSource"
+	
+	driverClassName="com.mysql.jdbc.Driver"
+	jdbcUrl="jdbc:mysql://localhost:3306/sherpa?useSSL=false"
+	
+	dataSource.user="root"
+	dataSource.password="root"
+	
+	dataSource.implicitCachingEnabled="true"
+	minimumIdle="5"
+	maximumPoolSize="10"
+	connectionTimeout="300000"
+	
+	dataSource.cachePrepStmts="true"
+	dataSource.prepStmtCacheSize="250"
+	dataSource.prepStmtCacheSqlLimit="2048"
+/>
+
+<!--
+	driverClassName="com.mysql.jdbc.Driver"
+	jdbcUrl="jdbc:mysql://localhost:3306/sherpa?useSSL=false"
+-->
+
+<!--
+	dataSourceClassName="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
+	dataSource.url="jdbc:mysql://localhost:3306/sherpa?useSSL=false"
+-->
+
+<!-- UPITNI PROPERTYi -->
+<!--
+	<!--
+		Web site kaze bez navodnika.
+		Server.xml ih trazi, ali pitanje dal ovi propertyi uopce mogu ic u server.xml
+	-->
+	
+	dataSource.cachePrepStmts=true
+	dataSource.prepStmtCacheSize=250
+	dataSource.prepStmtCacheSqlLimit=2048
+-->
+
+<!-- (dataSource.)useServerPrepStmts=true ? -->
