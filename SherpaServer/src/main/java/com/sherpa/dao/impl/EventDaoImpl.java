@@ -26,8 +26,8 @@ public class EventDaoImpl extends GenericDaoImpl<Event> implements EventDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Event transientInstance) {
-		super.persist(transientInstance);
+	public Event persist(Event transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

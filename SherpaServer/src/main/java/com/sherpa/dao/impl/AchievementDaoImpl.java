@@ -14,8 +14,8 @@ public class AchievementDaoImpl extends GenericDaoImpl<Achievement> implements A
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Achievement transientInstance) {
-		super.persist(transientInstance);
+	public Achievement persist(Achievement transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

@@ -14,8 +14,8 @@ public class RatingDaoImpl extends GenericDaoImpl<Rating> implements RatingDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Rating transientInstance) {
-		super.persist(transientInstance);
+	public Rating persist(Rating transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

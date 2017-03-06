@@ -14,8 +14,8 @@ public class ExperienceDaoImpl extends GenericDaoImpl<Experience> implements Exp
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Experience transientInstance) {
-		super.persist(transientInstance);
+	public Experience persist(Experience transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

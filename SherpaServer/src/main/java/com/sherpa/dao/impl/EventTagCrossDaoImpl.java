@@ -14,8 +14,8 @@ public class EventTagCrossDaoImpl extends GenericDaoImpl<EventTagCross> implemen
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(EventTagCross transientInstance) {
-		super.persist(transientInstance);
+	public EventTagCross persist(EventTagCross transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

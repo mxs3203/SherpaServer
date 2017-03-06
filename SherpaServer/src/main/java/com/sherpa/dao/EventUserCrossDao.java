@@ -4,7 +4,7 @@ import com.sherpa.model.EventUserCross;
 
 public interface EventUserCrossDao extends GenericDao<EventUserCross> {
 
-	void persist(EventUserCross transientInstance);
+	EventUserCross persist(EventUserCross transientInstance);
 
 	void remove(Class<EventUserCross> clazz, long id);
 

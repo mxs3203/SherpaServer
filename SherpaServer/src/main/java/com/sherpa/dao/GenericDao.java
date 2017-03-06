@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface GenericDao<T> {
 
-	void persist(T transientInstance);
+	T persist(T transientInstance);
 
 	void remove(Class<T> clazz, long id);
 

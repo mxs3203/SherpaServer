@@ -4,7 +4,7 @@ import com.sherpa.model.Currency;
 
 public interface CurrencyDao extends GenericDao<Currency> {
 
-	void persist(Currency transientInstance);
+	Currency persist(Currency transientInstance);
 
 	void remove(Class<Currency> clazz, long id);
 

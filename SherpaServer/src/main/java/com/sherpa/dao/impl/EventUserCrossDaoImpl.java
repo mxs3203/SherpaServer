@@ -14,8 +14,8 @@ public class EventUserCrossDaoImpl extends GenericDaoImpl<EventUserCross> implem
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(EventUserCross transientInstance) {
-		super.persist(transientInstance);
+	public EventUserCross persist(EventUserCross transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

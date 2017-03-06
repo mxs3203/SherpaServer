@@ -25,8 +25,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(User transientInstance) {
-		super.persist(transientInstance);
+	public User persist(User transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

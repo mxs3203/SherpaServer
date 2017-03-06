@@ -15,8 +15,8 @@ public class LocationDaoImpl extends GenericDaoImpl<Location> implements Locatio
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Location transientInstance) {
-		super.persist(transientInstance);
+	public Location persist(Location transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

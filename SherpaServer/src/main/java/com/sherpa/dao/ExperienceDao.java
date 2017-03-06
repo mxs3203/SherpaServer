@@ -4,7 +4,7 @@ import com.sherpa.model.Experience;
 
 public interface ExperienceDao extends GenericDao<Experience> {
 
-	void persist(Experience transientInstance);
+	Experience persist(Experience transientInstance);
 
 	void remove(Class<Experience> clazz, long id);
 

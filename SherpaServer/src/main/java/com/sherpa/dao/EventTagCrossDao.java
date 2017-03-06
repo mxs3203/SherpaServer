@@ -4,7 +4,7 @@ import com.sherpa.model.EventTagCross;
 
 public interface EventTagCrossDao extends GenericDao<EventTagCross> {
 
-	void persist(EventTagCross transientInstance);
+	EventTagCross persist(EventTagCross transientInstance);
 
 	void remove(Class<EventTagCross> clazz, long id);
 

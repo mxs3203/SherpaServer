@@ -21,11 +21,12 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(final T transientInstance) {
+	public T persist(final T transientInstance) {
 		log.debug("persisting {} instance", transientInstance.getClass().getName());
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
+			return transientInstance;
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
 			throw re;

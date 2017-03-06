@@ -4,7 +4,7 @@ import com.sherpa.model.Image;
 
 public interface ImageDao extends GenericDao<Image> {
 
-	void persist(Image transientInstance);
+	Image persist(Image transientInstance);
 
 	void remove(Class<Image> clazz, long id);
 

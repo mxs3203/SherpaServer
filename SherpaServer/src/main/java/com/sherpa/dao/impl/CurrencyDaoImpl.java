@@ -20,8 +20,8 @@ public class CurrencyDaoImpl extends GenericDaoImpl<Currency> implements Currenc
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Currency transientInstance) {
-		super.persist(transientInstance);
+	public Currency persist(Currency transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import com.sherpa.model.Achievement;
 
 public interface AchievementDao extends GenericDao<Achievement> {
 
-	void persist(Achievement transientInstance);
+	Achievement persist(Achievement transientInstance);
 
 	void remove(Class<Achievement> clazz, long id);
 

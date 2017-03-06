@@ -6,7 +6,7 @@ import com.sherpa.model.Event;
 
 public interface EventDao extends GenericDao<Event> {
 
-	void persist(Event transientInstance);
+	Event persist(Event transientInstance);
 
 	void remove(Class<Event> clazz, long id);
 

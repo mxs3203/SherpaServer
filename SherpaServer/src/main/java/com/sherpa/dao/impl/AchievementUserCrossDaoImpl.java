@@ -15,8 +15,8 @@ public class AchievementUserCrossDaoImpl extends GenericDaoImpl<AchievementUserC
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(AchievementUserCross transientInstance) {
-		super.persist(transientInstance);
+	public AchievementUserCross persist(AchievementUserCross transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

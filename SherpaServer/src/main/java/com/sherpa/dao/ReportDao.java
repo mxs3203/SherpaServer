@@ -4,7 +4,7 @@ import com.sherpa.model.Report;
 
 public interface ReportDao extends GenericDao<Report> {
 
-	void persist(Report transientInstance);
+	Report persist(Report transientInstance);
 
 	void remove(Class<Report> clazz, long id);
 

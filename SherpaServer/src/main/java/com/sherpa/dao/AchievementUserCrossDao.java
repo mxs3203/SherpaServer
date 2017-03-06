@@ -4,7 +4,7 @@ import com.sherpa.model.AchievementUserCross;
 
 public interface AchievementUserCrossDao extends GenericDao<AchievementUserCross> {
 
-	void persist(AchievementUserCross transientInstance);
+	AchievementUserCross persist(AchievementUserCross transientInstance);
 
 	void remove(Class<AchievementUserCross> clazz, long id);
 

@@ -4,7 +4,7 @@ import com.sherpa.model.Admin;
 
 public interface AdminDao extends GenericDao<Admin> {
 
-	void persist(Admin transientInstance);
+	Admin persist(Admin transientInstance);
 
 	void remove(Class<Admin> clazz, long id);
 

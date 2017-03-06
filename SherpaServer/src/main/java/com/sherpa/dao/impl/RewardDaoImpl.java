@@ -14,8 +14,8 @@ public class RewardDaoImpl extends GenericDaoImpl<Reward> implements RewardDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Reward transientInstance) {
-		super.persist(transientInstance);
+	public Reward persist(Reward transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

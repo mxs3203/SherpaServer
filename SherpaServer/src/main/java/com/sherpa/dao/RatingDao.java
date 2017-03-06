@@ -4,7 +4,7 @@ import com.sherpa.model.Rating;
 
 public interface RatingDao extends GenericDao<Rating> {
 
-	void persist(Rating transientInstance);
+	Rating persist(Rating transientInstance);
 
 	void remove(Class<Rating> clazz, long id);
 

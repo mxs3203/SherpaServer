@@ -14,8 +14,8 @@ public class ReportDaoImpl extends GenericDaoImpl<Report> implements ReportDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Report transientInstance) {
-		super.persist(transientInstance);
+	public Report persist(Report transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import com.sherpa.model.User;
 
 public interface UserDao extends GenericDao<User> {
 
-	void persist(User transientInstance);
+	User persist(User transientInstance);
 
 	void remove(Class<User> clazz, long id);
 

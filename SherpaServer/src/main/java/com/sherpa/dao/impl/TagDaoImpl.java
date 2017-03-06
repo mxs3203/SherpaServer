@@ -20,8 +20,8 @@ public class TagDaoImpl extends GenericDaoImpl<Tag> implements TagDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Tag transientInstance) {
-		super.persist(transientInstance);
+	public Tag persist(Tag transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

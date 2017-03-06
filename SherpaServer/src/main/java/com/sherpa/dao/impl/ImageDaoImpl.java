@@ -14,8 +14,8 @@ public class ImageDaoImpl extends GenericDaoImpl<Image> implements ImageDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Image transientInstance) {
-		super.persist(transientInstance);
+	public Image persist(Image transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

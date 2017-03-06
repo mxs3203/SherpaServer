@@ -20,8 +20,8 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin> implements AdminDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void persist(Admin transientInstance) {
-		super.persist(transientInstance);
+	public Admin persist(Admin transientInstance) {
+		return super.persist(transientInstance);
 	}
 
 	@Override

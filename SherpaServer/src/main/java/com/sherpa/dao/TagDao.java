@@ -4,7 +4,7 @@ import com.sherpa.model.Tag;
 
 public interface TagDao extends GenericDao<Tag> {
 
-	void persist(Tag transientInstance);
+	Tag persist(Tag transientInstance);
 
 	void remove(Class<Tag> clazz, long id);
 
