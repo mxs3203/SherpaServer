@@ -4,7 +4,7 @@ import com.sherpa.dto.ReportDto;
 
 public interface ReportService {
 
-	void add(ReportDto transientInstance);
+	ReportDto add(ReportDto transientInstance);
 
 	void remove(long id);
 

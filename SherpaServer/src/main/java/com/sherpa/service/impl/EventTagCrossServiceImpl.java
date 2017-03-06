@@ -13,26 +13,26 @@ import com.sherpa.service.EventTagCrossService;
 public class EventTagCrossServiceImpl implements EventTagCrossService {
 
 	@Autowired
-	private EventTagCrossDao imageDao;
+	private EventTagCrossDao eventTagCrossDao;
 
 	@Override
-	public void add(EventTagCross transientInstance) {
-		imageDao.persist(transientInstance);
+	public EventTagCross add(EventTagCross transientInstance) {
+		return eventTagCrossDao.persist(transientInstance);
 	}
 
 	@Override
 	public void remove(long id) {
-		imageDao.remove(EventTagCross.class, id);
+		eventTagCrossDao.remove(EventTagCross.class, id);
 	}
 
 	@Override
 	public EventTagCross update(EventTagCross detachedInstance) {
-		return imageDao.merge(detachedInstance);
+		return eventTagCrossDao.merge(detachedInstance);
 	}
 
 	@Override
 	public EventTagCross findById(long id) {
-		return imageDao.findById(EventTagCross.class, id);
+		return eventTagCrossDao.findById(EventTagCross.class, id);
 	}
 
 }

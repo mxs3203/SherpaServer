@@ -4,7 +4,7 @@ import com.sherpa.dto.LocationDto;
 
 public interface LocationService {
 
-	void add(LocationDto transientInstance);
+	LocationDto add(LocationDto transientInstance);
 
 	void remove(long id);
 

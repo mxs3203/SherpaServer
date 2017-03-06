@@ -17,8 +17,8 @@ public class AchievementServiceImpl implements AchievementService {
 	private AchievementDao achievementDao;
 
 	@Override
-	public void add(AchievementDto transientInstance) {
-		achievementDao.persist(transientInstance.toModel());
+	public AchievementDto add(AchievementDto transientInstance) {
+		return achievementDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

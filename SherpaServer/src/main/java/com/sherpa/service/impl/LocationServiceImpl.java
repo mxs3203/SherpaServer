@@ -17,8 +17,8 @@ public class LocationServiceImpl implements LocationService {
 	private LocationDao locationDao;
 
 	@Override
-	public void add(LocationDto transientInstance) {
-		locationDao.persist(transientInstance.toModel());
+	public LocationDto add(LocationDto transientInstance) {
+		return locationDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

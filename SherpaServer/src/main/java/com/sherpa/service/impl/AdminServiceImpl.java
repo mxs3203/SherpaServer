@@ -17,8 +17,8 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
 
 	@Override
-	public void add(AdminDto transientInstance) {
-		adminDao.persist(transientInstance.toModel());
+	public AdminDto add(AdminDto transientInstance) {
+		return adminDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

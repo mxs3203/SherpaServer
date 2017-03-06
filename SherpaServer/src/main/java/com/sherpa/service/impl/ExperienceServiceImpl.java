@@ -17,8 +17,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao experienceDao;
 
 	@Override
-	public void add(ExperienceDto transientInstance) {
-		experienceDao.persist(transientInstance.toModel());
+	public ExperienceDto add(ExperienceDto transientInstance) {
+		return experienceDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

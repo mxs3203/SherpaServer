@@ -17,8 +17,8 @@ public class RatingServiceImpl implements RatingService {
 	private RatingDao ratingDao;
 
 	@Override
-	public void add(RatingDto transientInstance) {
-		ratingDao.persist(transientInstance.toModel());
+	public RatingDto add(RatingDto transientInstance) {
+		return ratingDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

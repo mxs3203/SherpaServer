@@ -4,7 +4,7 @@ import com.sherpa.dto.ImageDto;
 
 public interface ImageService {
 
-	void add(ImageDto transientInstance);
+	ImageDto add(ImageDto transientInstance);
 
 	void remove(long id);
 

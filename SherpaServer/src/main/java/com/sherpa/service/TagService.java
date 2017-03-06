@@ -4,7 +4,7 @@ import com.sherpa.dto.TagDto;
 
 public interface TagService {
 
-	void add(TagDto transientInstance);
+	TagDto add(TagDto transientInstance);
 
 	void remove(long id);
 

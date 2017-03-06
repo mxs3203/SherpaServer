@@ -4,7 +4,7 @@ import com.sherpa.model.EventUserCross;
 
 public interface EventUserCrossService {
 
-	void add(EventUserCross transientInstance);
+	EventUserCross add(EventUserCross transientInstance);
 
 	void remove(long id);
 

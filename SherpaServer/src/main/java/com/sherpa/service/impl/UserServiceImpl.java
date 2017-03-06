@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public void add(UserDto transientInstance) {
-		userDao.persist(transientInstance.toModel());
+	public UserDto add(UserDto transientInstance) {
+		return userDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override
@@ -110,18 +110,14 @@ public class UserServiceImpl implements UserService {
 		User user = userLocationDto.getUserDto().toModel();
 		user.setLocation(userLocationDto.getLocationDto().toModel());
 
-		/*
-		 * TODO! mozgat. pretvorit locationDto u model i spremit ga u user
-		 * model? da li ce to persistati u obe tablice?
-		 */
-
 		try {
-			userDao.persist(user);
+			user = userDao.persist(user);
 		} catch (EntityExistsException e) {
 			e.printStackTrace();
+			user = null;
 		}
 
-		return userDao.findByCredentials(user).toDto();
+		return user.toDto();
 	}
 
 }

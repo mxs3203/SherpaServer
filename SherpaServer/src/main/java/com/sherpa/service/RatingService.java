@@ -4,7 +4,7 @@ import com.sherpa.dto.RatingDto;
 
 public interface RatingService {
 
-	void add(RatingDto transientInstance);
+	RatingDto add(RatingDto transientInstance);
 
 	void remove(long id);
 

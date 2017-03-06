@@ -4,7 +4,7 @@ import com.sherpa.model.AchievementUserCross;
 
 public interface AchievementUserCrossService {
 
-	void add(AchievementUserCross transientInstance);
+	AchievementUserCross add(AchievementUserCross transientInstance);
 
 	void remove(long id);
 

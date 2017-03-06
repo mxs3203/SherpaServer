@@ -4,7 +4,7 @@ import com.sherpa.dto.RewardDto;
 
 public interface RewardService {
 
-	void add(RewardDto transientInstance);
+	RewardDto add(RewardDto transientInstance);
 
 	void remove(long id);
 

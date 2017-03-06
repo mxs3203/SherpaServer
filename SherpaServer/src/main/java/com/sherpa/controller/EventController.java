@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sherpa.dto.composite.EventLocationDto;
+import com.sherpa.dto.EventDto;
+import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.service.EventService;
 
 @Controller
@@ -32,32 +33,32 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<EventLocationDto>> getEventsByRegion(@PathVariable("regionName") String region) {
+	public ResponseEntity<Set<EventDto>> getEventsByRegion(@PathVariable("regionName") String region) {
 		log.debug("Fetching Events in Region: {}", region);
 
-		Set<EventLocationDto> events = eventService.getEventsByRegion(region);
+		Set<EventDto> events = eventService.getEventsByRegion(region);
 
 		if (events == null) {
 			log.debug("Events in Region: '{}' Not Found!", region);
-			return new ResponseEntity<Set<EventLocationDto>>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Set<EventDto>>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<Set<EventLocationDto>>(events, HttpStatus.OK);
+		return new ResponseEntity<Set<EventDto>>(events, HttpStatus.OK);
 	}
 
 	/* TODO! refactor */
-	/*@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
-	public ResponseEntity<String> insertEvent(@RequestBody EventLocationDto eventBody) {
+	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
+	public ResponseEntity<EventDto> insertEvent(@RequestBody EventDetailDto eventBody) {
 		log.debug("Inserting Event with Name: '{}'", eventBody.getEvent().getName());
 
-		 TODO! WAT? ovo nevalja, tj. trazi mozganje i refactor 
-		eventService.insertEvent(eventBody);
+		// TODO! WAT? ovo nevalja, tj. trazi mozganje i refactor
+		EventDto eventDto = eventService.insertEvent(eventBody);
 
-		if (eventBody.getLocation() == null) {
+		if (eventBody.getLocationStart() == null) {
 			log.debug("Failed to Insert Event with Name: '{}'", eventBody.getEvent().getName());
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<EventDto>(HttpStatus.BAD_REQUEST);
 		}
-
-		return new ResponseEntity<String>(HttpStatus.OK);
-	}*/
+		return new ResponseEntity<EventDto>(eventDto, HttpStatus.OK);
+		
+	}
 
 }

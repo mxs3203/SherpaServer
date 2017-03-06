@@ -4,7 +4,7 @@ import com.sherpa.dto.ExperienceDto;
 
 public interface ExperienceService {
 
-	void add(ExperienceDto transientInstance);
+	ExperienceDto add(ExperienceDto transientInstance);
 
 	void remove(long id);
 

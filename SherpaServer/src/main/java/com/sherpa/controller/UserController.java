@@ -41,9 +41,7 @@ public class UserController {
 	 * Delete Rjesen?
 	 * 
 	 * Implementirati do kraja i Testirat Generic DAO na Admin Klasi -> GENERIC
-	 * DAO -> trazi Entity / Model class type za Delete -> drugim rijecima
-	 * delete se mora izvrsit u servisu (a DAO onda mora primiti Entity klasu?
-	 * za delete metodu?) ILI
+	 * DAO -> trazi Entity / Model class type za Delete
 	 * entityManager.remove(entityManager.getReference(**clazz, **id));?
 	 * 
 	 * 
@@ -60,8 +58,8 @@ public class UserController {
 	 * DAO (Entity) -> Service (Entity -> DTO) -> Controller (DTO)
 	 * 
 	 * Vecina provjera se obavlja u servisu (npr. is null i ta sranja). DAO bi
-	 * onda trebao imat sto vise metoda koje obavljaju sta god treba u sto
-	 * manjem broju querya
+	 * onda trebao imat sto vise metoda koje obavljaju sta god treba iz baze u
+	 * sto manjem broju querya
 	 * 
 	 * 
 	 * 
@@ -175,20 +173,12 @@ public class UserController {
 		log.debug("Registering User with Email: '{}' and Password: '{}'", requestBody.getUserDto().getEmail(),
 				requestBody.getUserDto().getPassword());
 
-		/*
-		 * TODO!
-		 * 
-		 * Napisat registration metodu koja prima composite userlocation i
-		 * sprema novi record + provjera dal user s istim emailom vec postoji,
-		 * bla bla
-		 */
-
 		UserDto userDto = userService.registerUser(requestBody);
 
 		if (userDto == null) {
 			log.debug("User with Email: '{}' and Password: '{}' Not Found!", requestBody.getUserDto().getEmail(),
 					requestBody.getUserDto().getPassword());
-			return new ResponseEntity<UserDto>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<UserDto>(HttpStatus.NOT_ACCEPTABLE);
 		}
 
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);

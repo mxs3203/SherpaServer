@@ -8,7 +8,7 @@ import com.sherpa.dto.composite.UserLocationDto;
 
 public interface UserService {
 
-	void add(UserDto transientInstance);
+	UserDto add(UserDto transientInstance);
 
 	void remove(long id);
 

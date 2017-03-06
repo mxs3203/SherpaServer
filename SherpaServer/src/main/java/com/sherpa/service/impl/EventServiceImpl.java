@@ -9,10 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sherpa.dao.EventDao;
+import com.sherpa.dao.LocationDao;
+import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
-import com.sherpa.dto.composite.EventLocationDto;
+import com.sherpa.dto.TagDto;
+import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.model.Event;
+import com.sherpa.model.EventTagCross;
 import com.sherpa.model.Location;
+import com.sherpa.model.User;
 import com.sherpa.service.EventService;
 
 @Service
@@ -22,9 +27,15 @@ public class EventServiceImpl implements EventService {
 	@Autowired
 	private EventDao eventDao;
 
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private LocationDao locationDao;
+
 	@Override
-	public void add(EventDto transientInstance) {
-		eventDao.persist(transientInstance.toModel());
+	public EventDto add(EventDto transientInstance) {
+		return eventDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override
@@ -46,51 +57,59 @@ public class EventServiceImpl implements EventService {
 	 * TODO! refactor, mozganje! da li ic po regiji ili po lat + long + radius?
 	 */
 	@Override
-	public Set<EventLocationDto> getEventsByRegion(String region) {
-
-		Set<EventLocationDto> events = new HashSet<EventLocationDto>();
-		Event event;
-		Location locationStart;
-		EventLocationDto eventLocDto = new EventLocationDto();
+	public Set<EventDto> getEventsByRegion(String region) {
 
 		Iterator<Event> iter = eventDao.getByRegion(region).iterator();
+
+		Set<EventDto> events = new HashSet<EventDto>();
+		Event event = new Event();
+		EventDto eventDto = new EventDto();
 
 		while (iter.hasNext()) {
 
 			event = iter.next();
-			locationStart = event.getLocationByStartLocationId();
+			eventDto = event.toDto();
 
-			eventLocDto.setEvent(event.toDto());
-			eventLocDto.setLocationStart(locationStart.toDto());
+			// TODO! linija ispod je tmp dok se ne rjese to dto metode
+			eventDto.setLocationByStartLocationId(event.getLocationByStartLocationId().getLocationId());
 
-			events.add(eventLocDto);
+			events.add(eventDto);
 		}
 
 		return events;
 
 	}
 
-	/* TODO! refactor */
+	/* TODO! refactor ili je ok? */
 	@Override
-	public void insertEvent(EventLocationDto eld) {
+	public EventDto insertEvent(EventDetailDto edd) {
 
-		/*
-		 * TODO! Location location = eld.getLocation().toModel(); Event event =
-		 * eld.getEvent().toModel();
-		 * 
-		 * Currency currency = currencyDao.findByCurrencyIso(eld.getCurrency());
-		 * event.setCurrency(currency);
-		 * 
-		 * event.setIsFinished(false);
-		 * 
-		 * User user = userDao.findById(User.class, eld.getEvent().getUserId());
-		 * 
-		 * locationDao.persist(location);
-		 * 
-		 * event.setLocationByStartLocationId(location); event.setUser(user);
-		 * 
-		 * eventDao.persist(event);
-		 */
+		Location locationStart = locationDao.persist(edd.getLocationStart().toModel());
+		Location locationEnd = locationDao.persist(edd.getLocationEnd().toModel());
+		Event event = edd.getEvent().toModel();
+		event.setLocationByStartLocationId(locationStart);
+		event.setLocationByEndLocationId(locationEnd);
+		event.setUser(userDao.findById(User.class, edd.getEvent().getUserId()));
+		event.setCurrency(edd.getCurrency().toModel());
+		event.setIsFinished(false);
+
+		/* Prepare Event Tag Cross Model */
+		Iterator<TagDto> iter = edd.getTags().iterator();
+		EventTagCross etc = new EventTagCross();
+		TagDto tagDto = new TagDto();
+		Set<EventTagCross> eventTagCrosses = new HashSet<EventTagCross>(0);
+
+		while (iter.hasNext()) {
+			tagDto = iter.next();
+			etc.setEvent(event);
+			etc.setTag(tagDto.toModel());
+			eventTagCrosses.add(etc);
+		}
+
+		event.setEventTagCrosses(eventTagCrosses);
+
+		return eventDao.persist(event).toDto();
+
 	}
 
 }

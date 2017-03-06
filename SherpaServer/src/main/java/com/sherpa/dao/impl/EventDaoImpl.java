@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.sherpa.dao.EventDao;
-import com.sherpa.dto.composite.EventLocationDto;
+import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.model.Event;
 import com.sherpa.model.Location;
 import com.sherpa.util.Util;

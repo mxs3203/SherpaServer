@@ -17,8 +17,8 @@ public class TagServiceImpl implements TagService {
 	private TagDao tagDao;
 
 	@Override
-	public void add(TagDto transientInstance) {
-		tagDao.persist(transientInstance.toModel());
+	public TagDto add(TagDto transientInstance) {
+		return tagDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

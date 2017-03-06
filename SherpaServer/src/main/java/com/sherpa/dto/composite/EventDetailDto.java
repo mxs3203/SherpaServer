@@ -7,7 +7,7 @@ import com.sherpa.dto.EventDto;
 import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.TagDto;
 
-public class EventLocationDto {
+public class EventDetailDto {
 
 	public EventDto event;
 	public LocationDto locationStart;
@@ -15,7 +15,7 @@ public class EventLocationDto {
 	public Set<TagDto> tags;
 	public CurrencyDto currency;
 
-	public EventLocationDto() {
+	public EventDetailDto() {
 	}
 
 	public Set<TagDto> getTags() {

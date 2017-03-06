@@ -4,7 +4,7 @@ import com.sherpa.dto.CurrencyDto;
 
 public interface CurrencyService {
 
-	void add(CurrencyDto transientInstance);
+	CurrencyDto add(CurrencyDto transientInstance);
 
 	void remove(long id);
 

@@ -17,8 +17,8 @@ public class ReportServiceImpl implements ReportService {
 	private ReportDao reportDao;
 
 	@Override
-	public void add(ReportDto transientInstance) {
-		reportDao.persist(transientInstance.toModel());
+	public ReportDto add(ReportDto transientInstance) {
+		return reportDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

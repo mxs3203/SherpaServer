@@ -17,8 +17,8 @@ public class RewardServiceImpl implements RewardService {
 	private RewardDao rewardDao;
 
 	@Override
-	public void add(RewardDto transientInstance) {
-		rewardDao.persist(transientInstance.toModel());
+	public RewardDto add(RewardDto transientInstance) {
+		return rewardDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

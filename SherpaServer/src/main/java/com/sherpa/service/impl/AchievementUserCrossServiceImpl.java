@@ -16,8 +16,8 @@ public class AchievementUserCrossServiceImpl implements AchievementUserCrossServ
 	private AchievementUserCrossDao achievementUserCrossDao;
 
 	@Override
-	public void add(AchievementUserCross transientInstance) {
-		achievementUserCrossDao.persist(transientInstance);
+	public AchievementUserCross add(AchievementUserCross transientInstance) {
+		return achievementUserCrossDao.persist(transientInstance);
 	}
 
 	@Override

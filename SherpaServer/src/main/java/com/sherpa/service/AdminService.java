@@ -4,7 +4,7 @@ import com.sherpa.dto.AdminDto;
 
 public interface AdminService {
 
-	void add(AdminDto transientInstance);
+	AdminDto add(AdminDto transientInstance);
 
 	void remove(long id);
 

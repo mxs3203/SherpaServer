@@ -16,8 +16,8 @@ public class EventUserCrossServiceImpl implements EventUserCrossService {
 	private EventUserCrossDao eventUserCrossDao;
 
 	@Override
-	public void add(EventUserCross transientInstance) {
-		eventUserCrossDao.persist(transientInstance);
+	public EventUserCross add(EventUserCross transientInstance) {
+		return eventUserCrossDao.persist(transientInstance);
 	}
 
 	@Override

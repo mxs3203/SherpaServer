@@ -17,8 +17,8 @@ public class CurrencyServiceImpl implements CurrencyService {
 	private CurrencyDao currencyDao;
 
 	@Override
-	public void add(CurrencyDto transientInstance) {
-		currencyDao.persist(transientInstance.toModel());
+	public CurrencyDto add(CurrencyDto transientInstance) {
+		return currencyDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

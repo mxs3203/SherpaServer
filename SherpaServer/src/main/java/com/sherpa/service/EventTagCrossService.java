@@ -4,7 +4,7 @@ import com.sherpa.model.EventTagCross;
 
 public interface EventTagCrossService {
 
-	void add(EventTagCross transientInstance);
+	EventTagCross add(EventTagCross transientInstance);
 
 	void remove(long id);
 

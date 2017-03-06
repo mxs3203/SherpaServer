@@ -17,8 +17,8 @@ public class ImageServiceImpl implements ImageService {
 	private ImageDao imageDao;
 
 	@Override
-	public void add(ImageDto transientInstance) {
-		imageDao.persist(transientInstance.toModel());
+	public ImageDto add(ImageDto transientInstance) {
+		return imageDao.persist(transientInstance.toModel()).toDto();
 	}
 
 	@Override

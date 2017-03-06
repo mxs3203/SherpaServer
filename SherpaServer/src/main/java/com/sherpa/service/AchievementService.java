@@ -4,7 +4,7 @@ import com.sherpa.dto.AchievementDto;
 
 public interface AchievementService {
 
-	void add(AchievementDto transientInstance);
+	AchievementDto add(AchievementDto transientInstance);
 
 	void remove(long id);
 
