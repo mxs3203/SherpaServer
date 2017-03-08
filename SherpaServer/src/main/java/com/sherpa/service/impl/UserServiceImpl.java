@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Set<EventDto> getSherpaEvents(long id) {
 
-		Set<EventDto> events = new HashSet<EventDto>();
-
 		Iterator<Event> iter = userDao.getSherpaEvents(id).iterator();
+
+		Set<EventDto> events = new HashSet<EventDto>();
 
 		while (iter.hasNext()) {
 			events.add(iter.next().toDto());
@@ -66,9 +66,9 @@ public class UserServiceImpl implements UserService {
 
 	public Set<UserDto> getUsersByRegion(String region) {
 
-		Set<UserDto> users = new HashSet<UserDto>();
-
 		Iterator<User> userIter = userDao.getUsersByRegion(region).iterator();
+
+		Set<UserDto> users = new HashSet<UserDto>();
 
 		while (userIter.hasNext()) {
 			users.add(userIter.next().toDto());
@@ -79,9 +79,9 @@ public class UserServiceImpl implements UserService {
 
 	public Set<UserDto> getSherpasByRegion(String region) {
 
-		Set<UserDto> users = new HashSet<UserDto>();
-
 		Iterator<User> userIter = userDao.getSherpasByRegion(region).iterator();
+
+		Set<UserDto> users = new HashSet<UserDto>();
 
 		while (userIter.hasNext()) {
 			users.add(userIter.next().toDto());

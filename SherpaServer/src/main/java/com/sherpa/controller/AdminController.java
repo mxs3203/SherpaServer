@@ -29,7 +29,7 @@ public class AdminController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AdminDto> getAdmin(@PathVariable("id") long userId) {
 		log.debug("Fetching User with ID: {}", userId);
 
@@ -43,7 +43,7 @@ public class AdminController {
 		return new ResponseEntity<AdminDto>(adminDto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/admin/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/admin/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AdminDto> loginAdmin(@RequestBody AdminDto adminBody) {
 		log.debug("Fetching Admin with Username: '{}' and Password: '{}'", adminBody.getUsername(),
 				adminBody.getPassword());

@@ -58,13 +58,14 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
-	/* TODO! Query ok? */
 	@Override
 	public Set<Event> getSherpaEvents(long id) {
-		log.debug("getting Events for User instance with ID: {}", id);
+		log.debug("getting Events for Sherpa instance with ID: {}", id);
 		try {
-			Query query = entityManager.createQuery("FROM Event e WHERE e.user.userId = :userId").setParameter("userId",
-					id);
+			Query query = entityManager
+					.createQuery(
+							"FROM Event e WHERE e.user.userId = :userId AND e.user.isSherpa = true AND e.isFinished = false")
+					.setParameter("userId", id);
 			log.debug("get successful");
 			return Util.castSet(Event.class, query.getResultList());
 		} catch (RuntimeException re) {
@@ -73,13 +74,11 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
-	/* TODO! Query ok? */
 	@Override
 	public Set<User> getUsersByRegion(String region) {
 		log.debug("getting All User (Sherpa and non-Sherpa) instances in Region: {}", region);
 		try {
-			Query query = entityManager
-					.createQuery("SELECT l.users FROM Location l JOIN l.users u WHERE l.region = :region")
+			Query query = entityManager.createQuery("SELECT l.users FROM Location l WHERE l.region = :region")
 					.setParameter("region", region);
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());
@@ -89,14 +88,13 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		}
 	}
 
-	/* TODO! Query ok? */
 	@Override
 	public Set<User> getSherpasByRegion(String region) {
 		log.debug("getting Sherpa instances in Region: {}", region);
 		try {
 			Query query = entityManager
 					.createQuery(
-							"SELECT l.users FROM Location l JOIN l.users u WHERE u.isSherpa = 1 AND l.region = :region")
+							"SELECT l.users FROM Location l JOIN l.users u WHERE l.region = :region AND u.isSherpa = true")
 					.setParameter("region", region);
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());
@@ -107,10 +105,11 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	/*
-	 * TODO! Query ok? Query vrati 3 rezultata, a castList gleda dal taj objekt
+	 * TODO! Query ok? Query vrati X rezultata, a castList gleda dal taj objekt
 	 * (u ovom slucaju User objekt) vec postoji u setu i ako postoji ne dodaje
 	 * ga. E sad buduci da je rating kao sto veci to bolji, mozda bi ga trebao
-	 * ostavit i mi to onda handle-at s nekim logikama?
+	 * ostavit i mi to onda handle-at s nekim logikama? + order by ovdje nista
+	 * ne radi jer set nema ordering
 	 */
 	@Override
 	public Set<User> getSherpasByRatingInRegion(String region) {
@@ -118,7 +117,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		try {
 			Query query = entityManager
 					.createQuery(
-							"SELECT u FROM User u JOIN Rating r ON r.user.userId = u.userId JOIN Event e ON r.event.eventId = e.eventId JOIN Location startLoc ON startLoc.locationId = e.locationByStartLocationId JOIN Location endLoc ON endLoc.locationId = e.locationByEndLocationId WHERE u.isSherpa = 1 AND (startLoc.region = :region OR endLoc.region = :region) ORDER BY r.rating DESC")
+							"SELECT u FROM User u JOIN Rating r ON r.user.userId = u.userId JOIN Event e ON r.event.eventId = e.eventId JOIN Location l ON l.locationId = e.locationByStartLocationId WHERE u.isSherpa = true AND l.region = :region ORDER BY r.rating DESC")
 					.setParameter("region", region);
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());

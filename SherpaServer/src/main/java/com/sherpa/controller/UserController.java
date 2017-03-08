@@ -78,7 +78,7 @@ public class UserController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<UserDto> getUser(@PathVariable("id") long userId) {
 		log.debug("Fetching User with ID: {}", userId);
 
@@ -93,7 +93,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userBody) {
 		log.debug("Fetching User with Email: '{}' and Password: '{}'", userBody.getEmail(), userBody.getPassword());
 
@@ -109,9 +109,9 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/sherpa/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/sherpa/events/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Set<EventDto>> getSherpaEvents(@PathVariable("id") long userId) {
-		log.debug("Fetching Events For User With ID: {}", userId);
+		log.debug("Fetching Events For Sherpa With ID: {}", userId);
 
 		Set<EventDto> events = userService.getSherpaEvents(userId);
 
@@ -124,7 +124,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/users/region/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users/region/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Set<UserDto>> getUsersByRegion(@PathVariable("name") String region) {
 		log.debug("Fetching Users in Region: '{}'", region);
 
@@ -139,7 +139,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/sherpas/region/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/sherpas/region/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRegion(@PathVariable("region") String region) {
 		log.debug("Fetching Sherpas in Region: '{}'", region);
 
@@ -154,7 +154,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/sherpas/rating/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/sherpas/rating/{region}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Set<UserDto>> getSherpasByRating(@PathVariable("region") String region) {
 		log.debug("Fetching Sherpas by Rating in Region: '{}'", region);
 
@@ -168,7 +168,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/user/registration", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/user/registration", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<UserDto> registerUser(@RequestBody UserLocationDto requestBody) {
 		log.debug("Registering User with Email: '{}' and Password: '{}'", requestBody.getUserDto().getEmail(),
 				requestBody.getUserDto().getPassword());

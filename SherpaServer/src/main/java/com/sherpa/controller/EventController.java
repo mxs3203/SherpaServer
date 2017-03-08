@@ -32,7 +32,7 @@ public class EventController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/events/region/{regionName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Set<EventDto>> getEventsByRegion(@PathVariable("regionName") String region) {
 		log.debug("Fetching Events in Region: {}", region);
 
@@ -46,7 +46,7 @@ public class EventController {
 	}
 
 	/* TODO! refactor */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "text/plain")
+	@RequestMapping(value = "/event/insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<EventDto> insertEvent(@RequestBody EventDetailDto eventBody) {
 		log.debug("Inserting Event with Name: '{}'", eventBody.getEvent().getName());
 
