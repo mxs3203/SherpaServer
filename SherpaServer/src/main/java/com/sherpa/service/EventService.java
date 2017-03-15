@@ -3,6 +3,7 @@ package com.sherpa.service;
 import java.util.Set;
 
 import com.sherpa.dto.EventDto;
+import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.composite.EventDetailDto;
 
 public interface EventService {
@@ -16,6 +17,7 @@ public interface EventService {
 	EventDto findById(long id);
 
 	Set<EventDto> getEventsByRegion(String region);
+	
 
 	EventDto insertEvent(EventDetailDto edd);
 

@@ -12,6 +12,7 @@ import com.sherpa.dao.EventDao;
 import com.sherpa.dao.LocationDao;
 import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
+import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.TagDto;
 import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.model.Event;
@@ -79,8 +80,9 @@ public class EventServiceImpl implements EventService {
 		return events;
 
 	}
-
-	/* TODO! refactor ili je ok? */
+	
+	
+	/* TODO! refactor ili je ok? NIJE OK JER SI FEGET!*/
 	@Override
 	public EventDto insertEvent(EventDetailDto edd) {
 

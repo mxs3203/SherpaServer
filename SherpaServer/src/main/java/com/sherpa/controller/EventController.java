@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sherpa.dto.EventDto;
+import com.sherpa.dto.LocationDto;
 import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.service.EventService;
 
@@ -44,6 +45,7 @@ public class EventController {
 		}
 		return new ResponseEntity<Set<EventDto>>(events, HttpStatus.OK);
 	}
+	
 
 	/* TODO! refactor */
 	@RequestMapping(value = "/event/insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
