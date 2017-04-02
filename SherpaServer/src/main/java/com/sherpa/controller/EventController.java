@@ -60,5 +60,19 @@ public class EventController {
 		return new ResponseEntity<EventDto>(eventDto, HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(value = "/{eventId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<EventDto> getEventsById(@PathVariable("eventId") Integer eventId) {
+		log.debug("Fetching Event for event ID: {}", eventId);
+
+		EventDto event = eventService.getEventById(eventId);
+
+		if (event == null) {
+			log.debug("Event for event ID: '{}' Not Found!", eventId);
+			return new ResponseEntity<EventDto>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<EventDto>(event, HttpStatus.OK);
+	}
+	
 
 }

@@ -25,10 +25,12 @@ public class EventDto {
 	private String startTime;
 	private String endTime;
 	private Boolean isFinished;
+    private String currencyIso;
 
 	private Set<ReportDto> reports = new HashSet<ReportDto>(0);
 	private Set<RatingDto> ratings = new HashSet<RatingDto>(0);
 	private Set<ImageDto> images = new HashSet<ImageDto>(0);
+	private Set<TagDto> tags = new HashSet<TagDto>(0);
 
 	public EventDto() {
 	}
@@ -128,6 +130,15 @@ public class EventDto {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	
+	public void setCurrencyIso(String currencyIso){
+		this.currencyIso = currencyIso;	
+	}
+	
+	public String getCurrencyIso(){
+		return currencyIso;	
+	}
+	
 
 	public Boolean getIsFinished() {
 		return isFinished;
@@ -160,6 +171,14 @@ public class EventDto {
 	public void setImages(Set<ImageDto> images) {
 		this.images = images;
 	}
+	
+	public void setTags(Set<TagDto> tags){
+		this.tags = tags;	
+	}
+	
+	public Set<TagDto> getTags(){
+		return tags;
+	}
 
 	public Event toModel() {
 		Event event = new Event();
@@ -186,9 +205,10 @@ public class EventDto {
 		event.setStartTime(Util.getDateJoda(startTime));
 		event.setEndTime(Util.getDateJoda(endTime));
 		event.setIsFinished(isFinished);
-		
+			
 		/* TODO! Setovi */
-
+		
+		
 		return event;
 	}
 

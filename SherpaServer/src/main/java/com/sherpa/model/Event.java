@@ -244,6 +244,9 @@ public class Event implements java.io.Serializable {
 		eventDto.setStartTime(Util.getDateString(startTime));
 		eventDto.setEndTime(Util.getDateString(endTime));
 		eventDto.setIsFinished(isFinished);
+		if(this.getUser() != null){
+			eventDto.setUserId(this.getUser().getUserId());
+		}
 		return eventDto;
 	}
 

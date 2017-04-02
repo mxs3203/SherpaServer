@@ -19,4 +19,6 @@ public interface EventService {
 
 	EventDto insertEvent(EventDetailDto edd);
 
+	EventDto getEventById(Integer eventId);
+
 }

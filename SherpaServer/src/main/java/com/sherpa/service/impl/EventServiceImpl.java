@@ -12,11 +12,17 @@ import com.sherpa.dao.EventDao;
 import com.sherpa.dao.LocationDao;
 import com.sherpa.dao.UserDao;
 import com.sherpa.dto.EventDto;
+import com.sherpa.dto.ImageDto;
+import com.sherpa.dto.RatingDto;
+import com.sherpa.dto.ReportDto;
 import com.sherpa.dto.TagDto;
 import com.sherpa.dto.composite.EventDetailDto;
 import com.sherpa.model.Event;
 import com.sherpa.model.EventTagCross;
+import com.sherpa.model.Image;
 import com.sherpa.model.Location;
+import com.sherpa.model.Rating;
+import com.sherpa.model.Report;
 import com.sherpa.model.User;
 import com.sherpa.service.EventService;
 
@@ -110,6 +116,65 @@ public class EventServiceImpl implements EventService {
 
 		return eventDao.persist(event).toDto();
 
+	}
+	
+	@Override
+	public EventDto getEventById(Integer eventId) {
+
+		Event event = eventDao.findById(Event.class, eventId.longValue());
+
+		EventDto eventDto = event.toDto();
+		if(event.getLocationByEndLocationId() != null){
+			eventDto.setLocationByEndLocationId(event.getLocationByEndLocationId().getLocationId());
+			
+		}if(event.getLocationByStartLocationId() != null){
+			eventDto.setLocationByStartLocationId(event.getLocationByStartLocationId().getLocationId());
+			
+		}
+		if(event.getImages() != null){
+			Set<ImageDto> images = new HashSet<ImageDto>();
+			Iterator<Image> iter = event.getImages().iterator();
+			while(iter.hasNext()){
+				
+				Image img = iter.next();
+				images.add(img.toDto());
+				
+			}
+			eventDto.setImages(images);
+		}
+		if(event.getRatings() != null){
+			Set<RatingDto> ratings = new HashSet<RatingDto>();
+			Iterator<Rating> iter = event.getRatings().iterator();
+			while(iter.hasNext()){
+				
+				Rating rating = iter.next();
+				ratings.add(rating.toDto());
+				
+			}
+			eventDto.setRatings(ratings);
+		}
+		if(event.getReports() != null){
+			Set<ReportDto> reports = new HashSet<ReportDto>();
+			Iterator<Report> iter = event.getReports().iterator();
+			while(iter.hasNext()){
+				Report report = iter.next();
+				reports.add(report.toDto());		
+			}
+			eventDto.setReports(reports);
+		}
+		if(event.getEventTagCrosses() != null){
+			Set<TagDto> tags = new HashSet<TagDto>();
+			Iterator<EventTagCross> iter = event.getEventTagCrosses().iterator();
+			while(iter.hasNext()){
+				EventTagCross etc = iter.next();
+				tags.add(etc.getTag().toDto());			
+			}
+			eventDto.setTags(tags);
+		}
+		if(event.getCurrency() != null){
+			eventDto.setCurrencyIso(event.getCurrency().getIso());		
+		}
+		return eventDto;
 	}
 
 }

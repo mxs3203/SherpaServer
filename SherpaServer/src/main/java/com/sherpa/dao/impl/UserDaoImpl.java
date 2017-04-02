@@ -117,7 +117,9 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		try {
 			Query query = entityManager
 					.createQuery(
-							"SELECT u FROM User u JOIN Rating r ON r.user.userId = u.userId JOIN Event e ON r.event.eventId = e.eventId JOIN Location l ON l.locationId = e.locationByStartLocationId WHERE u.isSherpa = true AND l.region = :region ORDER BY r.rating DESC")
+							"SELECT u FROM User u JOIN Rating r ON r.user.userId = u.userId JOIN Event e ON r.event.eventId = "
+							+ "e.eventId JOIN Location l ON l.locationId = e.locationByStartLocationId WHERE u.isSherpa = true "
+							+ "AND l.region = :region ORDER BY r.rating DESC")
 					.setParameter("region", region);
 			log.debug("get successful");
 			return Util.castSet(User.class, query.getResultList());

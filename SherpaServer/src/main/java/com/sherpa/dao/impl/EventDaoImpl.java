@@ -1,5 +1,6 @@
 package com.sherpa.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -49,6 +50,7 @@ public class EventDaoImpl extends GenericDaoImpl<Event> implements EventDao {
 			Query query = entityManager
 					.createQuery("SELECT l.eventsForStartLocationId FROM Location l WHERE l.region = :region")
 					.setParameter("region", region);
+			
 			log.debug("get successful");
 			return Util.castSet(Event.class, query.getResultList());
 		} catch (RuntimeException re) {
@@ -56,5 +58,23 @@ public class EventDaoImpl extends GenericDaoImpl<Event> implements EventDao {
 			throw re;
 		}
 	}
-
+		
+	
+	@Override
+	public Set<Event> getByLocation(BigDecimal longitude, BigDecimal latitude) {
+		log.debug("getting Event instances with their Locations by longitude: "+ longitude+ " latitude "+ latitude);
+		try {
+			Query query = entityManager
+				 .createQuery("SELECT l.eventsForStartLocationId FROM Location l WHERE (3959 * acos(cos(radians(:latitude)) "
+				 		+ "* cos(radians(l.latitude)) * cos(radians(l.longitude) - "
+					+"radians(:longitude)) + sin(radians(45.782533)) * sin(radians(l.latitude)))) < 10")
+					.setParameter("longitude", longitude).setParameter("latitude", latitude);
+			log.debug("get successful");
+			return Util.castSet(Event.class, query.getResultList());
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
 }
