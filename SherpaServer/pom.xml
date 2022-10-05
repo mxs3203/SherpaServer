@@ -24,7 +24,7 @@
 		<!-- Application Related -->
 		<version.springframework>4.3.6.RELEASE</version.springframework>
 
-		<version.jackson.databind>2.8.6</version.jackson.databind>
+		<version.jackson.databind>2.12.6.1</version.jackson.databind>
 
 		<version.joda>2.9.7</version.joda>
 		<version.jadira>6.0.1.GA</version.jadira>
