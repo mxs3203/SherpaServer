@@ -17,7 +17,7 @@
 		<version.logback>1.1.8</version.logback>
 
 		<!-- Data Source Related -->
-		<version.hibernate>5.2.6.Final</version.hibernate>
+		<version.hibernate>5.3.20.Final</version.hibernate>
 		<version.mysql.connector>5.1.39</version.mysql.connector>
 		<version.hikari.cp>2.6.0</version.hikari.cp>
 
