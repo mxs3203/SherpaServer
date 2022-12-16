@@ -22,7 +22,7 @@
 		<version.hikari.cp>2.6.0</version.hikari.cp>
 
 		<!-- Application Related -->
-		<version.springframework>4.3.6.RELEASE</version.springframework>
+		<version.springframework>5.2.20.RELEASE</version.springframework>
 
 		<version.jackson.databind>2.8.6</version.jackson.databind>
 
